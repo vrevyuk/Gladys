@@ -2104,6 +2104,11 @@
           "verifySSL": "SSL-Zertifikat überprüfen",
           "username": "CalDAV-Benutzername",
           "password": "CalDAV-Passwort"
+        },
+        "proton": {
+          "name": "Proton Calendar",
+          "url": "Proton Calendar-URL",
+          "urlInfo": "Öffne in Proton Calendar die Einstellungen deines Kalenders, wähle „Mit allen teilen“, erstelle einen Link (vollständige Ansicht für Ereignisdetails) und füge ihn hier ein."
         }
       },
       "synchronizationInfo": "Kalender werden alle 30 Minuten synchronisiert.",
@@ -2123,13 +2128,17 @@
       "synchronizationRequestCalendarsError": "Kalender kann nicht abgerufen werden. Überprüfe deine Konfiguration und den Status des CalDAV-Servers.",
       "synchronizationRequestChangesError": "Änderungen können nicht abgerufen werden. Überprüfe deine Konfiguration und den Status des CalDAV-Servers.",
       "synchronizationRequestEventsError": "Ereignisse können nicht abgerufen werden. Überprüfe deine Konfiguration und den Status des CalDAV-Servers.",
+      "configurationWebcalSuccess": "Proton-Kalender erfolgreich hinzugefügt.",
+      "configurationWebcalInvalidUrl": "Diese URL ist kein gültiger Kalenderlink. Prüfe, ob du den Proton-Link „Mit allen teilen“ kopiert hast.",
+      "configurationWebcalAlreadyExists": "Dieser Kalender ist bereits abonniert.",
       "synchronizationNeeded": "Starte die Synchronisierung, um verfügbare Kalender aufzulisten.",
       "calendarChoiceSuccess": "Deine Auswahl wurde gesichert.",
       "calendarChoiceError": "Das Sichern ist fehlgeschlagen.",
       "logTitle": "Protokoll",
       "buttonSave": "Sichern",
       "buttonCleanUp": "Aufräumen",
-      "buttonSync": "Jetzt synchronisieren"
+      "buttonSync": "Jetzt synchronisieren",
+      "buttonDelete": "Löschen"
     },
     "bluetooth": {
       "title": "Bluetooth-Anwesenheit",

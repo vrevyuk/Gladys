@@ -1,4 +1,4 @@
-import { Text } from 'preact-i18n';
+import { Text, Localizer } from 'preact-i18n';
 import cx from 'classnames';
 import { CalDAVStatus } from '../../../../../utils/consts';
 
@@ -33,17 +33,31 @@ const SyncTab = ({ children, ...props }) => (
                 {props.caldavCalendars &&
                   props.caldavCalendars.map(calendar => {
                     return (
-                      <label class={cx('custom-switch', style.switchLabel)}>
-                        <input
-                          type="checkbox"
-                          name={calendar.selector}
-                          class="custom-switch-input"
-                          checked={props.calendarsToSync ? props.calendarsToSync[calendar.selector] : calendar.sync}
-                          onClick={props.updateCalendarsToSync}
-                        />
-                        <span class={cx('custom-switch-indicator', style.switchIndicator)} />
-                        {calendar.name}
-                      </label>
+                      <div class={cx('d-flex align-items-center justify-content-between', style.switchLabel)}>
+                        <label class="custom-switch mb-0">
+                          <input
+                            type="checkbox"
+                            name={calendar.selector}
+                            class="custom-switch-input"
+                            checked={props.calendarsToSync ? props.calendarsToSync[calendar.selector] : calendar.sync}
+                            onClick={props.updateCalendarsToSync}
+                          />
+                          <span class={cx('custom-switch-indicator', style.switchIndicator)} />
+                          {calendar.name}
+                        </label>
+                        {calendar.type === 'WEBCAL' && (
+                          <Localizer>
+                            <button
+                              type="button"
+                              class="btn btn-link text-danger p-0"
+                              title={<Text id="integration.caldav.buttonDelete" />}
+                              onClick={() => props.deleteCalendar(calendar.selector)}
+                            >
+                              <i class="fe fe-trash-2" />
+                            </button>
+                          </Localizer>
+                        )}
+                      </div>
                     );
                   })}
               </div>

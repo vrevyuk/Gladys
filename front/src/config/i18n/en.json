@@ -2104,6 +2104,11 @@
           "verifySSL": "Verify SSL certificate",
           "username": "CalDAV Username",
           "password": "CalDAV Password"
+        },
+        "proton": {
+          "name": "Proton Calendar",
+          "url": "Proton Calendar URL",
+          "urlInfo": "In Proton Calendar, open your calendar's settings, choose 'Share with anyone', create a link (Full view for event details), and paste it here."
         }
       },
       "synchronizationInfo": "Calendars are synchronized every 30 minutes.",
@@ -2123,13 +2128,17 @@
       "synchronizationRequestCalendarsError": "Can't fetch calendars, verify your configuration and CalDAV server state.",
       "synchronizationRequestChangesError": "Can't fetch changes, verify your configuration and CalDAV server state.",
       "synchronizationRequestEventsError": "Can't fetch events, verify your configuration and CalDAV server state.",
+      "configurationWebcalSuccess": "Proton calendar added successfully.",
+      "configurationWebcalInvalidUrl": "This URL is not a valid calendar link. Check that you copied the Proton 'Share with anyone' link.",
+      "configurationWebcalAlreadyExists": "This calendar is already subscribed.",
       "synchronizationNeeded": "A first synchronization is necessary to list your calendars.",
       "calendarChoiceSuccess": "Your choices have been saved.",
       "calendarChoiceError": "An error occurred while saving.",
       "logTitle": "Log",
       "buttonSave": "Save",
       "buttonCleanUp": "Clean Up",
-      "buttonSync": "Sync now"
+      "buttonSync": "Sync now",
+      "buttonDelete": "Delete"
     },
     "bluetooth": {
       "title": "Bluetooth Presence",

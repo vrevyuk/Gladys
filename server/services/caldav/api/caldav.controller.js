@@ -32,8 +32,33 @@ module.exports = function CalDAVController(caldavHandler) {
    * @apiGroup CalDAV
    */
   async function sync(req, res) {
-    await caldavHandler.syncUserCalendars(req.user.id);
+    const caldavUrl = await caldavHandler.gladys.variable.getValue('CALDAV_URL', caldavHandler.serviceId, req.user.id);
+    if (caldavUrl) {
+      await caldavHandler.syncUserCalendars(req.user.id);
+    }
     await caldavHandler.syncUserWebcals(req.user.id);
+    res.json({
+      success: true,
+    });
+  }
+
+  /**
+   * @api {post} /api/v1/service/caldav/webcal Subscribe to an ICS/Webcal URL
+   * @apiName AddWebcal
+   * @apiGroup CalDAV
+   */
+  async function addWebcal(req, res) {
+    const calendar = await caldavHandler.addWebcal(req.user.id, req.body.url);
+    res.status(201).json(calendar);
+  }
+
+  /**
+   * @api {delete} /api/v1/service/caldav/calendar/:selector Delete a calendar
+   * @apiName DestroyCalendar
+   * @apiGroup CalDAV
+   */
+  async function destroyCalendar(req, res) {
+    await caldavHandler.destroyCalendar(req.user.id, req.params.selector);
     res.json({
       success: true,
     });
@@ -79,6 +104,14 @@ module.exports = function CalDAVController(caldavHandler) {
     'patch /api/v1/service/caldav/disable': {
       authenticated: true,
       controller: asyncMiddleware(disable),
+    },
+    'post /api/v1/service/caldav/webcal': {
+      authenticated: true,
+      controller: asyncMiddleware(addWebcal),
+    },
+    'delete /api/v1/service/caldav/calendar/:selector': {
+      authenticated: true,
+      controller: asyncMiddleware(destroyCalendar),
     },
   };
 };
