@@ -26,7 +26,10 @@ export function computeUpcoming(events, now, options = {}) {
     return { status: 'empty', next: null, today: [], moreCount: 0 };
   }
 
-  const [next, ...rest] = upcoming;
+  const firstTimedIndex = upcoming.findIndex(event => !event.full_day);
+  const nextIndex = firstTimedIndex === -1 ? 0 : firstTimedIndex;
+  const next = upcoming[nextIndex];
+  const rest = upcoming.filter((event, index) => index !== nextIndex);
   const todayEvents = rest.filter(event => dayjs(event.start).isSame(nowD, 'day'));
   const today = todayEvents.slice(0, maxToday);
   const moreCount = todayEvents.length - today.length;
@@ -47,7 +50,7 @@ export function describeEventTime(event, now) {
   const end = event.end ? dayjs(event.end) : start;
   const nowD = dayjs(now);
   return {
-    ongoing: !start.isAfter(nowD) && end.isAfter(nowD),
+    ongoing: !event.full_day && !start.isAfter(nowD) && end.isAfter(nowD),
     allDay: Boolean(event.full_day),
     startsToday: start.isSame(nowD, 'day'),
     startsTomorrow: start.isSame(nowD.add(1, 'day'), 'day'),

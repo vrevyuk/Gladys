@@ -39,7 +39,17 @@ const EventTime = ({ view }) => {
     return <Text id="dashboard.boxes.calendar.now" />;
   }
   if (view.allDay) {
-    return <Text id="dashboard.boxes.calendar.allDay" />;
+    return (
+      <span>
+        {view.startsTomorrow && (
+          <span class={style.eventDay}>
+            <Text id="dashboard.boxes.calendar.tomorrow" />{' '}
+          </span>
+        )}
+        {view.dayLabel && <span class={style.eventDay}>{view.dayLabel} </span>}
+        <Text id="dashboard.boxes.calendar.allDay" />
+      </span>
+    );
   }
   return (
     <span>
