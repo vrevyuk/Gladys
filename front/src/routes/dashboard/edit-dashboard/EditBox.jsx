@@ -19,6 +19,7 @@ import EditGaugeBox from '../../../components/boxs/gauge/EditGaugeBox';
 import EditEnergyConsumptionBox from '../../../components/boxs/energy-consumption/EditEnergyConsumption';
 import EditVoiceAssistantBox from '../../../components/boxs/voice-assistant/EditVoiceAssistantBox';
 import EditLinkBox from '../../../components/boxs/link/EditLinkBox';
+import EditCalendar from '../../../components/boxs/calendar/EditCalendar';
 
 const Box = ({ children, ...props }) => {
   switch (props.box.type) {
@@ -58,6 +59,8 @@ const Box = ({ children, ...props }) => {
       return <EditVoiceAssistantBox {...props} />;
     case 'link':
       return <EditLinkBox {...props} />;
+    case 'calendar':
+      return <EditCalendar {...props} />;
     default:
       return <SelectBoxType {...props} />;
   }
