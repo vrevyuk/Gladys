@@ -4,7 +4,8 @@ import get from 'get-value';
 const actions = store => ({
   updateCaldavHost(state, e) {
     store.setState({
-      caldavHost: e.target.value
+      caldavHost: e.target.value,
+      caldavSaveSettingsStatus: null
     });
 
     if (e.target.value === 'apple') {

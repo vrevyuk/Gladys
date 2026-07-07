@@ -118,6 +118,6 @@ describe('delete /api/v1/service/caldav/calendar/:selector', () => {
     const caldavController = CaldavController(caldavService);
     const req = { user: { id: userId }, params: { selector: 'my-proton' } };
     await caldavController['delete /api/v1/service/caldav/calendar/:selector'].controller(req, res);
-    assert.calledWith(caldavService.destroyCalendar, 'my-proton');
+    assert.calledWith(caldavService.destroyCalendar, userId, 'my-proton');
   });
 });

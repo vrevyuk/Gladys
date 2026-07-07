@@ -67,4 +67,13 @@ describe('addWebcal', () => {
     self.gladys.http.request.resolves({ data: '<html>nope</html>', status: 200 });
     await expect(self.addWebcal(userId, url)).to.be.rejectedWith('CALDAV_INVALID_WEBCAL_URL');
   });
+
+  it('should read the name from an X-WR-CALNAME with parameters', async () => {
+    self.gladys.http.request.resolves({
+      data: 'BEGIN:VCALENDAR\nX-WR-CALNAME;VALUE=TEXT:Parametered Name\nEND:VCALENDAR',
+      status: 200,
+    });
+    const calendar = await self.addWebcal(userId, url);
+    expect(calendar.name).to.equal('Parametered Name');
+  });
 });

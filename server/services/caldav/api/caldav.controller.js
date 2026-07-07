@@ -58,7 +58,7 @@ module.exports = function CalDAVController(caldavHandler) {
    * @apiGroup CalDAV
    */
   async function destroyCalendar(req, res) {
-    await caldavHandler.destroyCalendar(req.params.selector);
+    await caldavHandler.destroyCalendar(req.user.id, req.params.selector);
     res.json({
       success: true,
     });

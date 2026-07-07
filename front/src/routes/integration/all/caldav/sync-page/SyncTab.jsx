@@ -45,16 +45,18 @@ const SyncTab = ({ children, ...props }) => (
                           <span class={cx('custom-switch-indicator', style.switchIndicator)} />
                           {calendar.name}
                         </label>
-                        <Localizer>
-                          <button
-                            type="button"
-                            class="btn btn-link text-danger p-0"
-                            title={<Text id="integration.caldav.buttonDelete" />}
-                            onClick={() => props.deleteCalendar(calendar.selector)}
-                          >
-                            <i class="fe fe-trash-2" />
-                          </button>
-                        </Localizer>
+                        {calendar.type === 'WEBCAL' && (
+                          <Localizer>
+                            <button
+                              type="button"
+                              class="btn btn-link text-danger p-0"
+                              title={<Text id="integration.caldav.buttonDelete" />}
+                              onClick={() => props.deleteCalendar(calendar.selector)}
+                            >
+                              <i class="fe fe-trash-2" />
+                            </button>
+                          </Localizer>
+                        )}
                       </div>
                     );
                   })}

@@ -30,7 +30,7 @@ async function addWebcal(userId, url) {
   }
 
   // Read the calendar display name from X-WR-CALNAME, fallback to a default
-  const calNameMatch = icalData.match(/X-WR-CALNAME:(.+)/);
+  const calNameMatch = icalData.match(/X-WR-CALNAME[^:]*:(.+)/);
   const name = calNameMatch ? calNameMatch[1].trim() : DEFAULT_CALENDAR_NAME;
 
   const calendar = await this.gladys.calendar.create({
