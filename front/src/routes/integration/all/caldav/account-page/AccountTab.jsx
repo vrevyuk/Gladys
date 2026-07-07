@@ -148,7 +148,7 @@ const AccountTab = ({ children, ...props }) => (
               </p>
             </div>
           )}
-          {props.caldavSaveSettingsStatus === CalDAVStatus.Success && (
+          {props.caldavHost !== 'proton' && props.caldavSaveSettingsStatus === CalDAVStatus.Success && (
             <p class="alert alert-info">
               <Text id="integration.caldav.configurationSuccess" />
             </p>
