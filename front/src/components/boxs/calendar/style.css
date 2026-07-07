@@ -1,0 +1,52 @@
+.sectionLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9aa4ad;
+  margin: 6px 0 2px;
+}
+
+.eventRow {
+  display: flex;
+  align-items: baseline;
+  padding: 3px 0;
+}
+
+.eventRowLarge {
+  padding: 4px 0;
+  font-size: 16px;
+}
+
+.eventDot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  align-self: center;
+}
+
+.eventTime {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: #495057;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.eventDay {
+  color: #9aa4ad;
+}
+
+.eventName {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moreLink {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 13px;
+}
