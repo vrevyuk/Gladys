@@ -288,7 +288,8 @@
       "gauge": "Jauge",
       "energy-consumption": "Consommation Énergétique",
       "voice-assistant": "Assistant vocal",
-      "link": "Lien"
+      "link": "Lien",
+      "calendar": "Agenda"
     },
     "boxes": {
       "column": "Colonne {{index}}",
@@ -542,6 +543,18 @@
         "errorNoTranscription": "Je n'ai pas compris votre message. Parlez plus près du micro et réessayez.",
         "configDescription": "Ce widget utilise Gladys Plus pour la reconnaissance vocale, l'IA et la synthèse vocale. Connectez votre instance à Gladys Plus pour l'utiliser.",
         "plusRequiredHint": "Connectez Gladys Plus pour activer le micro."
+      },
+      "calendar": {
+        "next": "Prochain",
+        "now": "En cours",
+        "today": "Aujourd'hui",
+        "allDay": "Toute la journée",
+        "tomorrow": "Demain",
+        "noMoreEventsToday": "Plus d'événement aujourd'hui",
+        "noUpcomingEvents": "Aucun événement à venir",
+        "moreEvents": "+{{count}} de plus",
+        "error": "Impossible de charger les événements de votre agenda.",
+        "eventsToShowLabel": "Nombre d'événements à afficher"
       }
     }
   },

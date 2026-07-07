@@ -288,7 +288,8 @@
       "gauge": "Gauge",
       "energy-consumption": "Energy Consumption",
       "voice-assistant": "Voice assistant",
-      "link": "Link"
+      "link": "Link",
+      "calendar": "Calendar"
     },
     "boxes": {
       "column": "Column {{index}}",
@@ -542,6 +543,18 @@
         "errorNoTranscription": "I could not understand your message. Speak closer to the microphone and try again.",
         "configDescription": "This widget uses Gladys Plus for speech recognition, AI and text-to-speech. Connect your instance to Gladys Plus to use it.",
         "plusRequiredHint": "Connect Gladys Plus to enable the microphone."
+      },
+      "calendar": {
+        "next": "Next",
+        "now": "Now",
+        "today": "Today",
+        "allDay": "All day",
+        "tomorrow": "Tomorrow",
+        "noMoreEventsToday": "No more events today",
+        "noUpcomingEvents": "No upcoming events",
+        "moreEvents": "+{{count}} more",
+        "error": "Unable to load your calendar events.",
+        "eventsToShowLabel": "Number of events to show"
       }
     }
   },
