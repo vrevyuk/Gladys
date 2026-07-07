@@ -768,7 +768,8 @@
       "logTitle": "Journal",
       "buttonSave": "Sauvegarder",
       "buttonCleanUp": "Remettre à zéro",
-      "buttonSync": "Synchroniser"
+      "buttonSync": "Synchroniser",
+      "buttonDelete": "Supprimer"
     },
     "bluetooth": {
       "title": "Présence Bluetooth",

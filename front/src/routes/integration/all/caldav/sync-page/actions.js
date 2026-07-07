@@ -70,6 +70,18 @@ const actions = store => ({
         caldavSaveSyncStatus: CalDAVStatus.Error
       });
     }
+  },
+  async deleteCalendar(state, selector) {
+    try {
+      await state.httpClient.delete(`/api/v1/service/caldav/calendar/${selector}`);
+      store.setState({
+        caldavCalendars: state.caldavCalendars.filter(calendar => calendar.selector !== selector)
+      });
+    } catch (e) {
+      store.setState({
+        caldavSaveSyncStatus: CalDAVStatus.Error
+      });
+    }
   }
 });
 

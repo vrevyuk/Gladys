@@ -2137,7 +2137,8 @@
       "logTitle": "Log",
       "buttonSave": "Save",
       "buttonCleanUp": "Clean Up",
-      "buttonSync": "Sync now"
+      "buttonSync": "Sync now",
+      "buttonDelete": "Delete"
     },
     "bluetooth": {
       "title": "Bluetooth Presence",
