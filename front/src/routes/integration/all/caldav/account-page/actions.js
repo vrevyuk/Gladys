@@ -15,6 +15,10 @@ const actions = store => ({
       store.setState({
         caldavUrl: 'https://www.google.com/calendar/dav'
       });
+    } else if (e.target.value === 'proton') {
+      store.setState({
+        caldavUrl: ''
+      });
     }
   },
   updateCaldavUrl(state, e) {
@@ -104,6 +108,36 @@ const actions = store => ({
     });
   },
   async saveCaldavSettings(state) {
+    if (state.caldavHost === 'proton') {
+      store.setState({
+        caldavSaveSettingsStatus: CalDAVStatus.Getting,
+        caldavCleanUpStatus: null,
+        caldavSyncStatus: null,
+        caldavLog: null
+      });
+      try {
+        await state.httpClient.post('/api/v1/service/caldav/webcal', {
+          url: state.caldavUrl
+        });
+        store.setState({
+          caldavSaveSettingsStatus: CalDAVStatus.Success,
+          caldavUrl: ''
+        });
+      } catch (e) {
+        let responseMessage = get(e, 'response.data.message');
+        if (responseMessage && typeof responseMessage === 'object') {
+          responseMessage = responseMessage.message;
+        }
+        if (responseMessage === 'CALDAV_INVALID_WEBCAL_URL') {
+          store.setState({ caldavSaveSettingsStatus: CalDAVStatus.InvalidWebcalUrl });
+        } else if (responseMessage === 'CALDAV_WEBCAL_ALREADY_EXISTS') {
+          store.setState({ caldavSaveSettingsStatus: CalDAVStatus.WebcalAlreadyExists });
+        } else {
+          store.setState({ caldavSaveSettingsStatus: CalDAVStatus.Error });
+        }
+      }
+      return;
+    }
     store.setState({
       caldavSaveSettingsStatus: CalDAVStatus.Getting,
       caldavCleanUpStatus: null,

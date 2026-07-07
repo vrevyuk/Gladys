@@ -58,7 +58,9 @@ export const CalDAVStatus = {
   RetrieveHomeUrlError: 'RetrieveHomeUrlError',
   RequestCalendarsError: 'RequestCalendarsError',
   RequestChangesError: 'RequestChangesError',
-  RequestEventsError: 'RequestEventsError'
+  RequestEventsError: 'RequestEventsError',
+  InvalidWebcalUrl: 'InvalidWebcalUrl',
+  WebcalAlreadyExists: 'WebcalAlreadyExists'
 };
 
 export const CalendarGetEventsStatus = {

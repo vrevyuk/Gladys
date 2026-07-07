@@ -735,6 +735,11 @@
           "verifySSL": "Vérifier le certificat SSL",
           "username": "Nom d'utilisateur CalDAV",
           "password": "Mot de passe CalDAV"
+        },
+        "proton": {
+          "name": "Proton Calendar",
+          "url": "URL Proton Calendar",
+          "urlInfo": "Dans Proton Calendar, ouvrez les paramètres de votre agenda, choisissez « Partager avec tout le monde », créez un lien (vue complète pour les détails des événements) et collez-le ici."
         }
       },
       "synchronizationInfo": "Les calendriers sont synchronisés toutes les 30 minutes.",
@@ -754,6 +759,9 @@
       "synchronizationRequestCalendarsError": "Impossible de récupérer les calendriers CalDAV, vérifiez la configuration et l'état du serveur CalDAV.",
       "synchronizationRequestChangesError": "Impossible de récupérer les changements, vérifiez la configuration et l'état du serveur CalDAV.",
       "synchronizationRequestEventsError": "Impossible de récupérer les détails des évènements, vérifiez la configuration et l'état du serveur CalDAV.",
+      "configurationWebcalSuccess": "Agenda Proton ajouté avec succès.",
+      "configurationWebcalInvalidUrl": "Cette URL n'est pas un lien d'agenda valide. Vérifiez que vous avez copié le lien Proton « Partager avec tout le monde ».",
+      "configurationWebcalAlreadyExists": "Cet agenda est déjà synchronisé.",
       "synchronizationNeeded": "Une première synchronisation est nécessaire pour lister les calendriers.",
       "calendarChoiceSuccess": "Choix enregistrés avec succès.",
       "calendarChoiceError": "Une erreur est survenue lors de la sauvegarde.",
