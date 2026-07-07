@@ -288,7 +288,8 @@
       "gauge": "Messanzeige",
       "energy-consumption": "Energieverbrauch",
       "voice-assistant": "Sprachassistent",
-      "link": "Link"
+      "link": "Link",
+      "calendar": "Kalender"
     },
     "boxes": {
       "column": "Spalte {{index}}",
@@ -542,6 +543,18 @@
         "errorNoTranscription": "Ich habe Ihre Nachricht nicht verstanden. Sprechen Sie näher ans Mikrofon und versuchen Sie es erneut.",
         "configDescription": "Dieses Widget nutzt Gladys Plus für Spracherkennung, KI und Sprachausgabe. Verbinden Sie Ihre Instanz mit Gladys Plus, um es zu nutzen.",
         "plusRequiredHint": "Gladys Plus verbinden, um das Mikrofon zu aktivieren."
+      },
+      "calendar": {
+        "next": "Nächster",
+        "now": "Jetzt",
+        "today": "Heute",
+        "allDay": "Ganztägig",
+        "tomorrow": "Morgen",
+        "noMoreEventsToday": "Keine weiteren Termine heute",
+        "noUpcomingEvents": "Keine bevorstehenden Termine",
+        "moreEvents": "+{{count}} weitere",
+        "error": "Kalendertermine konnten nicht geladen werden.",
+        "eventsToShowLabel": "Anzahl der anzuzeigenden Termine"
       }
     }
   },
