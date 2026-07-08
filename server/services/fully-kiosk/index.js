@@ -1,5 +1,6 @@
 const logger = require('../../utils/logger');
 const FullyKioskHandler = require('./lib');
+const FullyKioskController = require('./api/fully-kiosk.controller');
 
 module.exports = function FullyKioskService(gladys, serviceId) {
   const fullyKioskHandler = new FullyKioskHandler(gladys, serviceId);
@@ -28,5 +29,6 @@ module.exports = function FullyKioskService(gladys, serviceId) {
     start,
     stop,
     device: fullyKioskHandler,
+    controllers: FullyKioskController(gladys, fullyKioskHandler),
   });
 };
