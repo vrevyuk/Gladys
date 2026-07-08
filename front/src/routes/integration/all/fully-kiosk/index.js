@@ -1,10 +1,21 @@
 import { Component } from 'preact';
+import { connect } from 'unistore/preact';
+import actions from './actions';
+import FullyKioskPage from './FullyKioskPage';
+import DeviceTab from './DeviceTab';
 
-// Minimal placeholder — replaced by the full integration page in the next task.
 class FullyKioskIntegration extends Component {
-  render() {
-    return null;
+  componentWillMount() {
+    this.props.getTablets();
+  }
+
+  render(props) {
+    return (
+      <FullyKioskPage user={props.user}>
+        <DeviceTab {...props} />
+      </FullyKioskPage>
+    );
   }
 }
 
-export default FullyKioskIntegration;
+export default connect('user,fullyKioskTablets,fullyKioskGetStatus', actions)(FullyKioskIntegration);
