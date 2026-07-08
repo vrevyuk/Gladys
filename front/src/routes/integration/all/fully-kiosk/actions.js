@@ -139,21 +139,43 @@ function createActions(store) {
       tablet.external_id = baseId;
       tablet.selector = baseId;
       tablet.features = buildTabletFeatures(baseId);
-      let saved = await state.httpClient.post('/api/v1/device', tablet);
-      const fullyKioskTablets = update(state.fullyKioskTablets, { [index]: { $set: saved } });
-      store.setState({ fullyKioskTablets });
+      try {
+        const saved = await state.httpClient.post('/api/v1/device', tablet);
+        const fullyKioskTablets = update(state.fullyKioskTablets, {
+          [index]: { $set: { ...saved, saveError: null } }
+        });
+        store.setState({ fullyKioskTablets });
+      } catch (e) {
+        const fullyKioskTablets = update(state.fullyKioskTablets, {
+          [index]: { saveError: { $set: e.message } }
+        });
+        store.setState({ fullyKioskTablets });
+      }
     },
     async deleteTablet(state, index) {
       const tablet = state.fullyKioskTablets[index];
       if (tablet.created_at) {
-        await state.httpClient.delete(`/api/v1/device/${tablet.selector}`);
+        try {
+          await state.httpClient.delete(`/api/v1/device/${tablet.selector}`);
+        } catch (e) {
+          const fullyKioskTablets = update(state.fullyKioskTablets, {
+            [index]: { saveError: { $set: e.message } }
+          });
+          store.setState({ fullyKioskTablets });
+          return;
+        }
       }
       const fullyKioskTablets = update(state.fullyKioskTablets, { $splice: [[index, 1]] });
       store.setState({ fullyKioskTablets });
     },
     async testConnection(state, index) {
       const tablet = state.fullyKioskTablets[index];
-      const result = await state.httpClient.post('/api/v1/service/fully-kiosk/tablet/test', tablet);
+      let result;
+      try {
+        result = await state.httpClient.post('/api/v1/service/fully-kiosk/tablet/test', tablet);
+      } catch (e) {
+        result = { success: false, message: e.message };
+      }
       const fullyKioskTablets = update(state.fullyKioskTablets, {
         [index]: { testResult: { $set: result } }
       });

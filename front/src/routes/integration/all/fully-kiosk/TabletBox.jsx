@@ -81,6 +81,7 @@ class TabletBox extends Component {
               <Text id="integration.fully-kiosk.testFailure" fields={{ message: result.message }} />
             </div>
           )}
+          {tablet.saveError && <div class="alert alert-danger">{tablet.saveError}</div>}
           <div class="btn-list">
             <button class="btn btn-outline-primary" onClick={this.test}>
               <Text id="integration.fully-kiosk.testConnection" />
