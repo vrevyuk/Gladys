@@ -1,10 +1,12 @@
 const { expect } = require('chai');
+const { fake } = require('sinon');
 const { DASHBOARD_TYPE, DASHBOARD_VISIBILITY } = require('../../../utils/constants');
 
 const Dashboard = require('../../../lib/dashboard');
 
 describe('dashboard.get', () => {
-  const dashboard = new Dashboard();
+  const event = { emit: fake.returns(null) };
+  const dashboard = new Dashboard(event);
   beforeEach(async () => {
     // Create a public and a private dashboard
     await dashboard.create('7a137a56-069e-4996-8816-36558174b727', {

@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 
 const db = require('../../models');
 const { NotFoundError } = require('../../utils/coreErrors');
+const { WEBSOCKET_MESSAGE_TYPES } = require('../../utils/constants');
 
 /**
  * @description Update a dashboard.
@@ -36,7 +37,12 @@ async function update(userId, selector, newDashboard) {
 
   const updatedDashboard = await dashboard.update(newDashboard);
 
-  return updatedDashboard.get({ plain: true });
+  const updatedDashboardPlain = updatedDashboard.get({ plain: true });
+
+  // Notify the user's other devices (e.g. a wall tablet) so they refresh the dashboard.
+  this.emitWebsocketEvent(WEBSOCKET_MESSAGE_TYPES.DASHBOARD.UPDATED, updatedDashboardPlain);
+
+  return updatedDashboardPlain;
 }
 
 module.exports = {

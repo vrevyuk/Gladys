@@ -1,11 +1,19 @@
 const { expect } = require('chai');
-const { DASHBOARD_BOX_TYPE, DASHBOARD_TYPE, DASHBOARD_VISIBILITY } = require('../../../utils/constants');
+const { fake, assert: sinonAssert } = require('sinon');
+const {
+  DASHBOARD_BOX_TYPE,
+  DASHBOARD_TYPE,
+  DASHBOARD_VISIBILITY,
+  EVENTS,
+  WEBSOCKET_MESSAGE_TYPES,
+} = require('../../../utils/constants');
 
 const Dashboard = require('../../../lib/dashboard');
 const db = require('../../../models');
 
 describe('dashboard.updateOrder', () => {
-  const dashboard = new Dashboard();
+  const event = { emit: fake.returns(null) };
+  const dashboard = new Dashboard(event);
   it('should update the order of dashboards', async () => {
     const newDashboard = await dashboard.create('0cd30aef-9c4e-4a23-88e3-3547971296e5', {
       name: 'My new dashboard',
@@ -43,5 +51,11 @@ describe('dashboard.updateOrder', () => {
       { selector: 'test-dashboard', position: 1 },
       { selector: 'my-new-public-dashoard', position: 2 },
     ]);
+    // reordering notifies the requesting user's devices
+    sinonAssert.calledWith(event.emit, EVENTS.WEBSOCKET.SEND, {
+      type: WEBSOCKET_MESSAGE_TYPES.DASHBOARD.UPDATED,
+      userId: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
+      payload: {},
+    });
   });
 });

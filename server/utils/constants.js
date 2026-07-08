@@ -1431,6 +1431,11 @@ const WEBSOCKET_MESSAGE_TYPES = {
   BACKUP: {
     DOWNLOADED: 'backup.downloaded',
   },
+  DASHBOARD: {
+    CREATED: 'dashboard.created',
+    UPDATED: 'dashboard.updated',
+    DELETED: 'dashboard.deleted',
+  },
   DEVICE: {
     NEW_STATE: 'device.new-state',
     NEW_STRING_STATE: 'device.new-string-state',
