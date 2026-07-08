@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 
 const Promise = require('bluebird');
 const db = require('../../models');
+const { EVENTS, WEBSOCKET_MESSAGE_TYPES } = require('../../utils/constants');
 
 /**
  * @description Update a dashboard.
@@ -30,6 +31,13 @@ async function updateOrder(userId, dashboards) {
         },
       },
     );
+  });
+
+  // Notify the user's other devices (e.g. a wall tablet) so they refresh the dashboard order.
+  this.event.emit(EVENTS.WEBSOCKET.SEND, {
+    type: WEBSOCKET_MESSAGE_TYPES.DASHBOARD.UPDATED,
+    userId,
+    payload: {},
   });
 }
 

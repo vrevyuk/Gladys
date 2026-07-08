@@ -89,6 +89,12 @@ class Dashboard extends Component {
     }
   };
 
+  // A dashboard was created/updated/deleted on another device (e.g. edited on a PC).
+  // Reload so this device (e.g. a wall tablet) reflects the change without a manual refresh.
+  dashboardChangedFromWebsocket = () => {
+    this.init();
+  };
+
   getCurrentDashboard = async () => {
     try {
       await this.setState({ loading: true });
@@ -233,6 +239,18 @@ class Dashboard extends Component {
     );
     this.props.session.dispatcher.addListener(WEBSOCKET_MESSAGE_TYPES.ALARM.ARMING, this.alarmArming);
     this.props.session.dispatcher.addListener(WEBSOCKET_MESSAGE_TYPES.JOB.UPDATED, this.jobUpdated);
+    this.props.session.dispatcher.addListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.UPDATED,
+      this.dashboardChangedFromWebsocket
+    );
+    this.props.session.dispatcher.addListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.CREATED,
+      this.dashboardChangedFromWebsocket
+    );
+    this.props.session.dispatcher.addListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.DELETED,
+      this.dashboardChangedFromWebsocket
+    );
     this.checkIfFullScreenParameterIsHere();
   }
 
@@ -254,6 +272,18 @@ class Dashboard extends Component {
     );
     this.props.session.dispatcher.removeListener(WEBSOCKET_MESSAGE_TYPES.ALARM.ARMING, this.alarmArming);
     this.props.session.dispatcher.removeListener(WEBSOCKET_MESSAGE_TYPES.JOB.UPDATED, this.jobUpdated);
+    this.props.session.dispatcher.removeListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.UPDATED,
+      this.dashboardChangedFromWebsocket
+    );
+    this.props.session.dispatcher.removeListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.CREATED,
+      this.dashboardChangedFromWebsocket
+    );
+    this.props.session.dispatcher.removeListener(
+      WEBSOCKET_MESSAGE_TYPES.DASHBOARD.DELETED,
+      this.dashboardChangedFromWebsocket
+    );
   }
 
   render(

@@ -1,4 +1,5 @@
 const db = require('../../models');
+const { WEBSOCKET_MESSAGE_TYPES } = require('../../utils/constants');
 
 /**
  * @description Create a new dashboard.
@@ -26,7 +27,12 @@ async function create(userId, dashboard) {
   if (dashboardWithTheHighestPosition.length > 0) {
     dashboard.position = dashboardWithTheHighestPosition[0].position + 1;
   }
-  return db.Dashboard.create({ ...dashboard, user_id: userId });
+  const createdDashboard = await db.Dashboard.create({ ...dashboard, user_id: userId });
+
+  // Notify the user's other devices (e.g. a wall tablet) so they refresh the dashboard list.
+  this.emitWebsocketEvent(WEBSOCKET_MESSAGE_TYPES.DASHBOARD.CREATED, createdDashboard.get({ plain: true }));
+
+  return createdDashboard;
 }
 
 module.exports = {

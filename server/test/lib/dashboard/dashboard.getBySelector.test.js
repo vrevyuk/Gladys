@@ -1,10 +1,12 @@
 const { expect, assert } = require('chai');
+const { fake } = require('sinon');
 const { DASHBOARD_BOX_TYPE, DASHBOARD_TYPE, DASHBOARD_VISIBILITY } = require('../../../utils/constants');
 
 const Dashboard = require('../../../lib/dashboard');
 
 describe('dashboard.getBySelector', () => {
-  const dashboard = new Dashboard();
+  const event = { emit: fake.returns(null) };
+  const dashboard = new Dashboard(event);
   it('should return dashboard', async () => {
     const testDashboard = await dashboard.getBySelector('0cd30aef-9c4e-4a23-88e3-3547971296e5', 'test-dashboard');
     expect(testDashboard).to.have.property('name', 'Test dashboard');
