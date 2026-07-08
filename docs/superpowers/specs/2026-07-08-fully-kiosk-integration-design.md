@@ -83,7 +83,7 @@ Each tablet = one Gladys **device**, added manually with: name, IP address, Remo
 | Brightness | integer (dimmer, 0–255) | read/write | write `setStringSetting key=screenBrightness`; read from `deviceInfo` |
 | Battery | integer (%) | read | `deviceInfo.batteryLevel` |
 | Charging | binary | read | `deviceInfo.isPlugged` |
-| Motion | binary | read | `deviceInfo` motion field (near-real-time in phase 2 via MQTT) |
+| Motion | binary | read | **Phase 2 only** — populated via MQTT `onMotion`. Not created in v1 (Fully's motion is an event, not reliably pollable). v1 wake-on-motion uses a separate Gladys motion sensor in a scene. |
 
 **Push-content actions**, exposed as writable features so scenes can drive them:
 
@@ -108,8 +108,8 @@ Core polls each device on its configured interval. Implementation:
 
 1. Read IP + password from device params.
 2. `axios.get` `cmd=deviceInfo&type=json`.
-3. Parse JSON and `gladys.device.saveState(...)` for each read feature: battery, screen state,
-   charging, motion.
+3. Parse JSON and `gladys.device.saveState(...)` for each v1 read feature: battery, screen state,
+   charging. (Motion is phase 2, populated via MQTT.)
 4. On failure, log and leave last-known state (do not throw).
 
 ### Onboarding UI + controller
