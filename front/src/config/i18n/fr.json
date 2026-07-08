@@ -1091,6 +1091,25 @@
         "conflictError": "Le topic actuel est déjà utilisé."
       }
     },
+    "fully-kiosk": {
+      "title": "Fully Kiosk Browser",
+      "description": "Contrôlez et surveillez votre tablette tableau de bord",
+      "deviceTab": "Tablettes",
+      "addTablet": "Ajouter une tablette",
+      "emptyTitle": "Aucune tablette configurée",
+      "emptyDescription": "Ajoutez votre première tablette Fully Kiosk pour contrôler son écran et surveiller son état.",
+      "nameLabel": "Nom de la tablette",
+      "namePlaceholder": "Tableau de bord du salon",
+      "ipLabel": "Adresse IP",
+      "ipPlaceholder": "192.168.1.50",
+      "portLabel": "Port",
+      "passwordLabel": "Mot de passe Remote Admin",
+      "testConnection": "Tester la connexion",
+      "testSuccess": "Connecté à {{deviceName}} (batterie {{batteryLevel}} %)",
+      "testFailure": "Impossible de joindre la tablette : {{message}}",
+      "saveButton": "Enregistrer",
+      "deleteButton": "Supprimer"
+    },
     "tpLink": {
       "title": "TP-Link",
       "description": "Contrôler les lumières et prises TP-Link.",

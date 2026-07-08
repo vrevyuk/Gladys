@@ -117,6 +117,9 @@ import TasmotaEditPage from '../routes/integration/all/tasmota/edit-page';
 import TasmotaMqttDiscoverPage from '../routes/integration/all/tasmota/discover-mqtt';
 import TasmotaHttpDiscoverPage from '../routes/integration/all/tasmota/discover-http';
 
+// Fully Kiosk
+import FullyKioskPage from '../routes/integration/all/fully-kiosk';
+
 // Integrations Bluetooth
 import BluetoothDevicePage from '../routes/integration/all/bluetooth/device-page';
 import BluetoothEditDevicePage from '../routes/integration/all/bluetooth/edit-page';
@@ -313,6 +316,7 @@ const AppRouter = connect(
         <TasmotaEditPage path="/dashboard/integration/device/tasmota/edit/:deviceSelector" />
         <TasmotaMqttDiscoverPage path="/dashboard/integration/device/tasmota/mqtt" />
         <TasmotaHttpDiscoverPage path="/dashboard/integration/device/tasmota/http" />
+        <FullyKioskPage path="/dashboard/integration/device/fully-kiosk" />
         <EweLinkPage path="/dashboard/integration/device/ewelink" />
         <EweLinkEditPage path="/dashboard/integration/device/ewelink/edit/:deviceSelector" />
         <EweLinkDiscoverPage path="/dashboard/integration/device/ewelink/discover" />
