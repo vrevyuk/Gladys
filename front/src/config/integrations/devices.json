@@ -34,6 +34,11 @@
     "local": true
   },
   {
+    "key": "fully-kiosk",
+    "img": "/assets/integrations/cover/fully-kiosk.jpg",
+    "local": true
+  },
+  {
     "key": "tpLink",
     "link": "tp-link",
     "img": "/assets/integrations/cover/tp-link.jpg",
