@@ -32,6 +32,12 @@ describe('fully-kiosk buildCommandUrl', () => {
     );
     expect(url).to.equal('http://10.0.0.9:2323/?cmd=screenOff&password=p&type=json');
   });
+
+  it('should throw BadParameters when no IP can be resolved', () => {
+    expect(() => buildCommandUrl({ external_id: null, params: [{ name: 'PASSWORD', value: 'p' }] }, 'screenOn')).to.throw(
+      'IP address',
+    );
+  });
 });
 
 describe('fully-kiosk sendCommand', () => {

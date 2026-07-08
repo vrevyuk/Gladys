@@ -1,4 +1,5 @@
 const { getDeviceParam } = require('../../../utils/device');
+const { BadParameters } = require('../../../utils/coreErrors');
 const { DEVICE_PARAM_NAME, DEFAULT_PORT, FULLY_COMMANDS } = require('./fully-kiosk.constants');
 
 /**
@@ -11,7 +12,12 @@ const { DEVICE_PARAM_NAME, DEFAULT_PORT, FULLY_COMMANDS } = require('./fully-kio
  * buildCommandUrl(device, 'screenOn');
  */
 function buildCommandUrl(device, cmd, extraParams = {}) {
-  const ip = getDeviceParam(device, DEVICE_PARAM_NAME.IP_ADDRESS) || device.external_id.split(':')[1];
+  const ip =
+    getDeviceParam(device, DEVICE_PARAM_NAME.IP_ADDRESS) ||
+    (device.external_id ? device.external_id.split(':')[1] : null);
+  if (!ip) {
+    throw new BadParameters('Fully Kiosk: IP address is required');
+  }
   const port = getDeviceParam(device, DEVICE_PARAM_NAME.PORT) || DEFAULT_PORT;
   const password = getDeviceParam(device, DEVICE_PARAM_NAME.PASSWORD) || '';
   const url = new URL(`http://${ip}:${port}/`);
