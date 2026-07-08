@@ -71,9 +71,13 @@ Uses `axios` — the API is plain HTTP GET, no third-party SDK.
 
 ### Data model — a tablet is a Gladys device
 
-Each tablet = one Gladys **device**, added manually with: name, IP address, Remote Admin password
-(stored as a device param; password param should be treated as a secret). `external_id` scheme:
-`fully-kiosk:<ip>:<command>` for features.
+Each tablet = one Gladys **device**, added manually with: name, IP address, Remote Admin password.
+The password is stored as a device param, consistent with how existing Gladys integrations
+(`rtsp-camera`, `tasmota`) store device credentials — i.e. **plaintext at rest in the device
+params**, and returned/echoed by the device API like any other param. This is a deliberate v1
+decision to match platform precedent rather than a security guarantee; encrypting secret device
+params is a platform-wide concern and is out of scope for this integration (noted as a possible
+future enhancement). `external_id` scheme: `fully-kiosk:<ip>:<command>` for features.
 
 **Features:**
 
