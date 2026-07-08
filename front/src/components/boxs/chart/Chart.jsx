@@ -371,11 +371,11 @@ class Chartbox extends Component {
     }
   };
   updateDeviceStateWebsocket = payload => {
-    if (
-      this.state.interval === intervalByName['last-hour'] &&
-      this.props.box.device_features &&
-      this.props.box.device_features.includes(payload.device_feature_selector)
-    ) {
+    // Refresh the chart whenever one of its device features gets a new value,
+    // whatever the selected range (last hour, day, week...). Previously this was
+    // limited to the "last hour" range, so longer ranges only updated on a manual
+    // page refresh.
+    if (this.props.box.device_features && this.props.box.device_features.includes(payload.device_feature_selector)) {
       this.getData();
     }
   };
