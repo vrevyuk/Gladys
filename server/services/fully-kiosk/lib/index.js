@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { DEFAULT_TIMEOUT } = require('./fully-kiosk.constants');
 const { buildCommandUrl, sendCommand, getDeviceInfo } = require('./fully-kiosk.command');
+const { setValue } = require('./fully-kiosk.setValue');
 
 /**
  * @description Handler for the Fully Kiosk Browser integration.
@@ -19,5 +20,6 @@ const FullyKioskHandler = function FullyKioskHandler(gladys, serviceId) {
 FullyKioskHandler.prototype.buildCommandUrl = buildCommandUrl;
 FullyKioskHandler.prototype.sendCommand = sendCommand;
 FullyKioskHandler.prototype.getDeviceInfo = getDeviceInfo;
+FullyKioskHandler.prototype.setValue = setValue;
 
 module.exports = FullyKioskHandler;
