@@ -1,4 +1,9 @@
 import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+
+import { timeFormatToken } from '../../../utils/timeFormat';
+
+dayjs.extend(localizedFormat);
 
 export const DEFAULT_MAX_TODAY = 5;
 
@@ -41,11 +46,13 @@ export function computeUpcoming(events, now, options = {}) {
  * @description Describe how to render an event's time.
  * @param {object} event - Event with { start, end, full_day }.
  * @param {(Date|string|number)} now - Current time.
+ * @param {object} [options] - Options, { language, timeFormat }.
  * @returns {object} { ongoing, allDay, startsToday, startsTomorrow, time }.
  * @example
- * describeEventTime(event, new Date());
+ * describeEventTime(event, new Date(), { language: 'en', timeFormat: '24h' });
  */
-export function describeEventTime(event, now) {
+export function describeEventTime(event, now, options = {}) {
+  const { language, timeFormat } = options;
   const start = dayjs(event.start);
   const end = event.end ? dayjs(event.end) : start;
   const nowD = dayjs(now);
@@ -54,6 +61,6 @@ export function describeEventTime(event, now) {
     allDay: Boolean(event.full_day),
     startsToday: start.isSame(nowD, 'day'),
     startsTomorrow: start.isSame(nowD.add(1, 'day'), 'day'),
-    time: start.format('HH:mm')
+    time: start.locale(language).format(timeFormatToken(timeFormat))
   };
 }
