@@ -66,6 +66,24 @@
   line-height: 2.5rem;
 }
 
+.dashboardButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dashboardButton {
+  opacity: 0.55;
+}
+
+.dashboardButton:hover {
+  opacity: 0.8;
+}
+
+.dashboardButtonActive {
+  opacity: 1;
+}
+
 .editDashboardText {
   display: inline;
 }
