@@ -12,6 +12,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     // We look if there is a french admin user in this integration
     const frenchAdminUser = await db.User.findOne({
+      attributes: ['id', 'email', 'language', 'role'],
       where: {
         language: AVAILABLE_LANGUAGES.FR,
         role: USER_ROLE.ADMIN,

@@ -23,6 +23,7 @@ async function getById(id) {
       'role',
       'temperature_unit_preference',
       'distance_unit_preference',
+      'time_format',
       'created_at',
       'updated_at',
     ],

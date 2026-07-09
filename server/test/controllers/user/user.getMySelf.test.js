@@ -17,6 +17,7 @@ describe('GET /api/v1/me', () => {
           birthdate: '12/12/1990',
           distance_unit_preference: 'metric',
           temperature_unit_preference: 'celsius',
+          time_format: 'auto',
           language: 'en',
           role: 'admin',
           created_at: '2019-02-12T07:49:07.556Z',

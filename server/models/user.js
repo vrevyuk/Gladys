@@ -82,6 +82,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM(['metric', 'us']),
         defaultValue: 'metric',
       },
+      time_format: {
+        allowNull: false,
+        type: DataTypes.ENUM(['auto', '12h', '24h']),
+        defaultValue: 'auto',
+      },
       telegram_user_id: {
         allowNull: true,
         type: DataTypes.STRING,
