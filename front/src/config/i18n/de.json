@@ -949,6 +949,25 @@
         "conflictError": "Das aktuelle Topic wird bereits verwendet."
       }
     },
+    "fully-kiosk": {
+      "title": "Fully Kiosk Browser",
+      "description": "Steuere und überwache dein Dashboard-Tablet",
+      "deviceTab": "Tablets",
+      "addTablet": "Tablet hinzufügen",
+      "emptyTitle": "Kein Tablet konfiguriert",
+      "emptyDescription": "Füge dein erstes Fully Kiosk Tablet hinzu, um dessen Bildschirm zu steuern und den Status zu überwachen.",
+      "nameLabel": "Tabletname",
+      "namePlaceholder": "Dashboard Wohnzimmer",
+      "ipLabel": "IP-Adresse",
+      "ipPlaceholder": "192.168.1.50",
+      "portLabel": "Port",
+      "passwordLabel": "Remote-Admin-Passwort",
+      "testConnection": "Verbindung testen",
+      "testSuccess": "Verbunden mit {{deviceName}} (Akku {{batteryLevel}} %)",
+      "testFailure": "Tablet nicht erreichbar: {{message}}",
+      "saveButton": "Speichern",
+      "deleteButton": "Löschen"
+    },
     "tpLink": {
       "title": "TP-Link",
       "description": "Steuere deine TP-Link-Lampen und -Stecker in Gladys.",
