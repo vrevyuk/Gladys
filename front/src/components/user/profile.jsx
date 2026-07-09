@@ -272,6 +272,24 @@ const Profile = ({ children, ...props }) => {
           </select>
         </div>
       )}
+      {!props.disablePreferences && (
+        <div class="form-group">
+          <label class="form-label">
+            <Text id="profile.timeFormatLabel" />
+          </label>
+          <select value={props.newUser.time_format} onInput={props.updateTimeFormat} class="form-control">
+            <option value="auto">
+              <Text id="profile.timeFormatAuto" />
+            </option>
+            <option value="12h">
+              <Text id="profile.timeFormat12h" />
+            </option>
+            <option value="24h">
+              <Text id="profile.timeFormat24h" />
+            </option>
+          </select>
+        </div>
+      )}
       {!props.disableProfilePicture && (
         <div class="form-group">
           <label class="form-label">

@@ -40,6 +40,9 @@ class Profile extends Component {
   updateDistanceUnit = e => {
     this.props.updateNewUserProperty('distance_unit_preference', e.target.value);
   };
+  updateTimeFormat = e => {
+    this.props.updateNewUserProperty('time_format', e.target.value);
+  };
 
   componentWillMount() {
     this.props.updateDays();
@@ -66,6 +69,7 @@ class Profile extends Component {
         updateBirthdateYear={this.updateBirthdateYear}
         updateTemperatureUnit={this.updateTemperatureUnit}
         updateDistanceUnit={this.updateDistanceUnit}
+        updateTimeFormat={this.updateTimeFormat}
       />
     );
   }
