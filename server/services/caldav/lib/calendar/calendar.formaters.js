@@ -9,6 +9,10 @@
  */
 function formatRecurringEvents(event, gladysCalendar) {
   const { tz } = event.start;
+  // Local wall-clock time of the event (e.g. "17:30:00"). The ical lib encodes the wall-clock into
+  // the instant using the process timezone, so formatting it back here recovers the intended local
+  // time regardless of the server timezone.
+  const anchorWallClock = this.dayjs(event.start).format('HH:mm:ss');
   let startDate = this.dayjs.tz(this.dayjs(event.start).format('YYYY-MM-DDTHH:mm:ss'), tz);
   let endDate;
 
@@ -49,15 +53,17 @@ function formatRecurringEvents(event, gladysCalendar) {
 
   // Diff between start date & first occurrence to handle Timezone issue in rrule lib
   const startDiff = event.rrule.after(startDate.toDate(), true) - startDate.toDate();
-  // Initial local offset to handle daylight saving time (DST)
-  const initLocalOffset = startDate.utcOffset();
 
   // Loop through the set of date entries to see which recurrences should be printed.
   return dates.map((date, i) => {
     let curEvent = event;
     let showRecurrence = true;
     let curDuration = duration;
-    startDate = this.dayjs.tz(this.dayjs(date).format('YYYY-MM-DDTHH:mm:ss'), tz);
+    // Rebuild each occurrence from the anchor's local wall-clock time on the occurrence's own date.
+    // This preserves the local time across daylight saving time changes (e.g. a 17:30 meeting stays
+    // at 17:30 whether the occurrence falls in winter or summer) and does not depend on rrule keeping
+    // the UTC offset stable nor on the server timezone.
+    startDate = this.dayjs.tz(`${this.dayjs(date).format('YYYY-MM-DD')}T${anchorWallClock}`, tz);
 
     // Use just the date of the recurrence to look up overrides and exceptions (i.e. chop off time information)
     const dateLookupKey = date.toISOString().substring(0, 10);
@@ -81,11 +87,9 @@ function formatRecurringEvents(event, gladysCalendar) {
 
     // Set the the title and the end date from either the regular event or the recurrence override.
     const recurrenceTitle = curEvent.summary;
-    endDate = this.dayjs(parseInt(startDate.format('x'), 10) + curDuration, 'x');
-    endDate = this.dayjs.tz(
-      this.dayjs(parseInt(startDate.format('x'), 10) + curDuration, 'x').format('YYYY-MM-DDTHH:mm:ss'),
-      tz,
-    );
+    // Advance the tz-aware start by the event duration. Keeping it as a dayjs offset add (rather than
+    // reformatting through the process timezone) preserves the correct instant across DST boundaries.
+    endDate = startDate.add(curDuration, 'millisecond');
 
     // If this recurrence ends before the start of the date range, or starts after the end of the date range,
     // don't process it.
@@ -113,12 +117,10 @@ function formatRecurringEvents(event, gladysCalendar) {
         endDate = endDate.subtract(startDiff, 'ms');
       }
 
-      // update start/end with DST offset
-      startDate = startDate.add(initLocalOffset - startDate.utcOffset(), 'm');
-      endDate = endDate.add(initLocalOffset - endDate.utcOffset(), 'm');
-
-      newEvent.start = startDate.format();
-      newEvent.end = endDate.format();
+      // Serialize with an explicit UTC offset (e.g. +00:00, +03:00) rather than the "Z" shorthand,
+      // so the stored value keeps the event's offset consistently across timezones.
+      newEvent.start = startDate.format('YYYY-MM-DDTHH:mm:ssZ');
+      newEvent.end = endDate.format('YYYY-MM-DDTHH:mm:ssZ');
 
       return newEvent;
     }
@@ -157,18 +159,18 @@ function formatEvents(caldavEvents, gladysCalendar) {
       if (caldavEvent.start) {
         newEvent.start = this.dayjs
           .tz(this.dayjs(caldavEvent.start).format('YYYY-MM-DDTHH:mm:ss'), caldavEvent.start.tz)
-          .format();
+          .format('YYYY-MM-DDTHH:mm:ssZ');
       }
 
       if (caldavEvent.end) {
         newEvent.end = this.dayjs
           .tz(this.dayjs(caldavEvent.end).format('YYYY-MM-DDTHH:mm:ss'), caldavEvent.end.tz)
-          .format();
+          .format('YYYY-MM-DDTHH:mm:ssZ');
       } else if (caldavEvent.start && caldavEvent.duration) {
         newEvent.end = this.dayjs
           .tz(this.dayjs(caldavEvent.start).format('YYYY-MM-DDTHH:mm:ss'), caldavEvent.start.tz)
           .add(this.dayjs.duration(caldavEvent.duration))
-          .format();
+          .format('YYYY-MM-DDTHH:mm:ssZ');
       }
 
       if (
@@ -188,7 +190,7 @@ function formatEvents(caldavEvents, gladysCalendar) {
               .format('YYYY-MM-DDTHH:mm:ss'),
             caldavEvent.start.tz,
           )
-          .format();
+          .format('YYYY-MM-DDTHH:mm:ssZ');
       }
 
       events.push(newEvent);
