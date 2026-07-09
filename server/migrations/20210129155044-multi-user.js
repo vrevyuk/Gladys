@@ -15,6 +15,7 @@ module.exports = {
       onDelete: 'CASCADE',
     });
     const users = await db.User.findAll({
+      attributes: ['id', 'selector', 'role'],
       where: {
         role: USER_ROLE.ADMIN,
       },

@@ -21,6 +21,7 @@ describe('GET /api/v1/user/:user_selector', () => {
           role: 'admin',
           temperature_unit_preference: 'celsius',
           distance_unit_preference: 'metric',
+          time_format: 'auto',
           last_latitude: null,
           last_longitude: null,
           last_altitude: null,

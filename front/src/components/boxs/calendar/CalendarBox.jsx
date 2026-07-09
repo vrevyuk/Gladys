@@ -15,8 +15,8 @@ const BOX_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 const CALENDAR_ROUTE = '/dashboard/calendar';
 const DEFAULT_COLOR = '#3174ad';
 
-function toEventView(event, now, language) {
-  const desc = describeEventTime(event, now);
+function toEventView(event, now, language, timeFormat) {
+  const desc = describeEventTime(event, now, { language, timeFormat });
   let dayLabel = null;
   if (!desc.ongoing && !desc.startsToday && !desc.startsTomorrow) {
     dayLabel = dayjs(event.start)
@@ -145,11 +145,12 @@ class CalendarBoxComponent extends Component {
     const boxStatus = get(props, `${DASHBOARD_BOX_STATUS_KEY}Calendar.${props.x}_${props.y}`);
     const upcoming = get(boxData, 'upcoming');
     const language = get(props, 'user.language');
+    const timeFormat = get(props, 'user.time_format');
     const now = new Date();
 
     const nextEvent = get(upcoming, 'next');
-    const nextView = nextEvent ? toEventView(nextEvent, now, language) : null;
-    const todayViews = (get(upcoming, 'today') || []).map(event => toEventView(event, now, language));
+    const nextView = nextEvent ? toEventView(nextEvent, now, language, timeFormat) : null;
+    const todayViews = (get(upcoming, 'today') || []).map(event => toEventView(event, now, language, timeFormat));
 
     return (
       <CalendarBox

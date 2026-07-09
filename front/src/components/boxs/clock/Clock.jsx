@@ -10,6 +10,7 @@ import { Text } from 'preact-i18n';
 import style from './style.css';
 import get from 'get-value';
 import cx from 'classnames';
+import { timeFormatToken } from '../../../utils/timeFormat';
 
 const Clock = ({ children, ...props }) => (
   <div class="card">
@@ -67,7 +68,7 @@ class ClockComponent extends Component {
 
     const time = dayjs()
       .locale(this.props.user.language)
-      .format(displaySecond ? 'LTS' : 'LT');
+      .format(timeFormatToken(this.props.user.time_format, { withSeconds: displaySecond }));
 
     this.setState({ day, dayNumber, month, year, time });
   };
