@@ -9,24 +9,10 @@ import { JOB_TYPES, WEBSOCKET_MESSAGE_TYPES } from '../../../../server/utils/con
 import get from 'get-value';
 
 class Dashboard extends Component {
-  toggleDashboardDropdown = () => {
-    this.setState(prevState => {
-      return { ...prevState, dashboardDropdownOpened: !this.state.dashboardDropdownOpened };
-    });
-  };
-
   toggleDefineTabletMode = () => {
     this.setState(prevState => {
       return { ...prevState, defineTabletModeOpened: !this.state.defineTabletModeOpened };
     });
-  };
-
-  closeDashboardDropdown = () => {
-    if (this.state.dashboardDropdownOpened) {
-      this.setState({
-        dashboardDropdownOpened: false
-      });
-    }
   };
 
   getDashboards = async () => {
@@ -131,12 +117,6 @@ class Dashboard extends Component {
     await this.getDuckDbMigrationJob();
   };
 
-  redirectToDashboard = () => {
-    this.setState({
-      dashboardDropdownOpened: false
-    });
-  };
-
   editDashboard = () => {
     route(`/dashboard/${this.state.currentDashboard.selector}/edit`);
   };
@@ -215,7 +195,6 @@ class Dashboard extends Component {
     this.props = props;
     this.state = {
       isGladysPlus: this.props.session.gatewayClient !== undefined,
-      dashboardDropdownOpened: false,
       defineTabletModeOpened: false,
       dashboardEditMode: false,
       showReorderDashboard: false,
@@ -231,7 +210,6 @@ class Dashboard extends Component {
     document.addEventListener('fullscreenchange', this.onFullScreenChange, false);
     document.addEventListener('webkitfullscreenchange', this.onFullScreenChange, false);
     document.addEventListener('mozfullscreenchange', this.onFullScreenChange, false);
-    document.addEventListener('click', this.closeDashboardDropdown, true);
     this.props.session.dispatcher.addListener(WEBSOCKET_MESSAGE_TYPES.ALARM.ARMED, this.alarmArmedOrPartiallyArmed);
     this.props.session.dispatcher.addListener(
       WEBSOCKET_MESSAGE_TYPES.ALARM.PARTIALLY_ARMED,
@@ -264,7 +242,6 @@ class Dashboard extends Component {
     document.removeEventListener('fullscreenchange', this.onFullScreenChange, false);
     document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange, false);
     document.removeEventListener('mozfullscreenchange', this.onFullScreenChange, false);
-    document.removeEventListener('click', this.closeDashboardDropdown, true);
     this.props.session.dispatcher.removeListener(WEBSOCKET_MESSAGE_TYPES.ALARM.ARMED, this.alarmArmedOrPartiallyArmed);
     this.props.session.dispatcher.removeListener(
       WEBSOCKET_MESSAGE_TYPES.ALARM.PARTIALLY_ARMED,
@@ -290,7 +267,6 @@ class Dashboard extends Component {
     props,
     {
       isGladysPlus,
-      dashboardDropdownOpened,
       defineTabletModeOpened,
       dashboards,
       currentDashboard,
@@ -315,7 +291,6 @@ class Dashboard extends Component {
     return (
       <DashboardPage
         {...props}
-        dashboardDropdownOpened={dashboardDropdownOpened}
         defineTabletModeOpened={defineTabletModeOpened}
         dashboardEditMode={dashboardEditMode}
         dashboards={dashboards}
@@ -325,8 +300,6 @@ class Dashboard extends Component {
         loading={loading}
         dashboardNotConfigured={dashboardNotConfigured}
         browserFullScreenCompatible={browserFullScreenCompatible}
-        toggleDashboardDropdown={this.toggleDashboardDropdown}
-        redirectToDashboard={this.redirectToDashboard}
         editDashboard={this.editDashboard}
         toggleFullScreen={this.toggleFullScreen}
         toggleDefineTabletMode={this.toggleDefineTabletMode}

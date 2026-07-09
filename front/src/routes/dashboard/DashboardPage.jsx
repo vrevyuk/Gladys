@@ -20,25 +20,21 @@ const DashboardPage = ({ children, ...props }) => (
               <div class="page-header">
                 <div>
                   {!props.dashboardListEmpty && (
-                    <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" onClick={props.toggleDashboardDropdown}>
-                        {props.currentDashboard && wrapEmojisJSX(props.currentDashboard.name)}
-                      </button>
-                      <div
-                        class={cx('dropdown-menu', {
-                          show: props.dashboardDropdownOpened
-                        })}
-                      >
-                        {props.dashboards.map(dashboard => (
+                    <div class={style.dashboardButtons}>
+                      {props.dashboards.map(dashboard => {
+                        const isActive =
+                          props.currentDashboard && dashboard.selector === props.currentDashboard.selector;
+                        return (
                           <Link
-                            class={cx('dropdown-item', style.dropdownItemBiggerLines)}
+                            class={cx('btn btn-secondary', style.dashboardButton, {
+                              [style.dashboardButtonActive]: isActive
+                            })}
                             href={`/dashboard/${dashboard.selector}`}
-                            onClick={props.redirectToDashboard}
                           >
                             {wrapEmojisJSX(dashboard.name)}
                           </Link>
-                        ))}
-                      </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
