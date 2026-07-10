@@ -1,6 +1,5 @@
 const Promise = require('bluebird');
 const logger = require('../../../../utils/logger');
-const { slugify } = require('../../../../utils/slugify');
 
 /**
  * @description Start user's WEBCAL calendars synchronization.
@@ -30,8 +29,10 @@ async function syncUserWebcals(userId) {
       await Promise.map(
         formatedEvents,
         async (formatedEvent) => {
+          // Match on external_id: it is stored verbatim, whereas the stored
+          // selector is slugified on creation and cannot be compared reliably.
           const existingIndex = existingEvents.findIndex(
-            (existing) => existing.selector === slugify(formatedEvent.selector),
+            (existing) => existing.external_id === formatedEvent.external_id,
           );
 
           try {
@@ -44,8 +45,16 @@ async function syncUserWebcals(userId) {
               const rowEvent = jsonEvents.find(
                 (jsonEvent) => jsonEvent.uid === formatedEvent.external_id.replace(/\d{4}-\d{2}-\d{2}-\d{2}-\d{2}/, ''),
               );
-              if (this.dayjs(gladysWebcal.last_sync).isBefore(this.dayjs(rowEvent.lastmodified))) {
-                await this.gladys.calendar.updateEvent(existingEvents[existingIndex].selector, formatedEvent);
+              // Some feeds (e.g. Proton) have no LAST-MODIFIED: fall back to DTSTAMP,
+              // and skip the update when neither is present instead of treating the
+              // event as always modified (dayjs(undefined) is "now").
+              const lastModified = rowEvent ? rowEvent.lastmodified || rowEvent.dtstamp : undefined;
+              if (lastModified && this.dayjs(gladysWebcal.last_sync).isBefore(this.dayjs(lastModified))) {
+                // Never rewrite identity fields on update: the selector is stored
+                // slugified and updates bypass the slugify hook, so writing the raw
+                // selector back would corrupt the row identity.
+                const { selector, external_id: externalId, ...eventUpdate } = formatedEvent;
+                await this.gladys.calendar.updateEvent(existingEvents[existingIndex].selector, eventUpdate);
                 insertedOrUpdatedEvent += 1;
               }
               // Remove it from eventToDelete list

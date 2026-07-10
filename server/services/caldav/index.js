@@ -24,6 +24,8 @@ module.exports = function CalDAVService(gladys, serviceId) {
 
   const calDavHandler = new CalDAVHandler(gladys, serviceId, ical, dav, dayjs, xmlDom);
 
+  const SYNC_INTERVAL_MS = 1000 * 60 * 10;
+
   let interval;
   let webcalInterval;
 
@@ -79,15 +81,15 @@ module.exports = function CalDAVService(gladys, serviceId) {
   /**
    * @public
    * @description This function starts the CalDAV service
-   * and start interval to sync all users CalDAV calendars every 30mn
-   * and start interval to sync all users Webcals calendars every 30mn.
+   * and start interval to sync all users CalDAV calendars every 10mn
+   * and start interval to sync all users Webcals calendars every 10mn.
    * @example
    * gladys.services.caldav.start();
    */
   async function start() {
     logger.info('Starting CalDAV service');
-    interval = setInterval(syncAllUsers, 1000 * 60 * 30);
-    webcalInterval = setInterval(syncAllUsersWebcals, 1000 * 60 * 30);
+    interval = setInterval(syncAllUsers, SYNC_INTERVAL_MS);
+    webcalInterval = setInterval(syncAllUsersWebcals, SYNC_INTERVAL_MS);
   }
 
   /**
