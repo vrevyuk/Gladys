@@ -18,7 +18,7 @@ const serviceId = '5d6c666f-56be-4929-9104-718a78556844';
 
 describe('Webcal sync', () => {
   let sync;
-  before(() => {
+  beforeEach(() => {
     sync = {
       serviceId,
       syncUserWebcals,
@@ -160,8 +160,141 @@ describe('Webcal sync', () => {
     expect(sync.gladys.calendar.createEvent.getCall(0).args[1].external_id).to.equal('m14515@allrugby.com');
     expect(sync.gladys.calendar.createEvent.getCall(1).args[1].external_id).to.equal('m14505@allrugby.com');
     expect(sync.gladys.calendar.createEvent.getCall(2).args[1].external_id).to.equal('m17295@allrugby.com');
-    expect(sync.gladys.calendar.updateEvent.getCall(0).args[1].external_id).to.equal('m17286@allrugby.com');
+    expect(sync.gladys.calendar.updateEvent.getCall(0).args[0]).to.equal('m17286allrugbycom');
+    expect(sync.gladys.calendar.updateEvent.getCall(0).args[1].name).to.equal('Champions Cup - Munster vs Toulouse');
     expect(sync.gladys.calendar.destroyEvent.getCall(0).args[0]).to.equal('m14501allrugbycom');
     expect(sync.gladys.calendar.update.getCall(0).args[0]).to.equal('calendar1');
+  });
+
+  it('should not rewrite selector or external_id when updating an existing event', async () => {
+    sync.gladys.calendar.get.resolves([
+      {
+        id: 'fc8aabab-d3d5-4ec5-8f24-3de06761284e',
+        external_id: 'https://webcal.host.com/calendar1.ics',
+        selector: 'calendar1',
+        name: 'calendar1',
+        last_sync: new Date('2022-05-05T14:00:00.000Z'),
+      },
+    ]);
+    sync.gladys.http.request.resolves({ data: 'all-events' });
+    sync.ical.parseICS.returns({
+      event1: {
+        type: 'VEVENT',
+        params: [],
+        uid: 'm17286@allrugby.com',
+        start: new Date('2022-05-07T14:00:00.000Z'),
+        duration: 'PT1H50M0S',
+        lastmodified: new Date('2022-05-07T14:00:00.000Z'),
+        summary: 'Champions Cup - Munster vs Toulouse',
+      },
+    });
+    sync.gladys.calendar.getEvents.resolves([
+      {
+        selector: 'm17286allrugbycom',
+        external_id: 'm17286@allrugby.com',
+        name: 'Champions Cup - Munster vs Toulouse',
+      },
+    ]);
+
+    await sync.syncUserWebcals(userId);
+
+    expect(sync.gladys.calendar.updateEvent.callCount).to.equal(1);
+    const updatePayload = sync.gladys.calendar.updateEvent.getCall(0).args[1];
+    expect(updatePayload).to.not.have.property('selector');
+    expect(updatePayload).to.not.have.property('external_id');
+    expect(sync.gladys.calendar.destroyEvent.callCount).to.equal(0);
+  });
+
+  it('should match existing events even when their stored selector is not slugified', async () => {
+    // Regression: rows whose selector was rewritten raw by a previous update
+    // must still be matched (by external_id), not deleted and re-created.
+    sync.gladys.calendar.get.resolves([
+      {
+        id: 'fc8aabab-d3d5-4ec5-8f24-3de06761284e',
+        external_id: 'https://webcal.host.com/calendar1.ics',
+        selector: 'calendar1',
+        name: 'calendar1',
+        last_sync: new Date('2022-05-05T14:00:00.000Z'),
+      },
+    ]);
+    sync.gladys.http.request.resolves({ data: 'all-events' });
+    sync.ical.parseICS.returns({
+      event1: {
+        type: 'VEVENT',
+        params: [],
+        uid: 'fybTsFwo81mNm5W8yEqM12rHXrBk@proton.me',
+        start: new Date('2022-05-07T14:00:00.000Z'),
+        duration: 'PT1H30M0S',
+        lastmodified: new Date('2022-05-07T14:00:00.000Z'),
+        summary: 'Massage',
+      },
+    });
+    sync.gladys.calendar.getEvents.resolves([
+      {
+        selector: 'fybTsFwo81mNm5W8yEqM12rHXrBk@proton.me',
+        external_id: 'fybTsFwo81mNm5W8yEqM12rHXrBk@proton.me',
+        name: 'Massage',
+      },
+    ]);
+
+    await sync.syncUserWebcals(userId);
+
+    expect(sync.gladys.calendar.createEvent.callCount).to.equal(0);
+    expect(sync.gladys.calendar.destroyEvent.callCount).to.equal(0);
+    expect(sync.gladys.calendar.updateEvent.callCount).to.equal(1);
+    expect(sync.gladys.calendar.updateEvent.getCall(0).args[0]).to.equal('fybTsFwo81mNm5W8yEqM12rHXrBk@proton.me');
+  });
+
+  it('should not treat events without lastmodified as always modified', async () => {
+    sync.gladys.calendar.get.resolves([
+      {
+        id: 'fc8aabab-d3d5-4ec5-8f24-3de06761284e',
+        external_id: 'https://webcal.host.com/calendar1.ics',
+        selector: 'calendar1',
+        name: 'calendar1',
+        last_sync: new Date('2022-05-05T14:00:00.000Z'),
+      },
+    ]);
+    sync.gladys.http.request.resolves({ data: 'all-events' });
+    sync.ical.parseICS.returns({
+      event1: {
+        type: 'VEVENT',
+        params: [],
+        uid: 'no-lastmodified@proton.me',
+        start: new Date('2022-05-07T14:00:00.000Z'),
+        duration: 'PT1H0M0S',
+        summary: 'Event without LAST-MODIFIED',
+      },
+      event2: {
+        type: 'VEVENT',
+        params: [],
+        uid: 'dtstamp-only@proton.me',
+        start: new Date('2022-05-08T14:00:00.000Z'),
+        duration: 'PT1H0M0S',
+        dtstamp: new Date('2022-05-06T14:00:00.000Z'),
+        summary: 'Event with DTSTAMP newer than last sync',
+      },
+    });
+    sync.gladys.calendar.getEvents.resolves([
+      {
+        selector: 'no-lastmodifiedprotonme',
+        external_id: 'no-lastmodified@proton.me',
+        name: 'Event without LAST-MODIFIED',
+      },
+      {
+        selector: 'dtstamp-onlyprotonme',
+        external_id: 'dtstamp-only@proton.me',
+        name: 'Event with DTSTAMP newer than last sync',
+      },
+    ]);
+
+    await sync.syncUserWebcals(userId);
+
+    // event1 has no modification info: keep it, don't update, don't delete
+    // event2 falls back to dtstamp, which is newer than last_sync: update
+    expect(sync.gladys.calendar.createEvent.callCount).to.equal(0);
+    expect(sync.gladys.calendar.destroyEvent.callCount).to.equal(0);
+    expect(sync.gladys.calendar.updateEvent.callCount).to.equal(1);
+    expect(sync.gladys.calendar.updateEvent.getCall(0).args[0]).to.equal('dtstamp-onlyprotonme');
   });
 });
