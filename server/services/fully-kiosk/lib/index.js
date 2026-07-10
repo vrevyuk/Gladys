@@ -3,6 +3,7 @@ const { DEFAULT_TIMEOUT } = require('./fully-kiosk.constants');
 const { buildCommandUrl, sendCommand, getDeviceInfo } = require('./fully-kiosk.command');
 const { setValue } = require('./fully-kiosk.setValue');
 const { poll } = require('./fully-kiosk.poll');
+const { reloadAll } = require('./fully-kiosk.reloadAll');
 
 /**
  * @description Handler for the Fully Kiosk Browser integration.
@@ -23,5 +24,6 @@ FullyKioskHandler.prototype.sendCommand = sendCommand;
 FullyKioskHandler.prototype.getDeviceInfo = getDeviceInfo;
 FullyKioskHandler.prototype.setValue = setValue;
 FullyKioskHandler.prototype.poll = poll;
+FullyKioskHandler.prototype.reloadAll = reloadAll;
 
 module.exports = FullyKioskHandler;
