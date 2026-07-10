@@ -7,11 +7,12 @@ import cx from 'classnames';
 import get from 'get-value';
 
 import actions from '../../../actions/dashboard/boxes/calendar';
-import { describeEventTime } from './computeUpcoming';
+import { describeEventTime, isStartingSoon } from './computeUpcoming';
 import { RequestStatus, DASHBOARD_BOX_DATA_KEY, DASHBOARD_BOX_STATUS_KEY } from '../../../utils/consts';
 import style from './style.css';
 
 const BOX_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
+const CLOCK_TICK_INTERVAL_MS = 60 * 1000;
 const CALENDAR_ROUTE = '/dashboard/calendar';
 const DEFAULT_COLOR = '#3174ad';
 
@@ -74,8 +75,8 @@ const EventRow = ({ view, large }) => (
   </div>
 );
 
-const CalendarBox = ({ boxTitle, boxStatus, status, nextView, todayViews, moreCount }) => (
-  <div class="card">
+const CalendarBox = ({ boxTitle, boxStatus, status, nextView, todayViews, moreCount, startingSoon }) => (
+  <div class={cx('card', { [style.startingSoon]: startingSoon })}>
     <div class="card-header">
       <Link href={CALENDAR_ROUTE} class="card-title">
         {boxTitle || <Text id="dashboard.boxTitle.calendar" />}
@@ -128,6 +129,7 @@ class CalendarBoxComponent extends Component {
   componentDidMount() {
     this.refreshData();
     this.interval = setInterval(this.refreshData, BOX_REFRESH_INTERVAL_MS);
+    this.clockInterval = setInterval(() => this.setState({ now: new Date() }), CLOCK_TICK_INTERVAL_MS);
   }
 
   componentDidUpdate(previousProps) {
@@ -138,6 +140,7 @@ class CalendarBoxComponent extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    clearInterval(this.clockInterval);
   }
 
   render(props) {
@@ -149,8 +152,10 @@ class CalendarBoxComponent extends Component {
     const now = new Date();
 
     const nextEvent = get(upcoming, 'next');
+    const todayEvents = get(upcoming, 'today') || [];
     const nextView = nextEvent ? toEventView(nextEvent, now, language, timeFormat) : null;
-    const todayViews = (get(upcoming, 'today') || []).map(event => toEventView(event, now, language, timeFormat));
+    const todayViews = todayEvents.map(event => toEventView(event, now, language, timeFormat));
+    const startingSoon = [nextEvent, ...todayEvents].some(event => isStartingSoon(event, now));
 
     return (
       <CalendarBox
@@ -160,6 +165,7 @@ class CalendarBoxComponent extends Component {
         nextView={nextView}
         todayViews={todayViews}
         moreCount={get(upcoming, 'moreCount') || 0}
+        startingSoon={startingSoon}
       />
     );
   }

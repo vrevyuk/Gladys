@@ -42,6 +42,26 @@ export function computeUpcoming(events, now, options = {}) {
   return { status: 'ok', next, today, moreCount };
 }
 
+export const STARTING_SOON_THRESHOLD_MINUTES = 15;
+
+/**
+ * @description Check if a timed event starts within the next few minutes.
+ * @param {object} event - Event with { start, full_day }.
+ * @param {(Date|string|number)} now - Current time.
+ * @param {number} [thresholdMinutes] - Look-ahead window in minutes.
+ * @returns {boolean} True if the event starts within the window.
+ * @example
+ * isStartingSoon(event, new Date());
+ */
+export function isStartingSoon(event, now, thresholdMinutes = STARTING_SOON_THRESHOLD_MINUTES) {
+  if (!event || event.full_day) {
+    return false;
+  }
+  const start = dayjs(event.start);
+  const nowD = dayjs(now);
+  return start.isAfter(nowD) && !start.isAfter(nowD.add(thresholdMinutes, 'minute'));
+}
+
 /**
  * @description Describe how to render an event's time.
  * @param {object} event - Event with { start, end, full_day }.
