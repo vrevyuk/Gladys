@@ -249,6 +249,7 @@ const AVAILABLE_LANGUAGES = {
   EN: 'en',
   FR: 'fr',
   DE: 'de',
+  UK: 'uk',
 };
 
 const SESSION_TOKEN_TYPES = {
