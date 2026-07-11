@@ -1,0 +1,22 @@
+[
+  {
+    "label": "light.turn-on.success",
+    "answers": ["Я увімкнув світло."]
+  },
+  {
+    "label": "light.turn-on.fail",
+    "answers": ["Мені не вдалося увімкнути світло."]
+  },
+  {
+    "label": "light.turn-off.success",
+    "answers": ["Я вимкнув світло."]
+  },
+  {
+    "label": "light.turn-off.fail",
+    "answers": ["Мені не вдалося вимкнути світло."]
+  },
+  {
+    "label": "light.not-found",
+    "answers": ["Я не знайшов жодного світла в цій кімнаті."]
+  }
+]

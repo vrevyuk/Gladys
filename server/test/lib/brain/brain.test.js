@@ -20,4 +20,16 @@ describe('brain', () => {
     expect(reply).to.be.a('string');
     expect(reply.length).to.be.greaterThan(0);
   });
+
+  it('should getReply in Ukrainian', async () => {
+    await brain.load();
+    const reply = brain.getReply('uk', 'calendar.next-event.get-location.success', {
+      event: {
+        location: 'Париж',
+        name: 'робота',
+      },
+    });
+    expect(reply).to.be.a('string');
+    expect(reply.length).to.be.greaterThan(0);
+  });
 });

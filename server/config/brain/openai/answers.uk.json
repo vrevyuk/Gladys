@@ -1,0 +1,16 @@
+[
+  {
+    "label": "openai.request.fail",
+    "answers": ["Запит до API штучного інтелекту не вдався, будь ласка, спробуйте ще раз!"]
+  },
+  {
+    "label": "openai.request.tooManyRequests",
+    "answers": ["Цього місяця ви зробили забагато запитів до API штучного інтелекту!"]
+  },
+  {
+    "label": "openai.plus-required",
+    "answers": [
+      "Чат використовує штучний інтелект Gladys Plus і доступний лише за передплатою Gladys Plus. [Оформити передплату Gladys Plus](https://gladysassistant.com/plus/?utm_source=gladys_app&utm_medium=in_app&utm_campaign=chat_plus_required&utm_content=brain_reply)"
+    ]
+  }
+]

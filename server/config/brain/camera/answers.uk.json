@@ -1,0 +1,15 @@
+[
+  {
+    "label": "camera.get-image.success",
+    "answers": ["Ось що я бачу:"]
+  },
+
+  {
+    "label": "camera.get-image.no-image-found",
+    "answers": ["Вибачте, я не можу отримати свіже зображення."]
+  },
+  {
+    "label": "camera.get-image.fail",
+    "answers": ["Вибачте, під час отримання зображення з камери сталася помилка"]
+  }
+]
