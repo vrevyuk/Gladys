@@ -4,6 +4,7 @@ import ApexCharts from 'apexcharts';
 import fr from 'apexcharts/dist/locales/fr.json';
 import en from 'apexcharts/dist/locales/en.json';
 import de from 'apexcharts/dist/locales/de.json';
+import uaLocale from 'apexcharts/dist/locales/ua.json';
 
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -15,6 +16,9 @@ import { getApexChartTimelineOptions } from './ApexChartTimelineOptions';
 import mergeArray from '../../../utils/mergeArray';
 
 dayjs.extend(localizedFormat);
+
+// apexcharts ships Ukrainian as "ua"; Gladys user language is "uk"
+const uk = { ...uaLocale, name: 'uk' };
 
 const DEFAULT_COLORS = [
   '#316cbe',
@@ -116,7 +120,7 @@ class ApexChartComponent extends Component {
       hideLegend: this.props.hide_legend,
       series: this.props.series,
       colors: mergeArray(this.props.colors, DEFAULT_COLORS),
-      locales: [fr, en, de],
+      locales: [fr, en, de, uk],
       defaultLocale: this.props.user.language,
       yAxisFormatter: this.props.y_axis_formatter,
       yAxisUnit: this.props.y_axis_unit,
@@ -151,7 +155,7 @@ class ApexChartComponent extends Component {
       series: this.props.series,
       displayAxes: this.props.display_axes,
       colors: mergeArray(this.props.colors, DEFAULT_COLORS),
-      locales: [fr, en, de],
+      locales: [fr, en, de, uk],
       defaultLocale: this.props.user.language
     });
     this.addDateFormatter(options);
@@ -172,7 +176,7 @@ class ApexChartComponent extends Component {
       colors: mergeArray(this.props.colors, DEFAULT_COLORS),
       displayAxes: this.props.display_axes,
       series: this.props.series,
-      locales: [fr, en, de],
+      locales: [fr, en, de, uk],
       defaultLocale: this.props.user.language
     });
     this.addDateFormatter(options);
@@ -192,7 +196,7 @@ class ApexChartComponent extends Component {
       colors: mergeArray(this.props.colors, DEFAULT_COLORS),
       displayAxes: this.props.display_axes,
       series: this.props.series,
-      locales: [fr, en, de],
+      locales: [fr, en, de, uk],
       defaultLocale: this.props.user.language
     });
     this.addDateFormatter(options);
@@ -213,7 +217,7 @@ class ApexChartComponent extends Component {
       colors: mergeArray(this.props.colors, DEFAULT_COLORS),
       displayAxes: this.props.display_axes,
       series: this.props.series,
-      locales: [fr, en, de],
+      locales: [fr, en, de, uk],
       defaultLocale: this.props.user.language
     });
     this.addDateFormatterRangeBar(options);
