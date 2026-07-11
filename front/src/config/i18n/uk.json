@@ -1554,347 +1554,347 @@
       }
     },
     "mqtt": {
-      "title": "MQTT Virtual Devices",
-      "description": "Create virtual devices controllable via MQTT.",
-      "virtualDevicesExplanation": "This integration allows you to create virtual devices, which are controllable via MQTT, HTTP, in scenes and on the dashboard. To use Zigbee devices, please use the <a href=\"/dashboard/integration/device/zigbee2mqtt\">Zigbee2mqtt</a> integration. To use Z-Wave devices, please use the <a href=\"/dashboard/integration/device/zwavejs-ui\">ZWaveJS UI</a> integration. To use Nuki MQTT devices, please use the <a href=\"/dashboard/integration/device/nuki\">Nuki</a> integration.",
-      "deviceTab": "Devices",
-      "debugTab": "MQTT Debug",
-      "setupTab": "Setup",
-      "documentation": "MQTT documentation",
-      "apiDocumentation": "MQTT API documentation ",
+      "title": "Віртуальні пристрої MQTT",
+      "description": "Створюйте віртуальні пристрої, керовані через MQTT.",
+      "virtualDevicesExplanation": "Ця інтеграція дає змогу створювати віртуальні пристрої, керовані через MQTT, HTTP, у сценах і на панелі приладів. Для пристроїв Zigbee використовуйте інтеграцію <a href=\"/dashboard/integration/device/zigbee2mqtt\">Zigbee2mqtt</a>. Для пристроїв Z-Wave використовуйте інтеграцію <a href=\"/dashboard/integration/device/zwavejs-ui\">ZWaveJS UI</a>. Для пристроїв Nuki MQTT використовуйте інтеграцію <a href=\"/dashboard/integration/device/nuki\">Nuki</a>.",
+      "deviceTab": "Пристрої",
+      "debugTab": "Налагодження MQTT",
+      "setupTab": "Налаштування",
+      "documentation": "Документація MQTT",
+      "apiDocumentation": "Документація API MQTT ",
       "status": {
-        "notConfigured": "MQTT service is not configured, please go to ",
-        "notConnected": "MQTT service failed to connect to network, please go to ",
-        "setupPageLink": "MQTT configuration page"
+        "notConfigured": "Сервіс MQTT не налаштовано, будь ласка, перейдіть на ",
+        "notConnected": "Сервісу MQTT не вдалося підключитися до мережі, будь ласка, перейдіть на ",
+        "setupPageLink": "сторінку налаштування MQTT"
       },
       "device": {
-        "title": "MQTT Devices",
-        "noDevices": "No MQTT devices added yet.",
-        "noNameLabel": "No name",
-        "nameLabel": "Name",
-        "externalIdLabel": "External ID",
-        "roomLabel": "Room",
-        "featuresLabel": "Features",
-        "saveButton": "Save",
-        "deleteButton": "Delete",
-        "returnButton": "Return back",
-        "editButton": "Edit details",
-        "notFound": "Requested device not found.",
-        "backToList": "Back to device list",
-        "saveError": "Error saving or deleting device",
-        "validationError": "Validation error : The device is not correctly filled.",
-        "validationErrorTitle": "Unable to save the device. Please fix the fields highlighted in red:",
-        "validationErrorDevice": "Device — {{field}}: {{message}}",
+        "title": "Пристрої MQTT",
+        "noDevices": "Ще не додано жодного пристрою MQTT.",
+        "noNameLabel": "Без назви",
+        "nameLabel": "Назва",
+        "externalIdLabel": "Зовнішній ідентифікатор",
+        "roomLabel": "Кімната",
+        "featuresLabel": "Функції",
+        "saveButton": "Зберегти",
+        "deleteButton": "Видалити",
+        "returnButton": "Повернутися назад",
+        "editButton": "Редагувати деталі",
+        "notFound": "Запитаний пристрій не знайдено.",
+        "backToList": "Назад до списку пристроїв",
+        "saveError": "Помилка збереження або видалення пристрою",
+        "validationError": "Помилка валідації: пристрій заповнено неправильно.",
+        "validationErrorTitle": "Не вдалося зберегти пристрій. Будь ласка, виправте поля, виділені червоним:",
+        "validationErrorDevice": "Пристрій — {{field}}: {{message}}",
         "validationErrorFeature": "\"{{featureName}}\" — {{field}}: {{message}}",
         "validationFieldLabels": {
-          "name": "Name",
-          "external_id": "External ID",
-          "min": "Minimum value",
-          "max": "Maximum value",
-          "unit": "Unit",
-          "room_id": "Room",
-          "category": "Category",
-          "type": "Type"
+          "name": "Назва",
+          "external_id": "Зовнішній ідентифікатор",
+          "min": "Мінімальне значення",
+          "max": "Максимальне значення",
+          "unit": "Одиниця",
+          "room_id": "Кімната",
+          "category": "Категорія",
+          "type": "Тип"
         },
         "validationErrors": {
-          "name": "This field is required",
-          "min": "This field is required and must be a number",
-          "max": "This field is required and must be a number",
-          "external_id": "This field is required and must be unique",
-          "unit": "The selected unit is not valid for this feature",
-          "room_id": "The selected room is not valid"
+          "name": "Це поле є обов'язковим",
+          "min": "Це поле є обов'язковим і має бути числом",
+          "max": "Це поле є обов'язковим і має бути числом",
+          "external_id": "Це поле є обов'язковим і має бути унікальним",
+          "unit": "Вибрана одиниця недійсна для цієї функції",
+          "room_id": "Вибрана кімната недійсна"
         },
-        "saveConflictError": "Conflict: Are you sure all external IDs are unique?",
-        "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
-        "noValueReceived": "No value received.",
-        "searchPlaceholder": "Search devices...",
-        "unassignedRoom": "No room assigned",
-        "featureCount": "{{count}} feature(s)"
+        "saveConflictError": "Конфлікт: ви впевнені, що всі зовнішні ідентифікатори унікальні?",
+        "mostRecentValueAt": "Останнє значення отримано {{mostRecentValueAt}}.",
+        "noValueReceived": "Не отримано жодного значення.",
+        "searchPlaceholder": "Пошук пристроїв...",
+        "unassignedRoom": "Кімнату не призначено",
+        "featureCount": "{{count}} функцій"
       },
       "featureCatalog": {
-        "title": "Feature catalog",
-        "subtitle": "Browse available features and see how they will appear on your dashboard.",
-        "searchPlaceholder": "Search features (e.g. temperature, dimmer, switch...)",
-        "openButton": "Add a feature",
-        "closeButton": "Close catalog",
-        "previewLabel": "Dashboard preview",
-        "cameraPreviewNotice": "This feature is displayed in the Camera dashboard widget, not in the device list.",
+        "title": "Каталог функцій",
+        "subtitle": "Переглядайте доступні функції та дивіться, як вони виглядатимуть на вашій панелі приладів.",
+        "searchPlaceholder": "Пошук функцій (напр. температура, димер, вимикач...)",
+        "openButton": "Додати функцію",
+        "closeButton": "Закрити каталог",
+        "previewLabel": "Попередній перегляд панелі",
+        "cameraPreviewNotice": "Ця функція відображається у віджеті «Камера» на панелі, а не в списку пристроїв.",
         "previewValues": {
           "cube": {
-            "mode": "Rotation (Xiaomi Cube gesture)"
+            "mode": "Обертання (жест Xiaomi Cube)"
           }
         },
-        "noResults": "No features match your search.",
-        "noFeaturesYet": "No features added yet. Use the button below to browse the catalog.",
-        "sensorBadge": "Sensor",
-        "actuatorBadge": "Actuator",
-        "historyBadge": "Logged",
-        "fallbackDescription": "A Gladys feature that can be controlled or monitored via MQTT.",
+        "noResults": "Жодна функція не відповідає вашому запиту.",
+        "noFeaturesYet": "Ще не додано жодної функції. Скористайтеся кнопкою нижче, щоб переглянути каталог.",
+        "sensorBadge": "Датчик",
+        "actuatorBadge": "Актуатор",
+        "historyBadge": "Записується",
+        "fallbackDescription": "Функція Gladys, якою можна керувати або яку можна відстежувати через MQTT.",
         "categoryDescriptions": {
-          "light": "Control lights: on/off, brightness, color and color temperature.",
-          "switch": "Control switches, dimmers and power measurements.",
-          "temperature-sensor": "Read temperature values from your sensors.",
-          "humidity-sensor": "Read humidity levels from your sensors.",
-          "motion-sensor": "Detect motion in a room or area.",
-          "energy-sensor": "Monitor energy consumption, power and electricity index.",
-          "shutter": "Control shutters and blinds.",
-          "curtain": "Control curtains and their position.",
-          "thermostat": "Set and read heating setpoints.",
-          "button": "Trigger actions on button press.",
-          "text": "Display or send text values.",
-          "battery": "Monitor battery level of your devices.",
-          "currency": "Display currency or cryptocurrency values."
+          "light": "Керування світлом: увімкнення/вимкнення, яскравість, колір і температура кольору.",
+          "switch": "Керування вимикачами, димерами та вимірюванням потужності.",
+          "temperature-sensor": "Зчитування значень температури з ваших датчиків.",
+          "humidity-sensor": "Зчитування рівнів вологості з ваших датчиків.",
+          "motion-sensor": "Виявлення руху в кімнаті або зоні.",
+          "energy-sensor": "Відстеження споживання енергії, потужності та показників лічильника електроенергії.",
+          "shutter": "Керування ролетами та жалюзі.",
+          "curtain": "Керування шторами та їхнім положенням.",
+          "thermostat": "Встановлення та зчитування цільової температури опалення.",
+          "button": "Запуск дій натисканням кнопки.",
+          "text": "Відображення або надсилання текстових значень.",
+          "battery": "Відстеження рівня заряду батареї ваших пристроїв.",
+          "currency": "Відображення значень валют або криптовалют."
         },
         "descriptions": {
           "light": {
-            "binary": "A simple on/off switch to control a light.",
-            "brightness": "A slider to adjust light brightness from 0% to 100%.",
-            "color": "A color picker to set the light color.",
-            "temperature": "A slider to adjust the color temperature (warm to cool white)."
+            "binary": "Простий перемикач увімк./вимк. для керування світлом.",
+            "brightness": "Повзунок для регулювання яскравості світла від 0% до 100%.",
+            "color": "Палітра для вибору кольору світла.",
+            "temperature": "Повзунок для регулювання температури кольору (від теплого до холодного білого)."
           },
           "switch": {
-            "binary": "A simple on/off switch for any appliance.",
-            "dimmer": "A slider to control the intensity of a device."
+            "binary": "Простий перемикач увімк./вимк. для будь-якого приладу.",
+            "dimmer": "Повзунок для керування інтенсивністю пристрою."
           },
           "temperature-sensor": {
-            "decimal": "Displays the current temperature with its unit."
+            "decimal": "Показує поточну температуру з одиницею вимірювання."
           },
           "humidity-sensor": {
-            "decimal": "Displays the current humidity percentage."
+            "decimal": "Показує поточний відсоток вологості."
           },
           "motion-sensor": {
-            "binary": "Shows whether motion is currently detected."
+            "binary": "Показує, чи виявлено зараз рух."
           },
           "energy-sensor": {
-            "power": "Displays instantaneous power consumption in watts.",
-            "index": "Displays the cumulative energy index (kWh meter)."
+            "power": "Показує миттєве споживання потужності у ватах.",
+            "index": "Показує накопичувальний показник енергії (лічильник кВт·год)."
           },
           "shutter": {
-            "state": "Open or close a shutter with up/down controls.",
-            "position": "Set the shutter position with a slider (0% = closed)."
+            "state": "Відкривайте або закривайте ролету кнопками вгору/вниз.",
+            "position": "Встановлюйте положення ролети повзунком (0% = закрито)."
           },
           "thermostat": {
-            "target-temperature": "Set the target temperature with +/- buttons."
+            "target-temperature": "Встановлюйте цільову температуру кнопками +/-."
           },
           "button": {
-            "push": "A button to trigger an action in Gladys or via MQTT."
+            "push": "Кнопка для запуску дії в Gladys або через MQTT."
           },
           "text": {
-            "text": "Displays a text value, useful for custom messages or data."
+            "text": "Показує текстове значення, корисно для власних повідомлень або даних."
           },
           "battery": {
-            "integer": "Shows the battery level as a percentage."
+            "integer": "Показує рівень заряду батареї у відсотках."
           },
           "currency": {
-            "decimal": "Displays a monetary value with its currency unit."
+            "decimal": "Показує грошове значення з одиницею валюти."
           }
         },
         "keywords": {
           "light": {
-            "brightness": "dimmer slider variator lamp",
-            "binary": "on off switch lamp",
-            "temperature": "warm cool white kelvin color temperature"
+            "brightness": "димер повзунок регулятор лампа",
+            "binary": "увімк вимк вимикач лампа",
+            "temperature": "теплий холодний білий кельвін температура кольору"
           },
           "switch": {
-            "dimmer": "dimmer slider variator",
-            "binary": "on off switch plug outlet"
+            "dimmer": "димер повзунок регулятор",
+            "binary": "увімк вимк вимикач розетка"
           },
           "temperature-sensor": {
-            "decimal": "temp thermometer climate"
+            "decimal": "темп термометр клімат"
           }
         }
       },
       "feature": {
-        "nameLabel": "Name",
-        "namePlaceholder": "Enter feature name",
-        "externalIdLabel": "Feature external ID",
-        "externalIdMessage": "The external ID is an unique ID which helps you identify this device outside of Gladys when sending a MQTT message. It musts start with \"mqtt:\". Read the MQTT API documentation <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">here</a>.",
-        "externalIdPlaceholder": "Feature MQTT message key",
-        "minLabel": "Minimum value",
-        "minPlaceholder": "Enter feature minimum value",
-        "maxLabel": "Maximum value",
-        "maxPlaceholder": "Enter feature maximum value",
-        "readOnlyLabel": "Is it a sensor?",
-        "readOnlyShortDescription": "Yes, it's a sensor",
-        "readOnlyButton": "Yes, it's a sensor sending data to Gladys only.",
-        "addButton": "Add feature",
-        "mqttTopicToPublishExampleLabel": "MQTT Topic to publish",
-        "mqttTopicToPublishExampleDescription": "Gladys is listening to this topic. If you publish a value in this topic, it'll be associated with this device. (see <a href=\"https://gladysassistant.com/docs/api/mqtt-api/\" target=\"_blank\" rel=\"noopener noreferrer\">doc</a>)",
-        "mqttTopicToListenExampleLabel": "MQTT Topic to listen",
-        "mqttTopicToListenExampleDescription": "Gladys will publish in this topic if the device is controlled in Gladys. You need to listen to this topic. (see <a href=\"https://gladysassistant.com/docs/api/mqtt-api/\" target=\"_blank\" rel=\"noopener noreferrer\">doc</a>)",
-        "mqttCustomTopic": "Custom MQTT Topic",
-        "mqttCustomTopicDescription": "Gladys offers a default MQTT API but allows you to use custom topics if you are using a device that publishes on a particular topic natively.",
-        "mqttCustomTopicPlaceholder": "Enter MQTT topic",
-        "copyMqttTopic": "Copy MQTT Topic",
-        "mqttCustomObjectPath": "MQTT JSON Message",
-        "mqttCustomObjectPathDescription": "If your connected object sends MQTT messages in the form of a JSON, Gladys allows you to specify here the path of the property to be used by Gladys. Example: property1.property2.property3. Leave blank if the format is not JSON.",
-        "mqttCustomObjectPathPlaceholder": "Path to follow in the JSON",
-        "copied": "Copied!",
-        "copyFailed": "Fail to copy",
-        "deleteLabel": "Delete feature",
-        "showAdvancedSettings": "Show advanced settings",
-        "hideAdvancedSettings": "Hide advanced settings",
+        "nameLabel": "Назва",
+        "namePlaceholder": "Введіть назву функції",
+        "externalIdLabel": "Зовнішній ідентифікатор функції",
+        "externalIdMessage": "Зовнішній ідентифікатор — це унікальний ідентифікатор, який допомагає ідентифікувати цей пристрій поза Gladys під час надсилання повідомлення MQTT. Він має починатися з \"mqtt:\". Прочитайте документацію API MQTT <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">тут</a>.",
+        "externalIdPlaceholder": "Ключ повідомлення MQTT функції",
+        "minLabel": "Мінімальне значення",
+        "minPlaceholder": "Введіть мінімальне значення функції",
+        "maxLabel": "Максимальне значення",
+        "maxPlaceholder": "Введіть максимальне значення функції",
+        "readOnlyLabel": "Це датчик?",
+        "readOnlyShortDescription": "Так, це датчик",
+        "readOnlyButton": "Так, це датчик, який лише надсилає дані в Gladys.",
+        "addButton": "Додати функцію",
+        "mqttTopicToPublishExampleLabel": "Топік MQTT для публікації",
+        "mqttTopicToPublishExampleDescription": "Gladys слухає цей топік. Якщо ви опублікуєте значення в цьому топіку, воно буде пов'язане з цим пристроєм. (див. <a href=\"https://gladysassistant.com/docs/api/mqtt-api/\" target=\"_blank\" rel=\"noopener noreferrer\">документацію</a>)",
+        "mqttTopicToListenExampleLabel": "Топік MQTT для прослуховування",
+        "mqttTopicToListenExampleDescription": "Gladys публікуватиме в цей топік, якщо пристроєм керують у Gladys. Вам потрібно слухати цей топік. (див. <a href=\"https://gladysassistant.com/docs/api/mqtt-api/\" target=\"_blank\" rel=\"noopener noreferrer\">документацію</a>)",
+        "mqttCustomTopic": "Власний топік MQTT",
+        "mqttCustomTopicDescription": "Gladys пропонує стандартний API MQTT, але дозволяє використовувати власні топіки, якщо ваш пристрій нативно публікує в певний топік.",
+        "mqttCustomTopicPlaceholder": "Введіть топік MQTT",
+        "copyMqttTopic": "Скопіювати топік MQTT",
+        "mqttCustomObjectPath": "JSON-повідомлення MQTT",
+        "mqttCustomObjectPathDescription": "Якщо ваш підключений об'єкт надсилає повідомлення MQTT у форматі JSON, Gladys дає змогу вказати тут шлях до властивості, яку має використовувати Gladys. Приклад: property1.property2.property3. Залиште порожнім, якщо формат не JSON.",
+        "mqttCustomObjectPathPlaceholder": "Шлях у JSON",
+        "copied": "Скопійовано!",
+        "copyFailed": "Не вдалося скопіювати",
+        "deleteLabel": "Видалити функцію",
+        "showAdvancedSettings": "Показати розширені налаштування",
+        "hideAdvancedSettings": "Сховати розширені налаштування",
         "energyMonitoring": {
-          "title": "Energy Monitoring",
-          "description": "This feature can be used for energy monitoring. Click the button below to automatically create the consumption and cost tracking features.",
-          "createButton": "Create energy monitoring features"
+          "title": "Моніторинг енергії",
+          "description": "Цю функцію можна використовувати для моніторингу енергії. Натисніть кнопку нижче, щоб автоматично створити функції відстеження споживання та вартості.",
+          "createButton": "Створити функції моніторингу енергії"
         }
       },
       "setup": {
-        "title": "MQTT configuration",
-        "mqttDescription": "You can connect Gladys to a MQTT broker to send & receive MQTT messages. Learn more about Gladys MQTT API <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">here</a>.",
-        "embeddedBrokerLabel": "Broker Docker container",
-        "nonDockerEnv": "Gladys is not running on Docker, you cannot install a MQTT broker from here.",
-        "invalidDockerNetwork": "Gladys is under custom installation, to install broker from here, Gladys container should be configured with \"host\" network mode.",
-        "installBrokerContainer": "Use broker in a Docker container.",
-        "brokerDockerNotInstalled": "No broker is available yet on current Docker environment, continue to install and configure <a href=\"https://mosquitto.org/\">eclipse-mosquitto</a> broker inside a Docker container.  Warning: this option will launch a Mosquitto container on port 1883. If you already have an MQTT server on this machine on port 1883, this won't work.",
-        "installBrokerButton": "Install broker on Docker",
-        "installingBrokerButton": "Installation in progress...",
-        "installBrokerError": "An error occurred while installing Docker container, please consult Gladys logs.",
-        "urlLabel": "Broker URL",
-        "urlPlaceholder": "Ex: mqtt://[mqtt-broker-address]:[port]",
-        "userLabel": "Username",
-        "userPlaceholder": "Enter MQTT broker username",
-        "passwordLabel": "Password",
-        "passwordPlaceholder": "Enter MQTT broker password",
-        "saveLabel": "Save configuration",
-        "error": "An error occurred while saving configuration.",
-        "connecting": "Configuration saved. Now connecting to your MQTT broker...",
-        "connected": "Connected to the MQTT broker with success !",
-        "connectionError": "Error while connecting, please check your configuration.",
-        "networkError": "Unable to contact Gladys, is your Gladys instance connected and accessible?",
-        "disconnected": "Disconnected from MQTT broker."
+        "title": "Налаштування MQTT",
+        "mqttDescription": "Ви можете підключити Gladys до брокера MQTT для надсилання та отримання повідомлень MQTT. Дізнайтеся більше про API MQTT Gladys <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">тут</a>.",
+        "embeddedBrokerLabel": "Контейнер Docker із брокером",
+        "nonDockerEnv": "Gladys не працює в Docker, ви не можете встановити брокер MQTT звідси.",
+        "invalidDockerNetwork": "Gladys встановлена нестандартно; щоб встановити брокер звідси, контейнер Gladys має бути налаштований із мережевим режимом \"host\".",
+        "installBrokerContainer": "Використовувати брокер у контейнері Docker.",
+        "brokerDockerNotInstalled": "У поточному середовищі Docker ще немає доступного брокера; продовжте, щоб встановити та налаштувати брокер <a href=\"https://mosquitto.org/\">eclipse-mosquitto</a> у контейнері Docker. Увага: ця опція запустить контейнер Mosquitto на порту 1883. Якщо на цій машині вже є сервер MQTT на порту 1883, це не спрацює.",
+        "installBrokerButton": "Встановити брокер у Docker",
+        "installingBrokerButton": "Триває встановлення...",
+        "installBrokerError": "Сталася помилка під час встановлення контейнера Docker, будь ласка, перегляньте логи Gladys.",
+        "urlLabel": "URL брокера",
+        "urlPlaceholder": "Напр.: mqtt://[mqtt-broker-address]:[port]",
+        "userLabel": "Ім'я користувача",
+        "userPlaceholder": "Введіть ім'я користувача брокера MQTT",
+        "passwordLabel": "Пароль",
+        "passwordPlaceholder": "Введіть пароль брокера MQTT",
+        "saveLabel": "Зберегти налаштування",
+        "error": "Сталася помилка під час збереження налаштувань.",
+        "connecting": "Налаштування збережено. Підключення до вашого брокера MQTT...",
+        "connected": "Успішно підключено до брокера MQTT!",
+        "connectionError": "Помилка під час підключення, будь ласка, перевірте ваші налаштування.",
+        "networkError": "Не вдалося зв'язатися з Gladys. Чи підключений і доступний ваш екземпляр Gladys?",
+        "disconnected": "Відключено від брокера MQTT."
       },
       "debug": {
-        "title": "Debug MQTT",
-        "description": "This tab allows you to see in real-time the MQTT messages arriving on your Gladys instance, enabling you to debug easily. After 2 minutes on this tab, debug mode will automatically deactivate. You can reactivate it with the refresh button at the top right.",
-        "activateDebugMode": "Activate",
-        "debugModeActivated": "Debug mode activated",
-        "date": "Time",
-        "topic": "Topic",
-        "message": "Message Content"
+        "title": "Налагодження MQTT",
+        "description": "Ця вкладка дає змогу бачити в реальному часі повідомлення MQTT, що надходять на ваш екземпляр Gladys, що спрощує налагодження. Після 2 хвилин на цій вкладці режим налагодження автоматично вимкнеться. Ви можете знову увімкнути його кнопкою оновлення вгорі праворуч.",
+        "activateDebugMode": "Активувати",
+        "debugModeActivated": "Режим налагодження активовано",
+        "date": "Час",
+        "topic": "Топік",
+        "message": "Вміст повідомлення"
       }
     },
     "broadlink": {
       "title": "Broadlink",
-      "description": "Control your Broadlink devices.",
-      "remoteTab": "Devices",
-      "peripheralTab": "Discover devices",
-      "documentation": "Broadlink documentation",
+      "description": "Керуйте вашими пристроями Broadlink.",
+      "remoteTab": "Пристрої",
+      "peripheralTab": "Виявлення пристроїв",
+      "documentation": "Документація Broadlink",
       "peripheral": {
-        "title": "Available Broadlink devices",
-        "description": "Here are discovered Broadlink devices, if one is missing, please check its network link.",
-        "noPeripherals": "No peripheral discovered on network, please check the connectivity.",
-        "noNameLabel": "Type not recognized",
-        "ipAddressLabel": "IP address",
-        "macAddressLabel": "MAC address",
-        "modelLabel": "Model",
-        "featuresLabel": "Features",
-        "noFeatures": "No features",
-        "nameLabel": "Name",
-        "saveButton": "Save",
-        "notConnectable": "Locked",
-        "alreadyCreatedButton": "Already created",
-        "createRemoteButton": "Create remote control"
+        "title": "Доступні пристрої Broadlink",
+        "description": "Тут показано виявлені пристрої Broadlink; якщо якогось бракує, перевірте його підключення до мережі.",
+        "noPeripherals": "У мережі не виявлено жодного периферійного пристрою, будь ласка, перевірте з'єднання.",
+        "noNameLabel": "Тип не розпізнано",
+        "ipAddressLabel": "IP-адреса",
+        "macAddressLabel": "MAC-адреса",
+        "modelLabel": "Модель",
+        "featuresLabel": "Функції",
+        "noFeatures": "Немає функцій",
+        "nameLabel": "Назва",
+        "saveButton": "Зберегти",
+        "notConnectable": "Заблоковано",
+        "alreadyCreatedButton": "Уже створено",
+        "createRemoteButton": "Створити пульт"
       },
       "device": {
-        "title": "Broadlink devices",
-        "newButton": "Create",
-        "noRemoteFound": "No Broadlink device or remote found.",
-        "saveError": "There was an error saving the device.",
-        "nameLabel": "Device name",
-        "namePlaceholder": "Enter the name of your device",
-        "modelLabel": "Model",
-        "roomLabel": "Room",
-        "saveButton": "Save",
-        "deleteButton": "Delete",
-        "editButton": "Edit",
-        "featuresLabel": "Features"
+        "title": "Пристрої Broadlink",
+        "newButton": "Створити",
+        "noRemoteFound": "Пристроїв або пультів Broadlink не знайдено.",
+        "saveError": "Сталася помилка під час збереження пристрою.",
+        "nameLabel": "Назва пристрою",
+        "namePlaceholder": "Введіть назву вашого пристрою",
+        "modelLabel": "Модель",
+        "roomLabel": "Кімната",
+        "saveButton": "Зберегти",
+        "deleteButton": "Видалити",
+        "editButton": "Редагувати",
+        "featuresLabel": "Функції"
       },
       "setup": {
-        "noNameLabel": "No name",
-        "saveError": "Error saving or deleting device",
-        "saveSuccess": "Broadlink device successfully created.",
-        "notFound": "Requested device not found.",
-        "saveButton": "Save",
-        "peripheralLabel": "Linked peripheral",
-        "categoryLabel": "Device category to control",
-        "featuresLabel": "Features",
-        "learnModeTitle": "Capture remote command",
-        "learningModeInProgress": "Press button on your remote",
-        "cancelLearnModeButton": "Cancel capture mode",
-        "skipLearningButton": "Skip this step and go to next",
-        "peripheralNotFound": "Peripheral not available.",
-        "peripheralNotLearn": "Peripheral is not able to learn code.",
-        "cancelLearnFailed": "Failed to cancel learning mode.",
-        "learnFailed": "Failed to enter in learn mode.",
-        "selectFeatureLabel": "Select a feature in the list or click button bellow to entrer in learning mode. Learning mode allows you to save all commands, one by one, in an automatized way.",
-        "selectedFeatureLabel": "Selected feature",
-        "selectActionLabel": "Feature <b>{{feature}}</b> is selected, now select an action in the list bellow to enabled capture mode.",
-        "selectedFeatureInfoLabel": "Feature <b>{{feature}}</b> is selected.",
-        "unselectedActionInfoLabel": "Feature <b>{{feature}}</b> is selected, please select an action to enter capture mode.",
-        "selectedActionInfoLabel": "Feature <b>{{feature}}</b> is selected, with action <b>{{action}}</b>.",
-        "testError": "An error occurred while testing feature, please check your device.",
+        "noNameLabel": "Без назви",
+        "saveError": "Помилка збереження або видалення пристрою",
+        "saveSuccess": "Пристрій Broadlink успішно створено.",
+        "notFound": "Запитаний пристрій не знайдено.",
+        "saveButton": "Зберегти",
+        "peripheralLabel": "Пов'язаний периферійний пристрій",
+        "categoryLabel": "Категорія пристрою для керування",
+        "featuresLabel": "Функції",
+        "learnModeTitle": "Захоплення команди пульта",
+        "learningModeInProgress": "Натисніть кнопку на вашому пульті",
+        "cancelLearnModeButton": "Скасувати режим захоплення",
+        "skipLearningButton": "Пропустити цей крок і перейти до наступного",
+        "peripheralNotFound": "Периферійний пристрій недоступний.",
+        "peripheralNotLearn": "Периферійний пристрій не може вивчати коди.",
+        "cancelLearnFailed": "Не вдалося скасувати режим навчання.",
+        "learnFailed": "Не вдалося увійти в режим навчання.",
+        "selectFeatureLabel": "Виберіть функцію в списку або натисніть кнопку нижче, щоб увійти в режим навчання. Режим навчання дає змогу зберегти всі команди, одну за одною, в автоматизований спосіб.",
+        "selectedFeatureLabel": "Вибрана функція",
+        "selectActionLabel": "Вибрано функцію <b>{{feature}}</b>, тепер виберіть дію в списку нижче, щоб увімкнути режим захоплення.",
+        "selectedFeatureInfoLabel": "Вибрано функцію <b>{{feature}}</b>.",
+        "unselectedActionInfoLabel": "Вибрано функцію <b>{{feature}}</b>, будь ласка, виберіть дію, щоб увійти в режим захоплення.",
+        "selectedActionInfoLabel": "Вибрано функцію <b>{{feature}}</b> з дією <b>{{action}}</b>.",
+        "testError": "Сталася помилка під час тестування функції, будь ласка, перевірте ваш пристрій.",
         "peripheralSelectLabel": "{{name}} ({{address}})",
-        "testLabel": "Test",
-        "unselect": "Unselect",
-        "deleteLabel": "Delete",
-        "learnAllLabel": "Learn all features",
-        "learnAllModeLabel": "Next learn in {{timeLeft}} secondes...",
-        "quitLearnModeLabel": "Stop learning features",
+        "testLabel": "Тест",
+        "unselect": "Зняти вибір",
+        "deleteLabel": "Видалити",
+        "learnAllLabel": "Вивчити всі функції",
+        "learnAllModeLabel": "Наступне навчання через {{timeLeft}} секунд...",
+        "quitLearnModeLabel": "Зупинити вивчення функцій",
         "features": {
           "curtain": {
             "state": {
-              "none": "Stop",
-              "one": "Open",
-              "other": "Close"
+              "none": "Стоп",
+              "one": "Відкрити",
+              "other": "Закрити"
             }
           },
           "light": {
             "binary": {
-              "none": "Off",
-              "one": "On"
+              "none": "Вимк.",
+              "one": "Увімк."
             },
             "brightness": {
-              "none": "Down",
-              "many": "Up"
+              "none": "Менше",
+              "many": "Більше"
             },
             "temperature": {
-              "none": "Cold",
-              "many": "Hot"
+              "none": "Холодніше",
+              "many": "Тепліше"
             }
           },
           "switch": {
             "binary": {
-              "none": "Off",
-              "one": "On"
+              "none": "Вимк.",
+              "one": "Увімк."
             },
             "dimmer": {
-              "none": "Down",
-              "many": "Up"
+              "none": "Менше",
+              "many": "Більше"
             }
           },
           "siren": {
             "binary": {
-              "none": "Off",
-              "one": "On"
+              "none": "Вимк.",
+              "one": "Увімк."
             }
           },
           "shutter": {
             "state": {
-              "none": "Stop",
-              "one": "Open",
-              "other": "Close"
+              "none": "Стоп",
+              "one": "Відкрити",
+              "other": "Закрити"
             }
           },
           "television": {
             "binary": {
-              "none": "Off",
-              "one": "On"
+              "none": "Вимк.",
+              "one": "Увімк."
             },
             "volume": {
-              "none": "Down",
-              "many": "Up"
+              "none": "Тихіше",
+              "many": "Гучніше"
             }
           }
         }
@@ -1902,87 +1902,87 @@
     },
     "lanManager": {
       "title": "LAN Manager",
-      "description": "Presence detection via network scan",
-      "deviceTab": "Devices",
-      "discoverTab": "LAN Discover",
-      "setupTab": "Presence scanner",
-      "documentation": "Lan Manager documentation",
+      "description": "Виявлення присутності через сканування мережі",
+      "deviceTab": "Пристрої",
+      "discoverTab": "Виявлення LAN",
+      "setupTab": "Сканер присутності",
+      "documentation": "Документація LAN Manager",
       "device": {
-        "title": "Devices added to the integration",
-        "explanation": "This integration allows you to detect user presence by scanning the network.",
-        "iosWarning": "Warning, this integration does not work with iOS devices.",
-        "search": "Search devices",
-        "noDevices": "No LAN devices added yet.",
-        "manufacturerLabel": "Manufacturer",
-        "ipAddressLabel": "IP address",
-        "macAddressLabel": "MAC address",
-        "originalNameLabel": "Hostname"
+        "title": "Пристрої, додані до інтеграції",
+        "explanation": "Ця інтеграція дає змогу виявляти присутність користувачів шляхом сканування мережі.",
+        "iosWarning": "Увага: ця інтеграція не працює з пристроями iOS.",
+        "search": "Пошук пристроїв",
+        "noDevices": "Ще не додано жодного пристрою LAN.",
+        "manufacturerLabel": "Виробник",
+        "ipAddressLabel": "IP-адреса",
+        "macAddressLabel": "MAC-адреса",
+        "originalNameLabel": "Ім'я хоста"
       },
       "discover": {
-        "title": "LAN Discover",
-        "noDevices": "No LAN devices found.",
-        "scanButton": "Scan network",
-        "deviceUpdateButton": "New devices available",
-        "hideExistingDevices": "Hide already added devices",
-        "alreadyCreatedButton": "Already created",
-        "updateButton": "Update",
-        "discoveringError": "An error occurred, check scanner configuration, or check logs."
+        "title": "Виявлення LAN",
+        "noDevices": "Пристроїв LAN не знайдено.",
+        "scanButton": "Сканувати мережу",
+        "deviceUpdateButton": "Доступні нові пристрої",
+        "hideExistingDevices": "Сховати вже додані пристрої",
+        "alreadyCreatedButton": "Уже створено",
+        "updateButton": "Оновити",
+        "discoveringError": "Сталася помилка, перевірте налаштування сканера або перегляньте логи."
       },
       "setup": {
-        "title": "Presence scanner",
-        "errorLabel": "An error occurred while loading configuration.",
-        "noConfigLabel": "Configuration not loaded, please retry.",
-        "presenceScannerDescription": "The presence scanner feature is doing a network scan at a defined interval. When a device is detected, the device will be flagged as \"seen\" in Gladys. In scene, you can create a trigger on this state change to set you home when a device is detected at home for example.",
-        "presenceScannerStatusLabel": "Enable or disable presence scanner",
-        "presenceScannerFrequencyLabel": "Scanner interval",
-        "presenceScannerFrequencyUnit": "minutes",
-        "presenceScannerFrequencyError": "Only integers are accepted.",
-        "ipMasksLabel": "CIDR to scan",
-        "masksDescription": "CIDR (Classless Inter-Domain Routing) is a notation to describe a range of IP addresses in a sub-network. You can write it as an IP address, followed by a network mask number, both separated by a slash (example: 192.168.1.1/10). There is many CIDR calculators on the Internet which will help you to compute your own.",
-        "networkInterfaceDescription": "Masks defined by your computer on your networks, with network interfaces, can't be removed.",
+        "title": "Сканер присутності",
+        "errorLabel": "Сталася помилка під час завантаження налаштувань.",
+        "noConfigLabel": "Налаштування не завантажено, будь ласка, повторіть.",
+        "presenceScannerDescription": "Функція сканера присутності виконує сканування мережі з визначеним інтервалом. Коли пристрій виявлено, він позначається в Gladys як «побачений». У сцені ви можете створити тригер на цю зміну стану, щоб, наприклад, позначати себе вдома, коли пристрій виявлено вдома.",
+        "presenceScannerStatusLabel": "Увімкнути або вимкнути сканер присутності",
+        "presenceScannerFrequencyLabel": "Інтервал сканування",
+        "presenceScannerFrequencyUnit": "хвилин",
+        "presenceScannerFrequencyError": "Приймаються лише цілі числа.",
+        "ipMasksLabel": "CIDR для сканування",
+        "masksDescription": "CIDR (Classless Inter-Domain Routing) — це нотація для опису діапазону IP-адрес у підмережі. Її записують як IP-адресу, за якою йде номер мережевої маски, розділені косою рискою (приклад: 192.168.1.1/10). В інтернеті є багато калькуляторів CIDR, які допоможуть вам обчислити ваш власний.",
+        "networkInterfaceDescription": "Маски, визначені вашим комп'ютером у ваших мережах через мережеві інтерфейси, не можна видалити.",
         "maskTableHeader": "CIDR",
-        "nameTableHeader": "Name",
-        "statusTableHeader": "Active",
-        "maskTablePlaceholder": "e.g. 192.168.1.1/20",
-        "nameTablePlaceholder": "Enter CIDR name",
-        "deleteButtonTooltip": "Delete",
-        "maskFormatError": "Invalid CIDR format"
+        "nameTableHeader": "Назва",
+        "statusTableHeader": "Активний",
+        "maskTablePlaceholder": "напр. 192.168.1.1/20",
+        "nameTablePlaceholder": "Введіть назву CIDR",
+        "deleteButtonTooltip": "Видалити",
+        "maskFormatError": "Недійсний формат CIDR"
       }
     },
     "xiaomi": {
       "title": "Xiaomi Home",
-      "description": "Control Xiaomi home devices with the official hub",
+      "description": "Керуйте домашніми пристроями Xiaomi за допомогою офіційного хаба",
       "deprecatedWarning": {
-        "title": "Deprecated integration",
-        "description": "This integration relies on developer mode on legacy Xiaomi/Aqara gateways, which is no longer available on recent models and app versions. It is no longer maintained for new hardware. Compatible Xiaomi products will be supported via <a href=\"/dashboard/integration/device/matter\">Matter</a>. If you already have a gateway configured in developer mode, it may continue to work."
+        "title": "Застаріла інтеграція",
+        "description": "Ця інтеграція спирається на режим розробника на старих шлюзах Xiaomi/Aqara, який більше недоступний на нових моделях і версіях застосунку. Вона більше не підтримується для нового обладнання. Сумісні продукти Xiaomi підтримуватимуться через <a href=\"/dashboard/integration/device/matter\">Matter</a>. Якщо у вас уже є шлюз, налаштований у режимі розробника, він може продовжувати працювати."
       },
-      "deviceTab": "Devices",
-      "documentation": "Xiaomi documentation",
+      "deviceTab": "Пристрої",
+      "documentation": "Документація Xiaomi",
       "device": {
-        "title": "Xiaomi devices in Gladys",
-        "noDevices": "No Xiaomi devices added yet.",
-        "sidLabel": "Xiaomi SID",
-        "ipLabel": "IP Address",
-        "roomLabel": "Room",
-        "featuresLabel": "Features",
-        "saveButton": "Save",
-        "deleteButton": "Delete",
-        "editButton": "Edit details"
+        "title": "Пристрої Xiaomi в Gladys",
+        "noDevices": "Ще не додано жодного пристрою Xiaomi.",
+        "sidLabel": "SID Xiaomi",
+        "ipLabel": "IP-адреса",
+        "roomLabel": "Кімната",
+        "featuresLabel": "Функції",
+        "saveButton": "Зберегти",
+        "deleteButton": "Видалити",
+        "editButton": "Редагувати деталі"
       },
       "setup": {
-        "title": "Xiaomi devices not in Gladys",
-        "description": "Devices detected by the Xiaomi Gateway will be added here when they send data. Your Xiaomi Gateway needs to be in developer mode. Learn more <a href=\"https://gladysassistant.com/en/docs/integrations/xiaomi\">here</a>.",
-        "createDeviceInGladys": "Connect in Gladys",
-        "createDeviceError": "There was an error while creating this device in Gladys. ",
-        "deviceCreatedSuccess": "The device was successfully added."
+        "title": "Пристрої Xiaomi, яких немає в Gladys",
+        "description": "Пристрої, виявлені шлюзом Xiaomi, з'являться тут, коли надішлють дані. Ваш шлюз Xiaomi має бути в режимі розробника. Дізнайтеся більше <a href=\"https://gladysassistant.com/en/docs/integrations/xiaomi\">тут</a>.",
+        "createDeviceInGladys": "Підключити в Gladys",
+        "createDeviceError": "Сталася помилка під час створення цього пристрою в Gladys. ",
+        "deviceCreatedSuccess": "Пристрій успішно додано."
       },
       "models": {
-        "motion": "Motion Sensor",
-        "temperature": "Temperature Sensor",
-        "switch": "Switch",
-        "cube": "Cube",
-        "leak": "Leak Sensor",
-        "magnet": "Magnet Sensor"
+        "motion": "Датчик руху",
+        "temperature": "Датчик температури",
+        "switch": "Вимикач",
+        "cube": "Куб",
+        "leak": "Датчик протікання",
+        "magnet": "Датчик відкриття"
       }
     },
     "energyMonitoring": {
