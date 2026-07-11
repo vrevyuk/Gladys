@@ -2551,173 +2551,173 @@
     }
   },
   "editScene": {
-    "settings": "Settings",
-    "nameTitle": "Scene name",
-    "editNamePlaceholder": "Enter a scene name",
-    "descriptionTitle": "Description",
-    "iconLabel": "Icon",
-    "editDescriptionPlaceholder": "Enter a scene description",
-    "tagsTitle": "Tags",
-    "editTagsPlaceholder": "Enter or choose a tag scene",
-    "createTag": "Create tag: '{{tagName}}'",
-    "startButton": "Start",
-    "saveButton": "Save",
-    "deleteButton": "Delete",
-    "deleteText": "Are you sure?",
-    "cancelButton": "Cancel",
-    "duplicateButton": "Duplicate",
-    "moreButton": "More",
-    "triggersTitle": "Triggers",
-    "newTrigger": "New trigger",
-    "addTriggerButton": "Add trigger",
-    "selectTriggerLabel": "Select a trigger type",
-    "newAction": "New action",
-    "newCondition": "New condition",
-    "selectActionType": "Select an action type",
-    "selectConditionType": "Select a condition type",
-    "addActionButton": "Add action",
-    "addActionGroupButton": "Add action group",
-    "noTriggersYet": "No trigger added yet. It's not mandatory to have a trigger in a scene.",
-    "noActionsYet": "No actions added yet. Click on the + button to add an action to this scene.",
-    "triggersDescription": "Every trigger is independent. When any of those triggers are triggered, the scene will run.",
-    "actionsDescription": "All actions in this block will run in parallel. To make a sequence of actions, add actions to the next block.",
-    "addNewTriggerButton": "Add trigger",
-    "saveSceneError": "There was an error saving your scene. Please check that all actions/triggers are filled and correct.",
+    "settings": "Налаштування",
+    "nameTitle": "Назва сцени",
+    "editNamePlaceholder": "Введіть назву сцени",
+    "descriptionTitle": "Опис",
+    "iconLabel": "Іконка",
+    "editDescriptionPlaceholder": "Введіть опис сцени",
+    "tagsTitle": "Мітки",
+    "editTagsPlaceholder": "Введіть або виберіть мітку сцени",
+    "createTag": "Створити мітку: '{{tagName}}'",
+    "startButton": "Запустити",
+    "saveButton": "Зберегти",
+    "deleteButton": "Видалити",
+    "deleteText": "Ви впевнені?",
+    "cancelButton": "Скасувати",
+    "duplicateButton": "Дублювати",
+    "moreButton": "Більше",
+    "triggersTitle": "Тригери",
+    "newTrigger": "Новий тригер",
+    "addTriggerButton": "Додати тригер",
+    "selectTriggerLabel": "Виберіть тип тригера",
+    "newAction": "Нова дія",
+    "newCondition": "Нова умова",
+    "selectActionType": "Виберіть тип дії",
+    "selectConditionType": "Виберіть тип умови",
+    "addActionButton": "Додати дію",
+    "addActionGroupButton": "Додати групу дій",
+    "noTriggersYet": "Ще не додано жодного тригера. Мати тригер у сцені не обов'язково.",
+    "noActionsYet": "Ще не додано жодної дії. Натисніть кнопку +, щоб додати дію до цієї сцени.",
+    "triggersDescription": "Кожен тригер незалежний. Коли спрацьовує будь-який із цих тригерів, сцена виконується.",
+    "actionsDescription": "Усі дії в цьому блоці виконуються паралельно. Щоб створити послідовність дій, додайте дії до наступного блока.",
+    "addNewTriggerButton": "Додати тригер",
+    "saveSceneError": "Сталася помилка під час збереження вашої сцени. Будь ласка, перевірте, що всі дії/тригери заповнені та правильні.",
     "actionsCard": {
       "delay": {
-        "label": " This block will wait the specified duration.",
-        "inputPlaceholder": "Duration",
-        "milliseconds": "milliseconds",
-        "seconds": "seconds",
-        "minutes": "minutes",
-        "hours": "hours",
-        "valueTypeSimple": "Simple",
-        "valueTypeComputed": "Computed",
-        "computedExplanationText": "Instead of a fixed value, you can enter here a calculation based on a scene variable. To inject a variable in the text, press '{{'. To set a variable value, you need to define a variable before this action."
+        "label": " Цей блок зачекає вказану тривалість.",
+        "inputPlaceholder": "Тривалість",
+        "milliseconds": "мілісекунд",
+        "seconds": "секунд",
+        "minutes": "хвилин",
+        "hours": "годин",
+        "valueTypeSimple": "Просте",
+        "valueTypeComputed": "Обчислюване",
+        "computedExplanationText": "Замість фіксованого значення тут можна ввести обчислення на основі змінної сцени. Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно визначити змінну перед цією дією."
       },
       "messageSend": {
-        "userLabel": "User",
-        "textLabel": "Message",
-        "textPlaceholder": "Message text",
-        "explanationText": "To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
+        "userLabel": "Користувач",
+        "textLabel": "Повідомлення",
+        "textPlaceholder": "Текст повідомлення",
+        "explanationText": "Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим."
       },
       "messageCameraSend": {
-        "userLabel": "User",
-        "cameraLabel": "Camera",
-        "textLabel": "Message",
-        "textPlaceholder": "Message text",
-        "explanationText": "To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
+        "userLabel": "Користувач",
+        "cameraLabel": "Камера",
+        "textLabel": "Повідомлення",
+        "textPlaceholder": "Текст повідомлення",
+        "explanationText": "Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим."
       },
       "askAi": {
-        "description": "This action will send a message to the AI via Gladys Plus and will reply to you with a message. If you attach a camera image, the AI will be able to see what is on the image and even take action accordingly.",
-        "userLabel": "Gladys will respond to",
-        "cameraLabel": "Attach a camera image (optional)",
-        "textLabel": "My question for the AI",
-        "textPlaceholder": "Message text",
-        "explanationText": "To insert a variable, type '{{'. Be careful, you must have defined a variable beforehand in a 'Retrieve the last state' action placed before this message block."
+        "description": "Ця дія надішле повідомлення до ШІ через Gladys Plus і відповість вам повідомленням. Якщо ви прикріпите зображення з камери, ШІ зможе побачити, що на зображенні, і навіть вжити відповідних заходів.",
+        "userLabel": "Gladys відповість користувачу",
+        "cameraLabel": "Прикріпити зображення з камери (необов'язково)",
+        "textLabel": "Моє запитання до ШІ",
+        "textPlaceholder": "Текст повідомлення",
+        "explanationText": "Щоб вставити змінну, введіть '{{'. Зверніть увагу: змінну потрібно попередньо визначити в дії «Отримати останній стан», розміщеній перед цим блоком повідомлення."
       },
       "smsSend": {
-        "textLabel": "Message",
-        "explanationText": "To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one.",
-        "messagePlaceholder": "My message"
+        "textLabel": "Повідомлення",
+        "explanationText": "Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим.",
+        "messagePlaceholder": "Моє повідомлення"
       },
       "turnOnLights": {
-        "label": "Select the lights you want to turn on"
+        "label": "Виберіть світильники, які хочете увімкнути"
       },
       "turnOffLights": {
-        "label": "Select the lights you want to turn off"
+        "label": "Виберіть світильники, які хочете вимкнути"
       },
       "toggleLights": {
-        "label": "Select the lights you want to toggle",
-        "description": "This action turn on the light if state is off or turn off the light if state is on"
+        "label": "Виберіть світильники, які хочете перемкнути",
+        "description": "Ця дія вмикає світло, якщо воно вимкнене, або вимикає, якщо воно увімкнене"
       },
       "blinkLights": {
-        "label": "Select the lights you want to make blink",
-        "description": "Configure blinking duration and speed",
+        "label": "Виберіть світильники, які мають блимати",
+        "description": "Налаштуйте тривалість і швидкість блимання",
         "blinkingTime": {
-          "label": "Duration (in seconds)",
+          "label": "Тривалість (у секундах)",
           "placeholder": "3"
         },
         "blinkingSpeed": {
-          "label": "Mode",
-          "slow": "Slow",
-          "medium": "Medium",
-          "fast": "Fast"
+          "label": "Режим",
+          "slow": "Повільно",
+          "medium": "Середньо",
+          "fast": "Швидко"
         }
       },
       "turnOnSwitches": {
-        "label": "Select the switches you want to turn on"
+        "label": "Виберіть вимикачі, які хочете увімкнути"
       },
       "turnOffSwitches": {
-        "label": "Select the switches you want to turn off"
+        "label": "Виберіть вимикачі, які хочете вимкнути"
       },
       "toggleSwitches": {
-        "label": "Select the switches you want to toggle",
-        "description": "This action turn on the switch if state is off or turn off the switch if state is on"
+        "label": "Виберіть вимикачі, які хочете перемкнути",
+        "description": "Ця дія вмикає вимикач, якщо він вимкнений, або вимикає, якщо він увімкнений"
       },
       "deviceGetValue": {
-        "description": "This will get the last value of the selected device, so you can use it later in the scene.",
-        "deviceLabel": "Select a device"
+        "description": "Це отримає останнє значення вибраного пристрою, щоб ви могли використати його пізніше в сцені.",
+        "deviceLabel": "Виберіть пристрій"
       },
       "deviceSetValue": {
-        "description": "This action let you control a device.",
-        "deviceLabel": "Device",
-        "valueLabel": "Value",
-        "valueTypeSimple": "Simple",
-        "simpleExplanationText": "Enter the new value you wish to assign to your device here.",
-        "valueTypeComputed": "Computed",
-        "computedExplanationText": "Instead of a fixed value, you can enter here a calculation based on a scene variable. To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
+        "description": "Ця дія дає змогу керувати пристроєм.",
+        "deviceLabel": "Пристрій",
+        "valueLabel": "Значення",
+        "valueTypeSimple": "Просте",
+        "simpleExplanationText": "Введіть тут нове значення, яке хочете присвоїти вашому пристрою.",
+        "valueTypeComputed": "Обчислюване",
+        "computedExplanationText": "Замість фіксованого значення тут можна ввести обчислення на основі змінної сцени. Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим."
       },
       "onlyContinueIf": {
-        "variableLabel": "Variable",
-        "operatorLabel": "Operator",
-        "valueLabel": "Value",
-        "removeLabel": "Remove",
-        "orText": "OR",
-        "orButton": "+ OR",
-        "explanationText": "Instead of a fixed value, you can enter here a calculation based on a scene variable. To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
+        "variableLabel": "Змінна",
+        "operatorLabel": "Оператор",
+        "valueLabel": "Значення",
+        "removeLabel": "Прибрати",
+        "orText": "АБО",
+        "orButton": "+ АБО",
+        "explanationText": "Замість фіксованого значення тут можна ввести обчислення на основі змінної сцени. Щоб вставити змінну в текст, натисніть '{{'. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим."
       },
       "conditionIfThenElse": {
-        "conditions": "Conditions",
-        "conditionDescription": "If all conditions are met, the actions in the \"Then\" block will be executed. If not, the \"Else\" block will be executed.",
-        "noCondition": "No condition has been added yet. Click the '+' button to add a condition to this block",
-        "addCondition": "Add condition",
-        "if": "If",
-        "then": "Then",
-        "else": "Else",
-        "shortIf": "I",
-        "shortThen": "T",
-        "shortElse": "E",
+        "conditions": "Умови",
+        "conditionDescription": "Якщо всі умови виконано, буде виконано дії з блока «Тоді». Якщо ні — блок «Інакше».",
+        "noCondition": "Ще не додано жодної умови. Натисніть кнопку '+', щоб додати умову до цього блока",
+        "addCondition": "Додати умову",
+        "if": "Якщо",
+        "then": "Тоді",
+        "else": "Інакше",
+        "shortIf": "Я",
+        "shortThen": "Т",
+        "shortElse": "І",
         "actionCount": {
-          "zero": "No action",
-          "one": "1 action",
-          "other": "{{count}} actions"
+          "zero": "Немає дій",
+          "one": "1 дія",
+          "other": "{{count}} дій"
         }
       },
       "checkTime": {
-        "description": "The scene will continue only if current time is between the selected limits, in the selected days. If a field is left empty, it'll not be taken into account.",
-        "beforeLabel": "Before",
-        "afterLabel": "After",
-        "daysOfTheWeekLabel": "Weekdays"
+        "description": "Сцена продовжиться, лише якщо поточний час знаходиться між вибраними межами у вибрані дні. Якщо поле залишити порожнім, воно не враховуватиметься.",
+        "beforeLabel": "До",
+        "afterLabel": "Після",
+        "daysOfTheWeekLabel": "Дні тижня"
       },
       "userPresence": {
-        "userLabel": "User",
-        "houseLabel": "House",
-        "userSeenDescription": "This action set the user as \"at home\".",
-        "userLeftHomeDescription": "This action set the user as \"left home\"."
+        "userLabel": "Користувач",
+        "houseLabel": "Будинок",
+        "userSeenDescription": "Ця дія позначає користувача як «вдома».",
+        "userLeftHomeDescription": "Ця дія позначає користувача як «пішов з дому»."
       },
       "checkUserPresence": {
-        "description": "When this action is executed, Gladys checks if one of the selected device was seen at home in the last X minutes. If one of the device was seen, the action does nothing more. If no device was seen, the user is marked as \"left home\".",
-        "userLabel": "User",
-        "houseLabel": "House",
-        "deviceLabel": "Devices",
-        "minutesLabel": "Devices seen less than",
-        "minutesPlaceholder": "Duration (in minutes)",
-        "minutes": "minutes"
+        "description": "Коли ця дія виконується, Gladys перевіряє, чи один із вибраних пристроїв був помічений вдома за останні X хвилин. Якщо якийсь пристрій було помічено, дія більше нічого не робить. Якщо жодного пристрою не помічено, користувач позначається як «пішов з дому».",
+        "userLabel": "Користувач",
+        "houseLabel": "Будинок",
+        "deviceLabel": "Пристрої",
+        "minutesLabel": "Пристрої, помічені менш ніж",
+        "minutesPlaceholder": "Тривалість (у хвилинах)",
+        "minutes": "хвилин тому"
       },
       "httpRequest": {
-        "description": "This action let you make HTTP requests.",
-        "methodLabel": "Method",
+        "description": "Ця дія дає змогу виконувати HTTP-запити.",
+        "methodLabel": "Метод",
         "get": "GET",
         "post": "POST",
         "put": "PUT",
@@ -2725,332 +2725,332 @@
         "delete": "DELETE",
         "urlLabel": "URL",
         "urlPlaceholder": "URL",
-        "bodyLabel": "Body",
-        "bodyPlaceholder": "Body",
-        "headersLabel": "Headers",
-        "headersKeyPlaceholder": "Name",
-        "headersValuePlaceholder": "Value",
-        "responseData": "Response",
-        "tryButton": "Try request",
-        "variablesExplanation": "To inject a variable defined in a \"Get device value\" action, type \"{{\". This variable will be injected only during scene execution, not when clicking on \"Try request\" below.",
-        "requestError": "An error happened while making the request. Are you sure parameters are right?"
+        "bodyLabel": "Тіло запиту",
+        "bodyPlaceholder": "Тіло запиту",
+        "headersLabel": "Заголовки",
+        "headersKeyPlaceholder": "Назва",
+        "headersValuePlaceholder": "Значення",
+        "responseData": "Відповідь",
+        "tryButton": "Спробувати запит",
+        "variablesExplanation": "Щоб вставити змінну, визначену в дії «Отримати значення пристрою», введіть \"{{\". Ця змінна буде підставлена лише під час виконання сцени, а не при натисканні «Спробувати запит» нижче.",
+        "requestError": "Сталася помилка під час виконання запиту. Ви впевнені, що параметри правильні?"
       },
       "scene": {
-        "label": "Select a scene",
-        "notice": "The trigger conditions of the called scene will be ignored. If a scene calls another scene, and vice versa, Gladys will not fall into an infinite loop: each scene will be executed once."
+        "label": "Виберіть сцену",
+        "notice": "Умови тригерів викликаної сцени буде проігноровано. Якщо сцена викликає іншу сцену, і навпаки, Gladys не потрапить у нескінченний цикл: кожна сцена буде виконана один раз."
       },
       "houseEmptyOrNot": {
-        "houseIsEmptyDescription": "If the house is empty, the scene will continue. Otherwise, the scene will stop.",
-        "houseIsNotEmptyDescription": "If the house is not empty, the scene will continue. Otherwise, the scene will stop.",
-        "houseLabel": "House"
+        "houseIsEmptyDescription": "Якщо будинок порожній, сцена продовжиться. Інакше сцена зупиниться.",
+        "houseIsNotEmptyDescription": "Якщо будинок не порожній, сцена продовжиться. Інакше сцена зупиниться.",
+        "houseLabel": "Будинок"
       },
       "calendarEventIsRunning": {
-        "description": "This action let you stop a scene if a calendar event is currently running, or if an event is not running. Only shared calendars are displayed here.",
-        "calendarLabel": "Look in the following shared calendars",
-        "nameLabel": "If the name",
-        "namePlaceholder": "Enter a name",
-        "whenFoundLabel": "If an event is found",
-        "whenNotFoundLabel": "If no event is found",
-        "stopScene": "Stop the scene",
-        "continueScene": "Continue the scene"
+        "description": "Ця дія дає змогу зупинити сцену, якщо подія календаря зараз триває, або якщо подія не триває. Тут показуються лише спільні календарі.",
+        "calendarLabel": "Шукати в таких спільних календарях",
+        "nameLabel": "Якщо назва",
+        "namePlaceholder": "Введіть назву",
+        "whenFoundLabel": "Якщо подію знайдено",
+        "whenNotFoundLabel": "Якщо подію не знайдено",
+        "stopScene": "Зупинити сцену",
+        "continueScene": "Продовжити сцену"
       },
       "ecowattCondition": {
-        "description": "This conditions lets you check the status of the french electricity network",
-        "knowMore": "Read more",
-        "networkStatusLabel": "Continue scene if the network is",
-        "ok": "Network ok",
-        "warning": "Network warning",
-        "critical": "Network critical"
+        "description": "Ця умова дає змогу перевірити стан французької електромережі",
+        "knowMore": "Дізнатися більше",
+        "networkStatusLabel": "Продовжити сцену, якщо мережа",
+        "ok": "Мережа в нормі",
+        "warning": "Попередження мережі",
+        "critical": "Критичний стан мережі"
       },
       "edfTempoCondition": {
-        "description": "The scene will continue if the following conditions on EDF Tempo are met.",
-        "selectDay": "For the day",
-        "today": "Today",
-        "tomorrow": "Tomorrow",
-        "selectPeakDayType": "If the day is",
-        "blueDay": "Blue Day",
-        "whiteDay": "White Day",
-        "redDay": "Red Day",
-        "noPeakDayCheck": "Any",
-        "noPeakHourCheck": "Any",
-        "selectPeakHourType": "And if it's",
-        "peakHour": "Peak Hour",
-        "offPeakHour": "Off-Peak Hour"
+        "description": "Сцена продовжиться, якщо виконуються такі умови щодо EDF Tempo.",
+        "selectDay": "Для дня",
+        "today": "Сьогодні",
+        "tomorrow": "Завтра",
+        "selectPeakDayType": "Якщо день",
+        "blueDay": "Синій день",
+        "whiteDay": "Білий день",
+        "redDay": "Червоний день",
+        "noPeakDayCheck": "Будь-який",
+        "noPeakHourCheck": "Будь-яка",
+        "selectPeakHourType": "І якщо зараз",
+        "peakHour": "Пікова година",
+        "offPeakHour": "Позапікова година"
       },
       "alarmCheckMode": {
-        "description": "The scene will continue if the alarm is in the selected mode.",
-        "houseLabel": "House",
-        "alarmModeLabel": "Alarm Mode"
+        "description": "Сцена продовжиться, якщо сигналізація у вибраному режимі.",
+        "houseLabel": "Будинок",
+        "alarmModeLabel": "Режим сигналізації"
       },
       "alarmSetMode": {
-        "description": "This action will set the selected house to the selected alarm mode.",
-        "houseLabel": "House",
-        "alarmModeLabel": "Alarm Mode"
+        "description": "Ця дія переведе вибраний будинок у вибраний режим сигналізації.",
+        "houseLabel": "Будинок",
+        "alarmModeLabel": "Режим сигналізації"
       },
       "mqttMessage": {
-        "topic": "Topic",
+        "topic": "Топік",
         "topicPlaceholder": "gladys/my-topic",
-        "messageLabel": "Message",
-        "variablesExplanation": "To inject a variable in the text, press '{{ '. To set a variable value, you need to use the 'Get device value' box before this one.",
-        "messagePlaceholder": "My message"
+        "messageLabel": "Повідомлення",
+        "variablesExplanation": "Щоб вставити змінну в текст, натисніть '{{ '. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим.",
+        "messagePlaceholder": "Моє повідомлення"
       },
       "zigbee2mqttMessage": {
-        "topic": "Topic",
+        "topic": "Топік",
         "topicPlaceholder": "gladys/my-topic",
-        "messageLabel": "Message",
-        "variablesExplanation": "To inject a variable in the text, press '{{ '. To set a variable value, you need to use the 'Get device value' box before this one.",
-        "messagePlaceholder": "My message"
+        "messageLabel": "Повідомлення",
+        "variablesExplanation": "Щоб вставити змінну в текст, натисніть '{{ '. Щоб задати значення змінної, потрібно використати блок «Отримати значення пристрою» перед цим.",
+        "messagePlaceholder": "Моє повідомлення"
       },
       "playNotification": {
-        "description": "This action will make Gladys speak on the selected speaker.",
-        "deviceLabel": "Speaker",
-        "volumeLabel": "Volume",
-        "textLabel": "Message to speak on the speaker",
-        "variablesExplanation": "To inject a variable, type '{{ '. Note: You must have defined a variable beforehand in a 'Retrieve Last State' action placed before this message block."
+        "description": "Ця дія змусить Gladys говорити через вибраний динамік.",
+        "deviceLabel": "Динамік",
+        "volumeLabel": "Гучність",
+        "textLabel": "Повідомлення для озвучення на динаміку",
+        "variablesExplanation": "Щоб вставити змінну, введіть '{{ '. Примітка: змінну потрібно попередньо визначити в дії «Отримати останній стан», розміщеній перед цим блоком повідомлення."
       }
     },
     "actions": {
       "calendar": {
-        "is-event-running": "Condition on calendar events"
+        "is-event-running": "Умова щодо подій календаря"
       },
       "device": {
-        "get-value": "Get device value",
-        "set-value": "Set device value"
+        "get-value": "Отримати значення пристрою",
+        "set-value": "Встановити значення пристрою"
       },
       "message": {
-        "send": "Send Message",
-        "send-camera": "Send a camera image"
+        "send": "Надіслати повідомлення",
+        "send-camera": "Надіслати зображення з камери"
       },
       "sms": {
-        "send": "Send SMS"
+        "send": "Надіслати SMS"
       },
-      "delay": "Wait",
+      "delay": "Зачекати",
       "light": {
-        "turn-on": "Turn On the Lights",
-        "turn-off": "Turn Off the Lights",
-        "toggle": "Toggle the Lights",
-        "blink": "Make the Lights blink"
+        "turn-on": "Увімкнути світло",
+        "turn-off": "Вимкнути світло",
+        "toggle": "Перемкнути світло",
+        "blink": "Зробити, щоб світло блимало"
       },
       "switch": {
-        "turn-on": "Turn On the Switches",
-        "turn-off": "Turn Off the Switches",
-        "toggle": "Toggle the Switches"
+        "turn-on": "Увімкнути вимикачі",
+        "turn-off": "Вимкнути вимикачі",
+        "toggle": "Перемкнути вимикачі"
       },
       "scene": {
-        "start": "Start scene"
+        "start": "Запустити сцену"
       },
       "service": {
-        "start": "Start service",
-        "stop": "Stop service"
+        "start": "Запустити сервіс",
+        "stop": "Зупинити сервіс"
       },
       "condition": {
-        "only-continue-if": "Condition on variables",
-        "check-time": "Time condition",
-        "if-then-else": "Condition: If...then...else..."
+        "only-continue-if": "Умова щодо змінних",
+        "check-time": "Умова часу",
+        "if-then-else": "Умова: якщо...тоді...інакше..."
       },
       "user": {
-        "set-seen-at-home": "User seen at home",
-        "set-out-of-home": "User left home",
-        "check-presence": "Check user presence"
+        "set-seen-at-home": "Користувача помічено вдома",
+        "set-out-of-home": "Користувач пішов з дому",
+        "check-presence": "Перевірити присутність користувача"
       },
       "http": {
-        "request": "Make a HTTP request"
+        "request": "Виконати HTTP-запит"
       },
       "house": {
-        "is-empty": "If the house is empty",
-        "is-not-empty": "If the house is not empty"
+        "is-empty": "Якщо будинок порожній",
+        "is-not-empty": "Якщо будинок не порожній"
       },
       "ecowatt": {
-        "condition": "Condition on Ecowatt (France)"
+        "condition": "Умова щодо Ecowatt (Франція)"
       },
       "edf-tempo": {
-        "condition": "Condition on EDF-Tempo"
+        "condition": "Умова щодо EDF-Tempo"
       },
       "alarm": {
-        "check-alarm-mode": "If the alarm is in mode",
-        "set-alarm-mode": "Set alarm mode to"
+        "check-alarm-mode": "Якщо сигналізація в режимі",
+        "set-alarm-mode": "Встановити режим сигналізації"
       },
       "mqtt": {
-        "send": "Send MQTT Message"
+        "send": "Надіслати повідомлення MQTT"
       },
       "zigbee2mqtt": {
-        "send": "Send Zigbee2mqtt Message"
+        "send": "Надіслати повідомлення Zigbee2mqtt"
       },
       "music": {
-        "play-notification": "Talk on a speaker"
+        "play-notification": "Говорити через динамік"
       },
       "ai": {
-        "ask": "Ask AI"
+        "ask": "Запитати ШІ"
       }
     },
     "variables": {
       "device": {
         "get-value": {
-          "last_value": "Device last value"
+          "last_value": "Останнє значення пристрою"
         }
       },
       "calendar": {
-        "eventName": "Event name",
-        "eventLocation": "Event location",
-        "eventDescription": "Event description",
-        "eventStart": "Start date",
-        "eventEnd": "End date"
+        "eventName": "Назва події",
+        "eventLocation": "Місце події",
+        "eventDescription": "Опис події",
+        "eventStart": "Дата початку",
+        "eventEnd": "Дата завершення"
       },
       "askAi": {
-        "answer": "AI answer"
+        "answer": "Відповідь ШІ"
       }
     },
     "triggers": {
       "device": {
-        "new-state": "Device state change"
+        "new-state": "Зміна стану пристрою"
       },
       "time": {
-        "changed": "Scheduled trigger",
-        "sunrise": "Every sunrise",
-        "sunset": "Every sunset"
+        "changed": "Запланований тригер",
+        "sunrise": "Щосходу сонця",
+        "sunset": "Щозаходу сонця"
       },
       "user": {
-        "back-home": "User back at home",
-        "left-home": "User left home"
+        "back-home": "Користувач повернувся додому",
+        "left-home": "Користувач пішов з дому"
       },
       "house": {
-        "empty": "House is empty",
-        "no-longer-empty": "House is no longer empty"
+        "empty": "Будинок порожній",
+        "no-longer-empty": "Будинок більше не порожній"
       },
       "area": {
-        "user-entered": "User entered a zone",
-        "user-left": "User left a zone"
+        "user-entered": "Користувач увійшов у зону",
+        "user-left": "Користувач покинув зону"
       },
       "calendar": {
-        "event-is-coming": "Calendar event is coming"
+        "event-is-coming": "Наближається подія календаря"
       },
       "alarm": {
-        "arm": "The alarm is armed",
-        "arming": "The alarm is arming",
-        "disarm": "The alarm is disarmed",
-        "partial-arm": "The alarm is partially armed",
-        "panic": "The alarm is in panic mode",
-        "too-many-codes-tests": "Alarm: Too many invalid codes"
+        "arm": "Сигналізацію увімкнено",
+        "arming": "Сигналізація вмикається",
+        "disarm": "Сигналізацію вимкнено",
+        "partial-arm": "Сигналізацію частково увімкнено",
+        "panic": "Сигналізація в режимі паніки",
+        "too-many-codes-tests": "Сигналізація: забагато недійсних кодів"
       },
       "system": {
-        "start": "Gladys starting"
+        "start": "Запуск Gladys"
       },
       "mqtt": {
-        "received": "Receive message from MQTT"
+        "received": "Отримати повідомлення з MQTT"
       }
     },
     "triggersCard": {
       "newState": {
-        "equal": "equal",
-        "superior": "superior",
-        "superiorOrEqual": "superior or equal",
-        "less": "less",
-        "lessOrEqual": "less or equal",
-        "different": "different",
-        "valuePlaceholder": "Value",
-        "on": "On",
-        "off": "Off",
-        "deviceSeen": "If the device is detected",
-        "onlyExecuteAtThreshold": "Execute only when threshold is passed (and not at every value sent by the device)",
-        "activateOrDeactivateForDuration": "Run the scene after the condition has been valid for:"
+        "equal": "дорівнює",
+        "superior": "більше",
+        "superiorOrEqual": "більше або дорівнює",
+        "less": "менше",
+        "lessOrEqual": "менше або дорівнює",
+        "different": "відрізняється",
+        "valuePlaceholder": "Значення",
+        "on": "Увімк.",
+        "off": "Вимк.",
+        "deviceSeen": "Якщо пристрій виявлено",
+        "onlyExecuteAtThreshold": "Виконувати лише при перетині порога (а не при кожному значенні, надісланому пристроєм)",
+        "activateOrDeactivateForDuration": "Запускати сцену після того, як умова була дійсною протягом:"
       },
       "scheduledTrigger": {
-        "typeLabel": "Type",
-        "everyMonth": "Every month",
-        "everyWeek": "Every week",
-        "everyDay": "Every day",
-        "interval": "Interval",
-        "customTime": "On a specific day",
-        "dateLabel": "Date",
-        "timeLabel": "Time",
-        "unitLabel": "Unit",
-        "intervalLabel": "Interval",
-        "daysOfTheWeekLabel": "Days of the week",
-        "dayOfTheMonthLabel": "Day of the month",
-        "dateFormat": "MM-dd-yyyy",
-        "timeCaption": "Time",
+        "typeLabel": "Тип",
+        "everyMonth": "Щомісяця",
+        "everyWeek": "Щотижня",
+        "everyDay": "Щодня",
+        "interval": "Інтервал",
+        "customTime": "У певний день",
+        "dateLabel": "Дата",
+        "timeLabel": "Час",
+        "unitLabel": "Одиниця",
+        "intervalLabel": "Інтервал",
+        "daysOfTheWeekLabel": "Дні тижня",
+        "dayOfTheMonthLabel": "День місяця",
+        "dateFormat": "dd-MM-yyyy",
+        "timeCaption": "Час",
         "units": {
-          "second": "seconds",
-          "minute": "minutes",
-          "hour": "hours"
+          "second": "секунд",
+          "minute": "хвилин",
+          "hour": "годин"
         },
         "daysOfTheWeek": {
-          "monday": "Monday",
-          "tuesday": "Tuesday",
-          "wednesday": "Wednesday",
-          "thursday": "Thursday",
-          "friday": "Friday",
-          "saturday": "Saturday",
-          "sunday": "Sunday"
+          "monday": "Понеділок",
+          "tuesday": "Вівторок",
+          "wednesday": "Середа",
+          "thursday": "Четвер",
+          "friday": "П'ятниця",
+          "saturday": "Субота",
+          "sunday": "Неділя"
         },
-        "house": "House"
+        "house": "Будинок"
       },
       "warning": {
-        "houseWithoutCoordinate": "Your house has no coordinates. This trigger cannot work without this data. Please go to Settings / Houses and click on the map to set the house coordinates."
+        "houseWithoutCoordinate": "Ваш будинок не має координат. Цей тригер не може працювати без цих даних. Будь ласка, перейдіть у «Налаштування» / «Будинки» та натисніть на карту, щоб встановити координати будинку."
       },
       "sunriseSunsetTrigger": {
-        "offsetLabel": "When",
-        "atExactTime": "At exact time",
-        "before": "Before",
-        "after": "After",
-        "minutes": "minutes"
+        "offsetLabel": "Коли",
+        "atExactTime": "У точний час",
+        "before": "До",
+        "after": "Після",
+        "minutes": "хвилин"
       },
       "userPresence": {
-        "backAtHomeDescription": "This will trigger when the selected user is back at the selected home.",
-        "leftHomeDescription": "This will trigger when the selected user is leaving the selected home.",
-        "userLabel": "User",
-        "houseLabel": "House"
+        "backAtHomeDescription": "Це спрацює, коли вибраний користувач повернеться до вибраного будинку.",
+        "leftHomeDescription": "Це спрацює, коли вибраний користувач покидатиме вибраний будинок.",
+        "userLabel": "Користувач",
+        "houseLabel": "Будинок"
       },
       "houseEmptyOrNot": {
-        "houseEmptyDescription": "This will trigger when a user leaves the house and is the last to leave.",
-        "houseNoLongerEmptyDescription": "This will trigger when a user comes back home and home was empty before him.",
-        "houseLabel": "House"
+        "houseEmptyDescription": "Це спрацює, коли користувач покине будинок останнім.",
+        "houseNoLongerEmptyDescription": "Це спрацює, коли користувач повернеться додому, а будинок до нього був порожнім.",
+        "houseLabel": "Будинок"
       },
       "area": {
-        "userEnteredDescription": "This scene will start when a user enters this zone. Zones can be created in the maps tab.",
-        "userLeftDescription": "This scene will start when a user left this zone. Zones can be created in the maps tab.",
-        "userLabel": "User",
-        "areaLabel": "Zone"
+        "userEnteredDescription": "Ця сцена запуститься, коли користувач увійде в цю зону. Зони можна створювати на вкладці карт.",
+        "userLeftDescription": "Ця сцена запуститься, коли користувач покине цю зону. Зони можна створювати на вкладці карт.",
+        "userLabel": "Користувач",
+        "areaLabel": "Зона"
       },
       "calendarEventIsComing": {
-        "description": "This will trigger the scene when a calendar event matches the conditions. Only shared calendars are displayed here.",
-        "calendarLabel": "Look in the following shared calendars",
-        "nameLabel": "If the name",
-        "isExactly": "is exactly",
-        "contains": "contains",
-        "startsWith": "starts with",
-        "endsWith": "ends with",
-        "hasAnyName": "has any name",
-        "namePlaceholder": "Text to match",
-        "durationName": "And the event is",
-        "startingIn": "Starting in",
-        "endingIn": "Ending in",
-        "durationPlaceholder": "Duration",
-        "minute": "minutes",
-        "hour": "hours",
-        "day": "days"
+        "description": "Це запустить сцену, коли подія календаря відповідатиме умовам. Тут показуються лише спільні календарі.",
+        "calendarLabel": "Шукати в таких спільних календарях",
+        "nameLabel": "Якщо назва",
+        "isExactly": "точно збігається",
+        "contains": "містить",
+        "startsWith": "починається з",
+        "endsWith": "закінчується на",
+        "hasAnyName": "будь-яка",
+        "namePlaceholder": "Текст для пошуку",
+        "durationName": "І подія",
+        "startingIn": "Починається через",
+        "endingIn": "Закінчується через",
+        "durationPlaceholder": "Тривалість",
+        "minute": "хвилин",
+        "hour": "годин",
+        "day": "днів"
       },
       "alarmMode": {
         "alarm": {
-          "arm": "This trigger will activate when the selected house is armed.",
-          "arming": "This trigger will activate when the selected house is in the process of arming.",
-          "disarm": "This trigger will activate when the selected house is disarmed.",
-          "partial-arm": "This trigger will activate when the selected house is partially armed.",
-          "panic": "This trigger will activate when the selected house is in panic mode.",
-          "too-many-codes-tests": "This trigger will activate on every alarm code entry failure after 3 unsuccessful attempts."
+          "arm": "Цей тригер спрацює, коли сигналізацію вибраного будинку буде увімкнено.",
+          "arming": "Цей тригер спрацює, коли сигналізація вибраного будинку буде в процесі увімкнення.",
+          "disarm": "Цей тригер спрацює, коли сигналізацію вибраного будинку буде вимкнено.",
+          "partial-arm": "Цей тригер спрацює, коли сигналізацію вибраного будинку буде частково увімкнено.",
+          "panic": "Цей тригер спрацює, коли вибраний будинок буде в режимі паніки.",
+          "too-many-codes-tests": "Цей тригер спрацьовуватиме при кожній невдалій спробі введення коду сигналізації після 3 невдалих спроб."
         },
-        "houseLabel": "House"
+        "houseLabel": "Будинок"
       },
       "gladysStart": {
-        "description": "This scene will be executed each time Gladys starts"
+        "description": "Ця сцена виконуватиметься щоразу під час запуску Gladys"
       },
       "mqttReceived": {
-        "description": "This scene will run when a message is received in the selected MQTT topic",
-        "topicLabel": "Topic",
-        "topicPlaceholder": "Enter your topic",
-        "messageLabel": "Message",
-        "messagePlaceholder": "Enter the expected message",
-        "messageDescription": "Enter the expected message or leave blank to run the scene regardless of the message"
+        "description": "Ця сцена запуститься, коли буде отримано повідомлення у вибраному топіку MQTT",
+        "topicLabel": "Топік",
+        "topicPlaceholder": "Введіть ваш топік",
+        "messageLabel": "Повідомлення",
+        "messagePlaceholder": "Введіть очікуване повідомлення",
+        "messageDescription": "Введіть очікуване повідомлення або залиште порожнім, щоб запускати сцену незалежно від повідомлення"
       }
     }
   },
