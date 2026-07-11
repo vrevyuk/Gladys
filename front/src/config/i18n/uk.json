@@ -3921,812 +3921,812 @@
   "deviceFeatureValue": {
     "type": {
       "binary": {
-        "other": "No value received",
-        "zero": "Inactive",
-        "one": "Active"
+        "other": "Значень не отримано",
+        "zero": "Неактивно",
+        "one": "Активно"
       }
     },
     "category": {
       "button": {
         "click": {
-          "unknown": "{{value}} (unknown value)",
-          "1": "Simple click",
-          "2": "Double click",
-          "3": "Long click press",
-          "4": "Long click release",
-          "5": "Hold click",
-          "6": "Long click",
-          "7": "On",
-          "8": "Off",
-          "9": "Brightness down",
-          "10": "Brightness up",
-          "11": "Brightness stop",
-          "12": "Left arrow click",
-          "13": "Right arrow click",
-          "14": "Left arrow held",
-          "15": "Right arrow held",
-          "16": "Left arrow release",
-          "17": "Right arrow release",
-          "18": "Triple click",
-          "19": "Quadruple click",
-          "20": "Click released",
-          "21": "Many clicks",
-          "22": "Cube shake",
-          "23": "Cube throw",
-          "24": "Cube wake up",
-          "25": "Cube fall",
-          "26": "Cube tap",
-          "27": "Cube slide",
-          "28": "Cube flip 180°",
-          "29": "Cube flip 90°",
-          "30": "Cube rotate left",
-          "31": "Cube rotate right",
-          "32": "Vibration",
-          "33": "Tilt",
-          "34": "Drop",
-          "35": "Emergency",
-          "36": "Disarm",
-          "37": "Arm day zones",
-          "38": "Arm all zones",
-          "39": "On press",
-          "40": "On hold",
-          "41": "Up press",
-          "42": "Up hold",
-          "43": "Down press",
-          "44": "Down hold",
-          "45": "Off press",
-          "46": "Off hold",
-          "47": "Single press",
-          "48": "Long press",
-          "49": "Short release",
-          "50": "Long release",
-          "51": "Double press",
-          "52": "Toggle",
-          "53": "Toggle Hold",
-          "54": "Brightness Up Click",
-          "55": "Brightness Up Hold",
-          "56": "Brightness Up Release",
-          "57": "Brightness Down Click",
-          "58": "Brightness Down Hold",
-          "59": "Brightness Down Release",
-          "60": "Pressed",
-          "61": "Simple Left",
-          "62": "Simple Right",
-          "63": "Simple Both",
-          "64": "Double Left",
-          "65": "Double Right",
-          "66": "Double Both",
-          "67": "Triple Left",
-          "68": "Triple Right",
-          "69": "Triple Both",
-          "70": "Hold Left",
-          "71": "Hold Right",
-          "72": "Hold Both",
-          "73": "Simple Click Plus",
-          "74": "Simple Click Center",
-          "75": "Simple Click Minus",
-          "76": "Double Click Plus",
-          "77": "Double Click Center",
-          "78": "Double Click Minus",
-          "79": "Hold Plus",
-          "80": "Hold Center",
-          "81": "Hold Minus",
-          "82": "Release Plus (Aqara W100)",
-          "83": "Release Center (Aqara W100)",
-          "84": "Release Minus (Aqara W100)",
-          "85": "On double",
-          "86": "Off double",
-          "87": "Arm night zones",
-          "88": "Exit delay",
-          "89": "Button 1 single click",
-          "90": "Button 1 double click",
-          "91": "Button 1 long click",
-          "92": "Button 1 triple click",
-          "93": "Button 2 single click",
-          "94": "Button 2 double click",
-          "95": "Button 2 long click",
-          "96": "Button 2 triple click",
-          "97": "Button 3 single click",
-          "98": "Button 3 double click",
-          "99": "Button 3 long click",
-          "100": "Button 3 triple click",
-          "101": "Button 4 single click",
-          "102": "Button 4 double click",
-          "103": "Button 4 long click",
-          "104": "Button 4 triple click"
+          "unknown": "{{value}} (невідоме значення)",
+          "1": "Одинарне натискання",
+          "2": "Подвійне натискання",
+          "3": "Початок довгого натискання",
+          "4": "Кінець довгого натискання",
+          "5": "Утримання",
+          "6": "Довге натискання",
+          "7": "Увімк.",
+          "8": "Вимк.",
+          "9": "Зменшити яскравість",
+          "10": "Збільшити яскравість",
+          "11": "Зупинити зміну яскравості",
+          "12": "Натискання стрілки вліво",
+          "13": "Натискання стрілки вправо",
+          "14": "Утримання стрілки вліво",
+          "15": "Утримання стрілки вправо",
+          "16": "Відпускання стрілки вліво",
+          "17": "Відпускання стрілки вправо",
+          "18": "Потрійне натискання",
+          "19": "Чотириразове натискання",
+          "20": "Натискання відпущено",
+          "21": "Багато натискань",
+          "22": "Куб: струшування",
+          "23": "Куб: кидок",
+          "24": "Куб: пробудження",
+          "25": "Куб: падіння",
+          "26": "Куб: постукування",
+          "27": "Куб: ковзання",
+          "28": "Куб: переворот на 180°",
+          "29": "Куб: переворот на 90°",
+          "30": "Куб: обертання вліво",
+          "31": "Куб: обертання вправо",
+          "32": "Вібрація",
+          "33": "Нахил",
+          "34": "Падіння",
+          "35": "Тривога",
+          "36": "Зняти з охорони",
+          "37": "Охорона денних зон",
+          "38": "Охорона всіх зон",
+          "39": "Натискання «Увімк.»",
+          "40": "Утримання «Увімк.»",
+          "41": "Натискання «Вгору»",
+          "42": "Утримання «Вгору»",
+          "43": "Натискання «Вниз»",
+          "44": "Утримання «Вниз»",
+          "45": "Натискання «Вимк.»",
+          "46": "Утримання «Вимк.»",
+          "47": "Одинарне натискання",
+          "48": "Довге натискання",
+          "49": "Коротке відпускання",
+          "50": "Довге відпускання",
+          "51": "Подвійне натискання",
+          "52": "Перемкнути",
+          "53": "Утримання перемикання",
+          "54": "Натискання «Яскравіше»",
+          "55": "Утримання «Яскравіше»",
+          "56": "Відпускання «Яскравіше»",
+          "57": "Натискання «Тьмяніше»",
+          "58": "Утримання «Тьмяніше»",
+          "59": "Відпускання «Тьмяніше»",
+          "60": "Натиснуто",
+          "61": "Одинарне ліворуч",
+          "62": "Одинарне праворуч",
+          "63": "Одинарне обидві",
+          "64": "Подвійне ліворуч",
+          "65": "Подвійне праворуч",
+          "66": "Подвійне обидві",
+          "67": "Потрійне ліворуч",
+          "68": "Потрійне праворуч",
+          "69": "Потрійне обидві",
+          "70": "Утримання ліворуч",
+          "71": "Утримання праворуч",
+          "72": "Утримання обидві",
+          "73": "Одинарне натискання «Плюс»",
+          "74": "Одинарне натискання «Центр»",
+          "75": "Одинарне натискання «Мінус»",
+          "76": "Подвійне натискання «Плюс»",
+          "77": "Подвійне натискання «Центр»",
+          "78": "Подвійне натискання «Мінус»",
+          "79": "Утримання «Плюс»",
+          "80": "Утримання «Центр»",
+          "81": "Утримання «Мінус»",
+          "82": "Відпускання «Плюс» (Aqara W100)",
+          "83": "Відпускання «Центр» (Aqara W100)",
+          "84": "Відпускання «Мінус» (Aqara W100)",
+          "85": "Подвійне «Увімк.»",
+          "86": "Подвійне «Вимк.»",
+          "87": "Охорона нічних зон",
+          "88": "Затримка на вихід",
+          "89": "Кнопка 1: одинарне натискання",
+          "90": "Кнопка 1: подвійне натискання",
+          "91": "Кнопка 1: довге натискання",
+          "92": "Кнопка 1: потрійне натискання",
+          "93": "Кнопка 2: одинарне натискання",
+          "94": "Кнопка 2: подвійне натискання",
+          "95": "Кнопка 2: довге натискання",
+          "96": "Кнопка 2: потрійне натискання",
+          "97": "Кнопка 3: одинарне натискання",
+          "98": "Кнопка 3: подвійне натискання",
+          "99": "Кнопка 3: довге натискання",
+          "100": "Кнопка 3: потрійне натискання",
+          "101": "Кнопка 4: одинарне натискання",
+          "102": "Кнопка 4: подвійне натискання",
+          "103": "Кнопка 4: довге натискання",
+          "104": "Кнопка 4: потрійне натискання"
         }
       },
       "fan": {
         "mode": {
-          "0": "Off",
-          "1": "Low",
-          "2": "Medium",
-          "3": "High",
-          "4": "Auto"
+          "0": "Вимк.",
+          "1": "Низька",
+          "2": "Середня",
+          "3": "Висока",
+          "4": "Авто"
         },
         "percent": {},
         "speed": {},
         "airflow-direction": {
-          "0": "Forward",
-          "1": "Reverse"
+          "0": "Вперед",
+          "1": "Назад"
         },
         "rock-setting": {
-          "0": "Off",
-          "1": "Left/Right",
-          "2": "Up/Down",
-          "3": "Left/Right + Up/Down",
-          "4": "Round",
-          "5": "Left/Right + Round",
-          "6": "Up/Down + Round",
-          "7": "All"
+          "0": "Вимк.",
+          "1": "Вліво/вправо",
+          "2": "Вгору/вниз",
+          "3": "Вліво/вправо + вгору/вниз",
+          "4": "По колу",
+          "5": "Вліво/вправо + по колу",
+          "6": "Вгору/вниз + по колу",
+          "7": "Усі"
         },
         "wind-setting": {
-          "0": "Off",
-          "1": "Sleep wind",
-          "2": "Natural wind",
-          "3": "Sleep + Natural wind"
+          "0": "Вимк.",
+          "1": "Нічний режим",
+          "2": "Природний вітер",
+          "3": "Нічний + природний вітер"
         }
       },
       "heater": {
         "pilot-wire-mode": {
-          "0": "Off",
-          "1": "Frost Protection",
-          "2": "Eco",
-          "3": "Comfort -1°C",
-          "4": "Comfort -2°C",
-          "5": "Comfort"
+          "0": "Вимк.",
+          "1": "Захист від замерзання",
+          "2": "Еко",
+          "3": "Комфорт -1°C",
+          "4": "Комфорт -2°C",
+          "5": "Комфорт"
         }
       },
       "shutter": {
         "state": {
-          "-1": "Closed",
-          "0": "Stopped",
-          "1": "Open"
+          "-1": "Закрито",
+          "0": "Зупинено",
+          "1": "Відкрито"
         }
       },
       "curtain": {
         "state": {
-          "-1": "Closed",
-          "0": "Stopped",
-          "1": "Open"
+          "-1": "Закрито",
+          "0": "Зупинено",
+          "1": "Відкрито"
         }
       },
       "lock": {
         "state": {
-          "0": "Unlocked",
-          "1": "Locked",
-          "2": "Activity",
-          "3": "Error"
+          "0": "Розблоковано",
+          "1": "Заблоковано",
+          "2": "Активність",
+          "3": "Помилка"
         }
       },
       "air-conditioning": {
         "mode": {
-          "0": "Auto",
-          "1": "Cooling",
-          "2": "Heating",
-          "3": "Drying",
-          "4": "Fan"
+          "0": "Авто",
+          "1": "Охолодження",
+          "2": "Обігрів",
+          "3": "Осушення",
+          "4": "Вентилятор"
         }
       },
       "siren": {
         "lmh_volume": {
-          "0": "Low",
-          "1": "Medium",
-          "2": "High"
+          "0": "Тихо",
+          "1": "Середньо",
+          "2": "Гучно"
         }
       },
       "music": {
         "playback_state": {
-          "0": "Paused",
-          "1": "Playing"
+          "0": "На паузі",
+          "1": "Відтворюється"
         }
       },
       "opening-sensor": {
         "binary": {
-          "other": "No value received",
-          "zero": "Opened",
-          "one": "Closed"
+          "other": "Значень не отримано",
+          "zero": "Відкрито",
+          "one": "Закрито"
         }
       },
       "co-sensor": {
         "binary": {
-          "other": "No value received",
-          "zero": "Healthy",
-          "one": "CO detected"
+          "other": "Значень не отримано",
+          "zero": "У нормі",
+          "one": "Виявлено CO"
         }
       },
       "leak-sensor": {
         "binary": {
-          "other": "No value received",
-          "zero": "No",
-          "one": "Yes"
+          "other": "Значень не отримано",
+          "zero": "Ні",
+          "one": "Так"
         }
       },
       "battery-low": {
         "binary": {
-          "other": "No value received",
-          "zero": "No",
-          "one": "Yes"
+          "other": "Значень не отримано",
+          "zero": "Ні",
+          "one": "Так"
         }
       },
       "tamper": {
         "binary": {
-          "other": "No value received",
-          "zero": "No",
-          "one": "Yes"
+          "other": "Значень не отримано",
+          "zero": "Ні",
+          "one": "Так"
         }
       },
       "input": {
         "binary": {
-          "other": "No value received",
-          "zero": "Off",
-          "one": "On"
+          "other": "Значень не отримано",
+          "zero": "Вимк.",
+          "one": "Увімк."
         }
       },
       "risk": {
         "integer": {
-          "no-risk": "No Risk",
-          "low-risk": "Low",
-          "medium-risk": "Medium",
-          "high-risk": "High",
-          "unknown": "Unknown"
+          "no-risk": "Немає ризику",
+          "low-risk": "Низький",
+          "medium-risk": "Середній",
+          "high-risk": "Високий",
+          "unknown": "Невідомо"
         }
       },
       "level-sensor": {
         "liquid-state": {
-          "0": "Low",
-          "1": "Normal",
-          "2": "High",
-          "unknown": "Unknown"
+          "0": "Низький",
+          "1": "Нормальний",
+          "2": "Високий",
+          "unknown": "Невідомо"
         }
       },
       "electrical-vehicle-state": {
         "door-opened": {
-          "0": "Closed",
-          "1": "Open"
+          "0": "Зачинено",
+          "1": "Відчинено"
         },
         "window-opened": {
-          "0": "Closed",
-          "1": "Open"
+          "0": "Зачинено",
+          "1": "Відчинено"
         }
       },
       "electrical-vehicle-charge": {
         "plugged": {
-          "0": "Unplugged",
-          "1": "Plugged"
+          "0": "Від'єднано",
+          "1": "Під'єднано"
         }
       },
       "voc-matter-index-sensor": {
         "integer": {
-          "unknown": "Unknown",
-          "low": "Low",
-          "medium": "Medium",
-          "high": "High",
-          "critical": "Critical"
+          "unknown": "Невідомо",
+          "low": "Низький",
+          "medium": "Середній",
+          "high": "Високий",
+          "critical": "Критичний"
         }
       },
       "no2-matter-index-sensor": {
         "integer": {
-          "unknown": "Unknown",
-          "low": "Low",
-          "medium": "Medium",
-          "high": "High",
-          "critical": "Critical"
+          "unknown": "Невідомо",
+          "low": "Низький",
+          "medium": "Середній",
+          "high": "Високий",
+          "critical": "Критичний"
         }
       },
       "level-matter-index-sensor": {
         "level-state": {
-          "1": "Low",
-          "2": "Medium",
-          "3": "High",
-          "4": "Critical"
+          "1": "Низький",
+          "2": "Середній",
+          "3": "Високий",
+          "4": "Критичний"
         }
       },
       "vacuum-cleaner": {
         "state": {
-          "unknown": "{{value}} (unknown)",
-          "0": "Stopped",
-          "1": "Running",
-          "2": "Paused",
-          "3": "Error",
-          "4": "Returning to Dock",
-          "5": "Charging",
-          "6": "Docked"
+          "unknown": "{{value}} (невідомо)",
+          "0": "Зупинено",
+          "1": "Працює",
+          "2": "На паузі",
+          "3": "Помилка",
+          "4": "Повертається на базу",
+          "5": "Заряджається",
+          "6": "На базі"
         }
       }
     }
   },
   "deviceFeatureCategory": {
     "light": {
-      "shortCategoryName": "Light",
-      "binary": "Light On/Off",
-      "brightness": "Light Brightness",
-      "hue": "Light Hue",
-      "color": "Light Color",
-      "saturation": "Light Saturation",
-      "temperature": "Light Temperature",
-      "power": "Light Power consumption",
-      "effect-mode": "Effect mode",
-      "effect-speed": "Effect speed"
+      "shortCategoryName": "Світло",
+      "binary": "Світло увімк./вимк.",
+      "brightness": "Яскравість світла",
+      "hue": "Відтінок світла",
+      "color": "Колір світла",
+      "saturation": "Насиченість світла",
+      "temperature": "Температура світла",
+      "power": "Споживання світла",
+      "effect-mode": "Режим ефекту",
+      "effect-speed": "Швидкість ефекту"
     },
     "battery": {
-      "shortCategoryName": "Battery",
-      "integer": "Battery"
+      "shortCategoryName": "Батарея",
+      "integer": "Батарея"
     },
     "battery-low": {
-      "shortCategoryName": "Low Battery",
-      "binary": "Low battery (yes/no)"
+      "shortCategoryName": "Низький заряд",
+      "binary": "Низький заряд (так/ні)"
     },
     "temperature-sensor": {
-      "shortCategoryName": "Temperature sensor",
-      "decimal": "Temperature",
-      "min": "Minimum temperature",
-      "max": "Maximum temperature",
-      "average": "Average temperature"
+      "shortCategoryName": "Датчик температури",
+      "decimal": "Температура",
+      "min": "Мінімальна температура",
+      "max": "Максимальна температура",
+      "average": "Середня температура"
     },
     "device-temperature-sensor": {
-      "shortCategoryName": "Device temperature sensor",
-      "decimal": "Temperature"
+      "shortCategoryName": "Датчик температури пристрою",
+      "decimal": "Температура"
     },
     "motion-sensor": {
-      "shortCategoryName": "Motion sensor",
-      "push": "Motion (push)",
-      "binary": "Motion (binary)"
+      "shortCategoryName": "Датчик руху",
+      "push": "Рух (імпульс)",
+      "binary": "Рух (бінарний)"
     },
     "presence-sensor": {
-      "shortCategoryName": "Presence sensor",
-      "push": "Presence"
+      "shortCategoryName": "Датчик присутності",
+      "push": "Присутність"
     },
     "rain-sensor": {
-      "shortCategoryName": "Rain sensor",
-      "binary": "Rain detection Yes/No"
+      "shortCategoryName": "Датчик дощу",
+      "binary": "Виявлення дощу так/ні"
     },
     "light-sensor": {
-      "shortCategoryName": "Luminosity sensor",
-      "integer": "Luminosity (integer)",
-      "decimal": "Luminosity (decimal)"
+      "shortCategoryName": "Датчик освітленості",
+      "integer": "Освітленість (ціле)",
+      "decimal": "Освітленість (десяткове)"
     },
     "sismic-sensor": {
-      "shortCategoryName": "Sismic sensor",
-      "decimal": "Sismic (decimal)"
+      "shortCategoryName": "Сейсмічний датчик",
+      "decimal": "Сейсміка (десяткове)"
     },
     "distance-sensor": {
-      "shortCategoryName": "Distance",
-      "decimal": "Distance"
+      "shortCategoryName": "Відстань",
+      "decimal": "Відстань"
     },
     "level-sensor": {
-      "shortCategoryName": "Level sensor",
-      "decimal": "Level sensor",
-      "liquid-state": "Liquid level state",
-      "liquid-level-percent": "Liquid level percent",
-      "liquid-depth": "Liquid depth"
+      "shortCategoryName": "Датчик рівня",
+      "decimal": "Датчик рівня",
+      "liquid-state": "Стан рівня рідини",
+      "liquid-level-percent": "Рівень рідини у відсотках",
+      "liquid-depth": "Глибина рідини"
     },
     "camera": {
-      "shortCategoryName": "Camera",
-      "image": "Camera"
+      "shortCategoryName": "Камера",
+      "image": "Камера"
     },
     "counter-sensor": {
-      "shortCategoryName": "Counter",
-      "integer": "Counter (integer)"
+      "shortCategoryName": "Лічильник",
+      "integer": "Лічильник (ціле)"
     },
     "child-lock": {
-      "shortCategoryName": "Child Lock",
-      "binary": "Child lock"
+      "shortCategoryName": "Захист від дітей",
+      "binary": "Захист від дітей"
     },
     "smoke-sensor": {
-      "shortCategoryName": "Smoke sensor",
-      "binary": "Smoke (on/off)",
-      "decimal": "Density (decimal)"
+      "shortCategoryName": "Датчик диму",
+      "binary": "Дим (увімк./вимк.)",
+      "decimal": "Щільність (десяткове)"
     },
     "co-sensor": {
-      "shortCategoryName": "Carbon Monoxide (CO) Sensor",
-      "binary": "CO (binary)"
+      "shortCategoryName": "Датчик чадного газу (CO)",
+      "binary": "CO (бінарний)"
     },
     "co2-sensor": {
-      "shortCategoryName": "Co2 Sensor",
-      "decimal": "Co2 (decimal)",
-      "integer": "Co2 (integer)"
+      "shortCategoryName": "Датчик CO2",
+      "decimal": "CO2 (десяткове)",
+      "integer": "CO2 (ціле)"
     },
     "switch": {
-      "shortCategoryName": "Switch",
-      "voltage": "Switch Voltage",
-      "current": "Switch Current",
-      "binary": "Switch (On/Off)",
-      "dimmer": "Switch Dimmer",
-      "burglar": "Switch Burglar",
-      "power": "Power consumption",
-      "energy": "Energy consumption",
-      "target-current": "Target current"
+      "shortCategoryName": "Вимикач",
+      "voltage": "Напруга вимикача",
+      "current": "Струм вимикача",
+      "binary": "Вимикач (увімк./вимк.)",
+      "dimmer": "Димер вимикача",
+      "burglar": "Датчик злому вимикача",
+      "power": "Споживана потужність",
+      "energy": "Споживання енергії",
+      "target-current": "Цільовий струм"
     },
     "siren": {
-      "shortCategoryName": "Siren",
-      "binary": "Siren",
-      "lmh_volume": "Siren volume",
-      "melody": "Melody"
+      "shortCategoryName": "Сирена",
+      "binary": "Сирена",
+      "lmh_volume": "Гучність сирени",
+      "melody": "Мелодія"
     },
     "cube": {
-      "shortCategoryName": "Cube",
-      "mode": "Mode",
-      "rotation": "Rotation"
+      "shortCategoryName": "Куб",
+      "mode": "Режим",
+      "rotation": "Обертання"
     },
     "button": {
-      "shortCategoryName": "Button",
-      "click": "Button (click)",
-      "push": "Push button"
+      "shortCategoryName": "Кнопка",
+      "click": "Кнопка (натискання)",
+      "push": "Кнопка (імпульс)"
     },
     "pressure-sensor": {
-      "shortCategoryName": "Pressure sensor",
-      "decimal": "Pressure (decimal)",
-      "integer": "Pressure (integer)"
+      "shortCategoryName": "Датчик тиску",
+      "decimal": "Тиск (десяткове)",
+      "integer": "Тиск (ціле)"
     },
     "leak-sensor": {
-      "shortCategoryName": "Leak sensor",
-      "binary": "Leak (yes/no)"
+      "shortCategoryName": "Датчик протікання",
+      "binary": "Протікання (так/ні)"
     },
     "opening-sensor": {
-      "shortCategoryName": "Opening sensor",
-      "binary": "Opening (open/closed)"
+      "shortCategoryName": "Датчик відкриття",
+      "binary": "Відкриття (відкрито/закрито)"
     },
     "humidity-sensor": {
-      "shortCategoryName": "Humidity sensor",
-      "decimal": "Humidity (decimal)"
+      "shortCategoryName": "Датчик вологості",
+      "decimal": "Вологість (десяткове)"
     },
     "soil-moisture-sensor": {
-      "shortCategoryName": "Soil moisture sensor",
-      "decimal": "Soil moisture (decimal)"
+      "shortCategoryName": "Датчик вологості ґрунту",
+      "decimal": "Вологість ґрунту (десяткове)"
     },
     "pm25-sensor": {
-      "shortCategoryName": "PM2.5 sensor",
-      "decimal": "PM2.5 (decimal)"
+      "shortCategoryName": "Датчик PM2.5",
+      "decimal": "PM2.5 (десяткове)"
     },
     "pm10-sensor": {
-      "shortCategoryName": "PM10 sensor",
-      "decimal": "PM10 (decimal)"
+      "shortCategoryName": "Датчик PM10",
+      "decimal": "PM10 (десяткове)"
     },
     "formaldehyd-sensor": {
-      "shortCategoryName": "Formaldehyd sensor",
-      "decimal": "Formaldehyd (decimal)"
+      "shortCategoryName": "Датчик формальдегіду",
+      "decimal": "Формальдегід (десяткове)"
     },
     "vibration-sensor": {
-      "shortCategoryName": "Vibration sensor",
-      "binary": "Vibrate (yes/no)",
-      "status": "Status",
-      "tilt-angle": "Tilt Angle",
-      "acceleration-x": "Acceleration X",
-      "acceleration-y": "Acceleration Y",
-      "acceleration-z": "Acceleration Z",
-      "angle-x": "Angle X",
-      "angle-y": "Angle Y",
-      "angle-z": "Angle Z",
-      "bed-activity": "Bed Activity"
+      "shortCategoryName": "Датчик вібрації",
+      "binary": "Вібрація (так/ні)",
+      "status": "Статус",
+      "tilt-angle": "Кут нахилу",
+      "acceleration-x": "Прискорення X",
+      "acceleration-y": "Прискорення Y",
+      "acceleration-z": "Прискорення Z",
+      "angle-x": "Кут X",
+      "angle-y": "Кут Y",
+      "angle-z": "Кут Z",
+      "bed-activity": "Активність у ліжку"
     },
     "signal": {
-      "shortCategoryName": "Signal",
-      "integer": "Signal strength"
+      "shortCategoryName": "Сигнал",
+      "integer": "Потужність сигналу"
     },
     "air-conditioning": {
-      "shortCategoryName": "Air Conditioning",
-      "binary": "Switch (On/Off)",
-      "mode": "Mode",
-      "target-temperature": "Target temperature"
+      "shortCategoryName": "Кондиціонер",
+      "binary": "Вимикач (увімк./вимк.)",
+      "mode": "Режим",
+      "target-temperature": "Цільова температура"
     },
     "electrical-vehicle-battery": {
-      "shortCategoryName": "Electric Vehicle - Battery",
-      "battery-energy-remaining": "Remaining energy",
-      "battery-level": "Battery level",
-      "battery-power": "Battery power",
-      "battery-range-estimate": "Estimated range",
-      "battery-temperature": "Battery temperature",
-      "battery-voltage": "Battery voltage"
+      "shortCategoryName": "Електромобіль - Батарея",
+      "battery-energy-remaining": "Залишок енергії",
+      "battery-level": "Рівень заряду батареї",
+      "battery-power": "Потужність батареї",
+      "battery-range-estimate": "Орієнтовний запас ходу",
+      "battery-temperature": "Температура батареї",
+      "battery-voltage": "Напруга батареї"
     },
     "electrical-vehicle-charge": {
-      "shortCategoryName": "Electric Vehicle - Charging",
-      "charge-current": "Charging current",
-      "charge-energy-added-total": "Total energy added",
-      "charge-energy-consumption-total": "Total energy consumed",
-      "charge-on": "Charge switch",
-      "charge-power": "Charging power",
-      "charge-voltage": "Charging voltage",
-      "last-charge-energy-added": "Energy added (last charge)",
-      "last-charge-energy-consumption": "Energy consumed (last charge)",
-      "plugged": "Vehicle plugged",
-      "target-charge-limit": "Charge limit",
-      "target-current": "Target current"
+      "shortCategoryName": "Електромобіль - Заряджання",
+      "charge-current": "Струм заряджання",
+      "charge-energy-added-total": "Загальна додана енергія",
+      "charge-energy-consumption-total": "Загальна спожита енергія",
+      "charge-on": "Перемикач заряджання",
+      "charge-power": "Потужність заряджання",
+      "charge-voltage": "Напруга заряджання",
+      "last-charge-energy-added": "Додана енергія (останнє заряджання)",
+      "last-charge-energy-consumption": "Спожита енергія (останнє заряджання)",
+      "plugged": "Автомобіль під'єднано",
+      "target-charge-limit": "Ліміт заряду",
+      "target-current": "Цільовий струм"
     },
     "electrical-vehicle-climate": {
-      "shortCategoryName": "Electric Vehicle - Climate",
-      "climate-on": "Climate switch",
-      "indoor-temperature": "Indoor temperature",
-      "target-temperature": "Target temperature"
+      "shortCategoryName": "Електромобіль - Клімат",
+      "climate-on": "Перемикач клімату",
+      "indoor-temperature": "Температура в салоні",
+      "target-temperature": "Цільова температура"
     },
     "electrical-vehicle-command": {
-      "shortCategoryName": "Electric Vehicle - Command",
-      "alarm": "Alarm",
-      "lock": "Lock"
+      "shortCategoryName": "Електромобіль - Команди",
+      "alarm": "Сигналізація",
+      "lock": "Замок"
     },
     "electrical-vehicle-drive": {
-      "shortCategoryName": "Electric Vehicle - Drive",
-      "drive-energy-consumption-total": "Total energy consumed",
-      "speed": "Speed"
+      "shortCategoryName": "Електромобіль - Рух",
+      "drive-energy-consumption-total": "Загальна спожита енергія",
+      "speed": "Швидкість"
     },
     "electrical-vehicle-consumption": {
-      "shortCategoryName": "Electric Vehicle - Consumption",
-      "energy-consumption": "Instant consumption",
-      "energy-efficiency": "Energy efficiency"
+      "shortCategoryName": "Електромобіль - Споживання",
+      "energy-consumption": "Миттєве споживання",
+      "energy-efficiency": "Енергоефективність"
     },
     "electrical-vehicle-state": {
-      "shortCategoryName": "Electric Vehicle - Status",
-      "door-opened": "Door open",
-      "odometer": "Odometer",
-      "tire-pressure": "Tire pressure",
-      "window-opened": "Window open"
+      "shortCategoryName": "Електромобіль - Стан",
+      "door-opened": "Двері відчинено",
+      "odometer": "Одометр",
+      "tire-pressure": "Тиск у шинах",
+      "window-opened": "Вікно відчинено"
     },
     "heater": {
-      "shortCategoryName": "Heating",
-      "pilot-wire-mode": "Mode"
+      "shortCategoryName": "Опалення",
+      "pilot-wire-mode": "Режим"
     },
     "tamper": {
-      "shortCategoryName": "Tamper",
-      "binary": "Tamper (yes/no)"
+      "shortCategoryName": "Датчик розкриття",
+      "binary": "Розкриття (так/ні)"
     },
     "television": {
-      "shortCategoryName": "Television",
-      "binary": "Power",
-      "source": "Source",
-      "channel": "Channel",
-      "guide": "Guide",
-      "menu": "Menu",
-      "volume-up": "Volume up",
-      "volume-mute": "Mute",
-      "volume-down": "Volume down",
-      "volume": "Volume",
-      "channel-up": "Channel up",
-      "channel-previous": "Previous channel",
-      "channel-down": "Channel down",
-      "tools": "Tools",
-      "info": "Info",
-      "return": "Return",
-      "exit": "Exit",
-      "up": "Up",
-      "down": "Down",
-      "left": "Left",
-      "right": "Right",
+      "shortCategoryName": "Телевізор",
+      "binary": "Живлення",
+      "source": "Джерело",
+      "channel": "Канал",
+      "guide": "Телегід",
+      "menu": "Меню",
+      "volume-up": "Гучніше",
+      "volume-mute": "Без звуку",
+      "volume-down": "Тихіше",
+      "volume": "Гучність",
+      "channel-up": "Наступний канал",
+      "channel-previous": "Попередній канал",
+      "channel-down": "Попередній канал (вниз)",
+      "tools": "Інструменти",
+      "info": "Інформація",
+      "return": "Повернутися",
+      "exit": "Вийти",
+      "up": "Вгору",
+      "down": "Вниз",
+      "left": "Вліво",
+      "right": "Вправо",
       "enter": "Enter",
-      "rewind": "Rewind",
-      "forward": "Forward",
-      "play": "Play",
-      "pause": "Pause",
-      "stop": "Stop",
-      "previous": "Previous",
-      "next": "Next",
-      "record": "Record"
+      "rewind": "Перемотати назад",
+      "forward": "Перемотати вперед",
+      "play": "Відтворити",
+      "pause": "Пауза",
+      "stop": "Стоп",
+      "previous": "Попередній",
+      "next": "Наступний",
+      "record": "Запис"
     },
     "energy-sensor": {
-      "shortCategoryName": "Energy sensor",
-      "voltage": "Voltage",
-      "current": "Current",
-      "binary": "Switch",
-      "power": "Power",
-      "energy": "Energy",
-      "export-index": "Export index",
-      "index": "Index",
-      "index-today": "Index today",
-      "index-yesterday": "Index yesterday",
-      "daily-consumption": "Daily Consumption",
-      "daily-consumption-cost": "Daily Cost",
-      "thirty-minutes-consumption": "30 Minutes Consumption",
-      "thirty-minutes-consumption-cost": "30 Minutes Cost"
+      "shortCategoryName": "Датчик енергії",
+      "voltage": "Напруга",
+      "current": "Струм",
+      "binary": "Вимикач",
+      "power": "Потужність",
+      "energy": "Енергія",
+      "export-index": "Показник експорту",
+      "index": "Показник",
+      "index-today": "Показник за сьогодні",
+      "index-yesterday": "Показник за вчора",
+      "daily-consumption": "Добове споживання",
+      "daily-consumption-cost": "Добова вартість",
+      "thirty-minutes-consumption": "Споживання за 30 хвилин",
+      "thirty-minutes-consumption-cost": "Вартість за 30 хвилин"
     },
     "energy-production-sensor": {
-      "shortCategoryName": "Energy production sensor",
-      "index": "Index",
-      "daily-production": "Daily Production",
-      "daily-production-revenue": "Daily Revenue",
-      "thirty-minutes-production": "30 Minutes Production",
-      "thirty-minutes-production-revenue": "30 Minutes Revenue"
+      "shortCategoryName": "Датчик виробництва енергії",
+      "index": "Показник",
+      "daily-production": "Добове виробництво",
+      "daily-production-revenue": "Добовий дохід",
+      "thirty-minutes-production": "Виробництво за 30 хвилин",
+      "thirty-minutes-production-revenue": "Дохід за 30 хвилин"
     },
     "teleinformation": {
-      "shortCategoryName": "Teleinformation",
-      "binary": "Switch",
-      "east": "Total active power delivered (EAST)",
-      "eait": "Total active power injected (EAIT)",
-      "easf01": "Total provider active power delivered (EASF01)",
-      "easf02": "Total provider active power delivered (EASF02)",
-      "easf03": "Total provider active power delivered (EASF03)",
-      "easf04": "Total provider active power delivered (EASF04)",
-      "easf05": "Total provider active power delivered (EASF05)",
-      "easf06": "Total provider active power delivered (EASF06)",
-      "easf07": "Total provider active power delivered (EASF07)",
-      "easf08": "Total provider active power delivered (EASF08)",
-      "easf09": "Total provider active power delivered (EASF09)",
-      "easf10": "Total provider active power delivered (EASF10)",
-      "pref": "Apparent power of reference (PREF)",
-      "pcoup": "Apparent power threshold (PCOUP)",
-      "vtic": "Protocol version (VTIC)",
-      "ccasn": "Current point of the active load curve drawn (CCASN)",
-      "ccasn_1": "Previous point of the active load curve drawn (CCASN-1)",
-      "umoy1": "Average RMS voltage (UMOY1)",
-      "umoy2": "Average RMS voltage (UMOY2)",
-      "umoy3": "Average RMS voltage (UMOY3)",
-      "erq1": "Total reactive power Q1 (ERQ1)",
-      "erq2": "Total reactive power Q2 (ERQ2)",
-      "erq3": "Total reactive power Q3 (ERQ3)",
-      "erq4": "Total reactive power Q4 (ERQ4)",
-      "irms1": "RMS current (IRMS1)",
-      "irms2": "RMS current (IRMS2)",
-      "irms3": "RMS current (IRMS3)",
-      "urms1": "RMS voltage (URMS1)",
-      "urms2": "RMS voltage (URMS2)",
-      "urms3": "RMS voltage (URMS3)",
-      "easd01": "Active energy withdrawn Distributor (EASD01)",
-      "easd02": "Active energy withdrawn Distributor (EASD02)",
-      "easd03": "Active energy withdrawn Distributor (EASD03)",
-      "easd04": "Active energy withdrawn Distributor (EASD04)",
-      "ntarf": "Tarif index number (NTARF)",
-      "ccain": "Point n of the withdrawn active load curve (CCAIN)",
-      "ccain_1": "Point n-1 of the withdrawn active load curve (CCAIN-1)",
-      "sinsti": "Instantaneous apparent power injected (SINSTI)",
-      "smaxin": "Apparent power max. injected n (SMAXIN)",
-      "smaxin_1": "Apparent power max. injected n-1 (SMAXIN-1)",
-      "smaxn": "Apparent power delivered peak (SMAXN)",
-      "smaxn2": "Apparent power delivered peak (SMAXN2)",
-      "smaxn3": "Apparent power delivered peak (SMAXN3)",
-      "sinsts": "Immediate apparent power delivered (SINSTS)",
-      "sinsts2": "Immediate apparent power delivered (SINSTS2)",
-      "sinsts3": "Immediate apparent power delivered (SINSTS3)",
-      "smaxn_1": "Apparent power max. draw-off n-1 (SMAXN-1)",
-      "smaxn2_1": "Apparent power max. draw-off n-1 (SMAXN2-1)",
-      "smaxn3_1": "Apparent power max. draw-off n-1 (SMAXN3-1)",
-      "hhphc": "HPHC Program (HHPHC)",
-      "imax": "RMS current peak (IMAX)",
-      "adps": "Subscribed Power Exceeded Warning (ADPS)",
-      "imax2": "RMS current peak (IMAX2)",
-      "imax3": "RMS current peak (IMAX3)",
-      "adir1": "Overcurrent alert (ADIR1)",
-      "adir2": "Overcurrent alert (ADIR2)",
-      "adir3": "Overcurrent alert (ADIR3)"
+      "shortCategoryName": "Телеінформація",
+      "binary": "Вимикач",
+      "east": "Загальна активна енергія відпущена (EAST)",
+      "eait": "Загальна активна енергія віддана (EAIT)",
+      "easf01": "Загальна активна енергія постачальника (EASF01)",
+      "easf02": "Загальна активна енергія постачальника (EASF02)",
+      "easf03": "Загальна активна енергія постачальника (EASF03)",
+      "easf04": "Загальна активна енергія постачальника (EASF04)",
+      "easf05": "Загальна активна енергія постачальника (EASF05)",
+      "easf06": "Загальна активна енергія постачальника (EASF06)",
+      "easf07": "Загальна активна енергія постачальника (EASF07)",
+      "easf08": "Загальна активна енергія постачальника (EASF08)",
+      "easf09": "Загальна активна енергія постачальника (EASF09)",
+      "easf10": "Загальна активна енергія постачальника (EASF10)",
+      "pref": "Опорна повна потужність (PREF)",
+      "pcoup": "Поріг повної потужності (PCOUP)",
+      "vtic": "Версія протоколу (VTIC)",
+      "ccasn": "Поточна точка кривої активного навантаження (CCASN)",
+      "ccasn_1": "Попередня точка кривої активного навантаження (CCASN-1)",
+      "umoy1": "Середня діюча напруга (UMOY1)",
+      "umoy2": "Середня діюча напруга (UMOY2)",
+      "umoy3": "Середня діюча напруга (UMOY3)",
+      "erq1": "Загальна реактивна енергія Q1 (ERQ1)",
+      "erq2": "Загальна реактивна енергія Q2 (ERQ2)",
+      "erq3": "Загальна реактивна енергія Q3 (ERQ3)",
+      "erq4": "Загальна реактивна енергія Q4 (ERQ4)",
+      "irms1": "Діючий струм (IRMS1)",
+      "irms2": "Діючий струм (IRMS2)",
+      "irms3": "Діючий струм (IRMS3)",
+      "urms1": "Діюча напруга (URMS1)",
+      "urms2": "Діюча напруга (URMS2)",
+      "urms3": "Діюча напруга (URMS3)",
+      "easd01": "Активна енергія відібрана, дистриб'ютор (EASD01)",
+      "easd02": "Активна енергія відібрана, дистриб'ютор (EASD02)",
+      "easd03": "Активна енергія відібрана, дистриб'ютор (EASD03)",
+      "easd04": "Активна енергія відібрана, дистриб'ютор (EASD04)",
+      "ntarf": "Номер тарифного індексу (NTARF)",
+      "ccain": "Точка n кривої відібраного активного навантаження (CCAIN)",
+      "ccain_1": "Точка n-1 кривої відібраного активного навантаження (CCAIN-1)",
+      "sinsti": "Миттєва повна потужність віддана (SINSTI)",
+      "smaxin": "Макс. повна потужність віддана n (SMAXIN)",
+      "smaxin_1": "Макс. повна потужність віддана n-1 (SMAXIN-1)",
+      "smaxn": "Пік відпущеної повної потужності (SMAXN)",
+      "smaxn2": "Пік відпущеної повної потужності (SMAXN2)",
+      "smaxn3": "Пік відпущеної повної потужності (SMAXN3)",
+      "sinsts": "Миттєва відпущена повна потужність (SINSTS)",
+      "sinsts2": "Миттєва відпущена повна потужність (SINSTS2)",
+      "sinsts3": "Миттєва відпущена повна потужність (SINSTS3)",
+      "smaxn_1": "Макс. повна потужність відібрана n-1 (SMAXN-1)",
+      "smaxn2_1": "Макс. повна потужність відібрана n-1 (SMAXN2-1)",
+      "smaxn3_1": "Макс. повна потужність відібрана n-1 (SMAXN3-1)",
+      "hhphc": "Програма HPHC (HHPHC)",
+      "imax": "Пік діючого струму (IMAX)",
+      "adps": "Попередження про перевищення замовленої потужності (ADPS)",
+      "imax2": "Пік діючого струму (IMAX2)",
+      "imax3": "Пік діючого струму (IMAX3)",
+      "adir1": "Попередження про перевищення струму (ADIR1)",
+      "adir2": "Попередження про перевищення струму (ADIR2)",
+      "adir3": "Попередження про перевищення струму (ADIR3)"
     },
     "volume-sensor": {
-      "shortCategoryName": "Volume sensor",
-      "decimal": "Volume (decimal)",
-      "integer": "Volume (integer)"
+      "shortCategoryName": "Датчик об'єму",
+      "decimal": "Об'єм (десяткове)",
+      "integer": "Об'єм (ціле)"
     },
     "currency": {
-      "shortCategoryName": "Money",
-      "decimal": "Currency"
+      "shortCategoryName": "Гроші",
+      "decimal": "Валюта"
     },
     "speed-sensor": {
-      "shortCategoryName": "Speed sensor",
-      "decimal": "Speed (decimal)",
-      "integer": "Speed (integer)"
+      "shortCategoryName": "Датчик швидкості",
+      "decimal": "Швидкість (десяткове)",
+      "integer": "Швидкість (ціле)"
     },
     "precipitation-sensor": {
-      "shortCategoryName": "Precipitation sensor",
-      "decimal": "Precipitation",
-      "integer": "Intensity (mV)"
+      "shortCategoryName": "Датчик опадів",
+      "decimal": "Опади",
+      "integer": "Інтенсивність (мВ)"
     },
     "uv-sensor": {
-      "shortCategoryName": "UV Sensor",
-      "integer": "UV Index"
+      "shortCategoryName": "УФ-датчик",
+      "integer": "УФ-індекс"
     },
     "fan": {
-      "shortCategoryName": "Fan",
-      "mode": "Fan mode",
-      "percent": "Fan speed (%)",
-      "speed": "Fan speed (level)",
-      "airflow-direction": "Airflow direction",
-      "rock-setting": "Rocking",
-      "wind-setting": "Wind mode"
+      "shortCategoryName": "Вентилятор",
+      "mode": "Режим вентилятора",
+      "percent": "Швидкість вентилятора (%)",
+      "speed": "Швидкість вентилятора (рівень)",
+      "airflow-direction": "Напрямок потоку повітря",
+      "rock-setting": "Коливання",
+      "wind-setting": "Режим вітру"
     },
     "hepa-filter-monitoring": {
-      "shortCategoryName": "HEPA filter monitoring",
-      "filter-life-remaining": "Filter life remaining"
+      "shortCategoryName": "Моніторинг HEPA-фільтра",
+      "filter-life-remaining": "Залишок ресурсу фільтра"
     },
     "duration": {
-      "shortCategoryName": "Duration",
-      "decimal": "Duration (decimal)",
-      "integer": "Duration (integer)"
+      "shortCategoryName": "Тривалість",
+      "decimal": "Тривалість (десяткове)",
+      "integer": "Тривалість (ціле)"
     },
     "voc-sensor": {
-      "shortCategoryName": "VOC Sensor",
-      "decimal": "VOC (decimal)"
+      "shortCategoryName": "Датчик ЛОС",
+      "decimal": "ЛОС (десяткове)"
     },
     "voc-index-sensor": {
-      "shortCategoryName": "Sensirion VOC Index",
-      "integer": "Sensirion VOC Index (integer)"
+      "shortCategoryName": "Індекс ЛОС Sensirion",
+      "integer": "Індекс ЛОС Sensirion (ціле)"
     },
     "voc-matter-index-sensor": {
-      "shortCategoryName": "VOC Index",
-      "integer": "VOC Index (integer)"
+      "shortCategoryName": "Індекс ЛОС",
+      "integer": "Індекс ЛОС (ціле)"
     },
     "no2-matter-index-sensor": {
-      "shortCategoryName": "NO₂ Index",
-      "integer": "NO₂ Index (integer)"
+      "shortCategoryName": "Індекс NO₂",
+      "integer": "Індекс NO₂ (ціле)"
     },
     "shutter": {
-      "shortCategoryName": "Shutter",
-      "state": "Shutter state",
-      "position": "Shutter position"
+      "shortCategoryName": "Ролета",
+      "state": "Стан ролети",
+      "position": "Положення ролети"
     },
     "curtain": {
-      "shortCategoryName": "Curtain",
-      "state": "Curtain state",
-      "position": "Curtain position"
+      "shortCategoryName": "Штора",
+      "state": "Стан штори",
+      "position": "Положення штори"
     },
     "data": {
-      "shortCategoryName": "Data",
-      "size": "Size"
+      "shortCategoryName": "Дані",
+      "size": "Розмір"
     },
     "datarate": {
-      "shortCategoryName": "Datarate",
-      "rate": "Rate"
+      "shortCategoryName": "Швидкість передачі",
+      "rate": "Швидкість"
     },
     "thermostat": {
-      "shortCategoryName": "Thermostat",
-      "target-temperature": "Thermostat Temperature"
+      "shortCategoryName": "Термостат",
+      "target-temperature": "Температура термостата"
     },
     "airquality-sensor": {
-      "shortCategoryName": "Air Quality",
-      "aqi": "Air Quality Index"
+      "shortCategoryName": "Якість повітря",
+      "aqi": "Індекс якості повітря"
     },
     "ph-sensor": {
-      "shortCategoryName": "pH Sensor",
-      "decimal": "pH (Decimal)"
+      "shortCategoryName": "Датчик pH",
+      "decimal": "pH (десяткове)"
     },
     "orp-sensor": {
-      "shortCategoryName": "ORP Sensor (Redox)",
-      "decimal": "ORP / Redox (Decimal)"
+      "shortCategoryName": "Датчик ОВП (Redox)",
+      "decimal": "ОВП / Redox (десяткове)"
     },
     "text": {
-      "shortCategoryName": "Text",
-      "text": "Text"
+      "shortCategoryName": "Текст",
+      "text": "Текст"
     },
     "surface": {
-      "shortCategoryName": "Surface",
-      "decimal": "Surface"
+      "shortCategoryName": "Площа",
+      "decimal": "Площа"
     },
     "music": {
-      "shortCategoryName": "Music",
-      "volume": "Music volume",
-      "play": "Music play button",
-      "pause": "Music pause button",
-      "previous": "Music previous button",
-      "next": "Music next button",
-      "playback_state": "Music playback state",
-      "play_notification": "Broadcast a notification"
+      "shortCategoryName": "Музика",
+      "volume": "Гучність музики",
+      "play": "Кнопка відтворення музики",
+      "pause": "Кнопка паузи музики",
+      "previous": "Кнопка попереднього треку",
+      "next": "Кнопка наступного треку",
+      "playback_state": "Стан відтворення музики",
+      "play_notification": "Озвучити сповіщення"
     },
     "lock": {
-      "shortCategoryName": "Lock",
-      "integer": "Battery",
-      "binary": "Locking",
-      "state": "State"
+      "shortCategoryName": "Замок",
+      "integer": "Батарея",
+      "binary": "Замикання",
+      "state": "Стан"
     },
     "noise-sensor": {
-      "shortCategoryName": "Sound sensor",
-      "integer": "Noise (integer)"
+      "shortCategoryName": "Датчик звуку",
+      "integer": "Шум (ціле)"
     },
     "angle-sensor": {
-      "shortCategoryName": "Angle sensor",
-      "integer": "Angle (integer)"
+      "shortCategoryName": "Датчик кута",
+      "integer": "Кут (ціле)"
     },
     "risk": {
-      "shortCategoryName": "Risk",
-      "integer": "Risk Level"
+      "shortCategoryName": "Ризик",
+      "integer": "Рівень ризику"
     },
     "input": {
-      "shortCategoryName": "Input",
-      "binary": "State of input"
+      "shortCategoryName": "Вхід",
+      "binary": "Стан входу"
     },
     "unknown": {
-      "shortCategoryName": "Unknown",
-      "unknown": "Unknown"
+      "shortCategoryName": "Невідомо",
+      "unknown": "Невідомо"
     },
     "vacuum-cleaner": {
-      "shortCategoryName": "Vacuum Cleaner",
-      "state": "Operational State",
-      "run-mode": "Run Mode",
-      "clean-mode": "Clean Mode",
-      "dock": "Return to Dock"
+      "shortCategoryName": "Пилосос",
+      "state": "Робочий стан",
+      "run-mode": "Режим роботи",
+      "clean-mode": "Режим прибирання",
+      "dock": "Повернення на базу"
     }
   },
   "errorPage": {
