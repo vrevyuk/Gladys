@@ -1,0 +1,229 @@
+[
+  {
+    "label": "weather.get.success.now.snow",
+    "answers": ["Надворі йде сніг, температура {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.rain",
+    "answers": ["Йде дощ, температура надворі {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.clear",
+    "answers": ["Сьогодні ясний день. Температура надворі {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.cloud",
+    "answers": ["Надворі хмарно, температура {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.fog",
+    "answers": ["Сьогодні туманно. Температура надворі {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.sleet",
+    "answers": ["Температура надворі {{ temperature }} {{ units }}, крижаний дощ із мокрим снігом."]
+  },
+  {
+    "label": "weather.get.success.now.wind",
+    "answers": ["Сьогодні вітряно. Температура надворі {{ temperature }} {{ units }}."]
+  },
+  {
+    "label": "weather.get.success.now.unknown",
+    "answers": ["Температура надворі {{ temperature }} {{ units }}."]
+  },
+
+  {
+    "label": "weather.get.success.today.snow",
+    "answers": ["Сьогодні йде сніг, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+  {
+    "label": "weather.get.success.today.rain",
+    "answers": ["Сьогодні йде дощ, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+  {
+    "label": "weather.get.success.today.clear",
+    "answers": ["Сьогодні ясне небо, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+  {
+    "label": "weather.get.success.today.cloud",
+    "answers": ["Сьогодні хмарно, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+  {
+    "label": "weather.get.success.today.fog",
+    "answers": ["Сьогодні туманно, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+  {
+    "label": "weather.get.success.today.sleet",
+    "answers": [
+      "Сьогодні температура від {{temperature min}} {{units}} до {{temperature max}} {{units}}, крижаний дощ."
+    ]
+  },
+  {
+    "label": "weather.get.success.today.wind",
+    "answers": [
+      "Сьогодні дуже вітряно, температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.today.unknown",
+    "answers": ["Сьогодні температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+
+  {
+    "label": "weather.get.success.tomorrow.snow",
+    "answers": [
+      "Завтра випаде сніг, температура буде від {{ temperature_min }} {{ units }} до {{ temperature_max }} {{ units }}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.rain",
+    "answers": [
+      "Завтра надворі йтиме дощ, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.clear",
+    "answers": [
+      "Завтра небо буде ясним, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.cloud",
+    "answers": [
+      "Завтра буде хмарно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.fog",
+    "answers": [
+      "Завтра буде туман, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.sleet",
+    "answers": [
+      "Завтра температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}, крижаний дощ."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.wind",
+    "answers": [
+      "Завтра буде вітряно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.tomorrow.unknown",
+    "answers": ["Завтра температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+
+  {
+    "label": "weather.get.success.after-tomorrow.snow",
+    "answers": [
+      "Післязавтра надворі йтиме сніг, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.rain",
+    "answers": [
+      "Післязавтра надворі йтиме дощ, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.clear",
+    "answers": [
+      "Післязавтра небо буде ясним, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.cloud",
+    "answers": [
+      "Післязавтра буде хмарно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.fog",
+    "answers": [
+      "Післязавтра буде туман, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.sleet",
+    "answers": [
+      "Післязавтра температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}, крижаний дощ."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.wind",
+    "answers": [
+      "Післязавтра буде вітряно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.after-tomorrow.unknown",
+    "answers": ["Післязавтра температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+
+  {
+    "label": "weather.get.success.day.snow",
+    "answers": [
+      "{{day}} йтиме сніг, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.rain",
+    "answers": [
+      "{{ day }} надворі йтиме дощ, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.clear",
+    "answers": [
+      "{{ day }} небо буде ясним, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.cloud",
+    "answers": [
+      "{{ day }} буде хмарно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.fog",
+    "answers": [
+      "{{ day }} буде туман, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.sleet",
+    "answers": [
+      "{{ day }} температура від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}, крижаний дощ."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.wind",
+    "answers": [
+      "{{ day }} буде вітряно, температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."
+    ]
+  },
+  {
+    "label": "weather.get.success.day.unknown",
+    "answers": ["{{ day }} температура буде від {{temperature_min}} {{units}} до {{temperature_max}} {{units}}."]
+  },
+
+  {
+    "label": "weather.get.fail",
+    "answers": ["Під час отримання прогнозу погоди сталася помилка."]
+  },
+  {
+    "label": "weather.get.fail.not-configured",
+    "answers": ["Перш ніж користуватися цією функцією, потрібно налаштувати OpenWeather API у вкладці «Інтеграції»."]
+  },
+  {
+    "label": "weather.get.fail.no-weather",
+    "answers": ["Не вдалося знайти прогноз погоди на цей день."]
+  },
+  {
+    "label": "weather.get.fail.no-house",
+    "answers": ["Спочатку потрібно налаштувати ваш будинок та його розташування в параметрах."]
+  }
+]

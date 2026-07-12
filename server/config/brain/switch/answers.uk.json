@@ -1,0 +1,22 @@
+[
+  {
+    "label": "switch.turn-on.success",
+    "answers": ["Вимикач увімкнено!"]
+  },
+  {
+    "label": "switch.turn-on.fail",
+    "answers": ["Мені не вдалося увімкнути вимикач."]
+  },
+  {
+    "label": "switch.turn-off.success",
+    "answers": ["Вимикач вимкнено!"]
+  },
+  {
+    "label": "switch.turn-off.fail",
+    "answers": ["Мені не вдалося вимкнути вимикач."]
+  },
+  {
+    "label": "switch.not-found",
+    "answers": ["Я не знайшов жодного вимикача з такою назвою."]
+  }
+]

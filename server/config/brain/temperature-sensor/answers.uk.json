@@ -1,0 +1,18 @@
+[
+  {
+    "label": "temperature-sensor.get-in-room.success",
+    "answers": ["У кімнаті {{ roomName }} зараз {{ temperature }} {{ unit }}."]
+  },
+  {
+    "label": "temperature-sensor.get-in-room.fail.no-results",
+    "answers": ["За останні 12 годин у цій кімнаті не зафіксовано жодних значень температури."]
+  },
+  {
+    "label": "temperature-sensor.get-in-room.fail.room-not-found",
+    "answers": ["Я не можу знайти кімнату з такою назвою."]
+  },
+  {
+    "label": "temperature-sensor.get-in-room.fail",
+    "answers": ["Мені не вдалося отримати температуру в цій кімнаті."]
+  }
+]

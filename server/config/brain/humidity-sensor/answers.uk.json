@@ -1,0 +1,14 @@
+[
+  {
+    "label": "humidity-sensor.get-in-room.success",
+    "answers": ["Рівень вологості в кімнаті {{ roomName }} становить {{ humidity }}%."]
+  },
+  {
+    "label": "humidity-sensor.get-in-room.fail.no-results",
+    "answers": ["За останню годину в цій кімнаті не зафіксовано жодних значень вологості."]
+  },
+  {
+    "label": "humidity-sensor.get-in-room.fail.room-not-found",
+    "answers": ["Я не можу знайти кімнату з такою назвою."]
+  }
+]

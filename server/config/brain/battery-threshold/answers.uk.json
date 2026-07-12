@@ -1,0 +1,12 @@
+[
+  {
+    "label": "battery-threshold.success",
+    "answers": [
+      "Увага! Рівень заряду батареї пристрою {{ device.name }} нижчий за {{ value.min }}% (поточний: {{ value.current }}%)"
+    ]
+  },
+  {
+    "label": "battery-level-is-low.success",
+    "answers": ["Увага! Рівень заряду батареї пристрою {{ device.name }} низький!"]
+  }
+]
