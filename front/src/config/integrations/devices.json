@@ -165,5 +165,11 @@
     "img": "/assets/integrations/cover/energy-monitoring.jpg",
     "invertInDarkMode": true,
     "local": true
+  },
+  {
+    "key": "beok-local",
+    "link": "beok-local",
+    "img": "/assets/integrations/cover/beok-local.jpg",
+    "local": true
   }
 ]

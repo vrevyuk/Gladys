@@ -117,6 +117,11 @@ import TasmotaEditPage from '../routes/integration/all/tasmota/edit-page';
 import TasmotaMqttDiscoverPage from '../routes/integration/all/tasmota/discover-mqtt';
 import TasmotaHttpDiscoverPage from '../routes/integration/all/tasmota/discover-http';
 
+// Beok Local
+import BeokLocalDevicesPage from '../routes/integration/all/beok-local/DevicesPage';
+import BeokLocalDiscoverPage from '../routes/integration/all/beok-local/DiscoverPage';
+import BeokLocalSchedulePage from '../routes/integration/all/beok-local/SchedulePage';
+
 // Fully Kiosk
 import FullyKioskPage from '../routes/integration/all/fully-kiosk';
 
@@ -316,6 +321,9 @@ const AppRouter = connect(
         <TasmotaEditPage path="/dashboard/integration/device/tasmota/edit/:deviceSelector" />
         <TasmotaMqttDiscoverPage path="/dashboard/integration/device/tasmota/mqtt" />
         <TasmotaHttpDiscoverPage path="/dashboard/integration/device/tasmota/http" />
+        <BeokLocalDevicesPage path="/dashboard/integration/device/beok-local" />
+        <BeokLocalDiscoverPage path="/dashboard/integration/device/beok-local/discover" />
+        <BeokLocalSchedulePage path="/dashboard/integration/device/beok-local/schedule/:selector" />
         <FullyKioskPage path="/dashboard/integration/device/fully-kiosk" />
         <EweLinkPage path="/dashboard/integration/device/ewelink" />
         <EweLinkEditPage path="/dashboard/integration/device/ewelink/edit/:deviceSelector" />

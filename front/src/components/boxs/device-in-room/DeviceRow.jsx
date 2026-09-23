@@ -21,6 +21,7 @@ import PushDeviceFeature from './device-features/PushDeviceFeature';
 import VacuumCleanerDockDeviceFeature from './device-features/VacuumCleanerDockDeviceFeature';
 import VacuumCleanerModeDeviceFeature from './device-features/VacuumCleanerModeDeviceFeature';
 import VacuumCleanerCleanModeDeviceFeature from './device-features/VacuumCleanerCleanModeDeviceFeature';
+import ThermostatModeDeviceFeature from './device-features/ThermostatModeDeviceFeature';
 
 const ROW_TYPE_BY_FEATURE_TYPE = {
   [DEVICE_FEATURE_TYPES.LIGHT.BINARY]: BinaryDeviceFeature,
@@ -73,6 +74,9 @@ const ROW_TYPE_BY_CATEGORY_AND_TYPE = {
   },
   [DEVICE_FEATURE_CATEGORIES.FAN]: {
     [DEVICE_FEATURE_TYPES.FAN.MODE]: FanModeDeviceFeature
+  },
+  [DEVICE_FEATURE_CATEGORIES.THERMOSTAT]: {
+    [DEVICE_FEATURE_TYPES.THERMOSTAT.MODE]: ThermostatModeDeviceFeature
   }
 };
 

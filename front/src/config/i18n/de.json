@@ -2548,6 +2548,55 @@
       "generateButton": "Generieren",
       "keyNameLabel": "Schlüssel:",
       "registeredLabel": "Registriert am:"
+    },
+    "beok-local": {
+      "title": "BEOK Local Thermostat",
+      "description": "Control compatible BEOK Wi-Fi thermostats directly on your local network.",
+      "deviceTab": "Devices",
+      "discoverTab": "Discovery",
+      "devices": {
+        "title": "BEOK thermostats",
+        "empty": "No BEOK thermostat has been added yet. Discover one to get started."
+      },
+      "device": {
+        "name": "Name",
+        "room": "Room",
+        "ip": "IP address",
+        "mac": "MAC address",
+        "saved": "Device saved successfully."
+      },
+      "discover": {
+        "title": "Discover BEOK thermostats",
+        "scan": "Scan network",
+        "description": "Scan your local network, or probe a thermostat directly using its IP and MAC addresses.",
+        "manualTitle": "Manual probe",
+        "probe": "Probe",
+        "validation": "Enter a valid IPv4 address and a colon-separated MAC address.",
+        "empty": "No thermostat found."
+      },
+      "schedule": {
+        "title": "Thermostat schedule",
+        "button": "Schedule",
+        "mode": "Operating mode",
+        "manual": "Manual",
+        "program": "Program",
+        "dayGrouping": "Day grouping",
+        "weekday": "Weekday periods (6)",
+        "weekend": "Weekend periods (2)",
+        "period": "Period {{number}}",
+        "periodLabel": "Period",
+        "time": "Start time",
+        "temperature": "Target temperature",
+        "saved": "Schedule saved successfully.",
+        "validation": "Each period needs a valid time and a temperature between 5°C and 35°C.",
+        "manualWarning": "Changing the target temperature from the dashboard switches the thermostat to manual mode."
+      },
+      "errors": {
+        "load": "Unable to load BEOK thermostats.",
+        "save": "Unable to save this thermostat.",
+        "discover": "Unable to discover the thermostat.",
+        "schedule": "Unable to load or save the schedule."
+      }
     }
   },
   "editScene": {
@@ -3914,6 +3963,12 @@
           "deep-clean": "Tiefenreinigung",
           "vacuum": "Saugen",
           "mop": "Wischen"
+        }
+      },
+      "thermostat": {
+        "mode": {
+          "manual": "Manual",
+          "program": "Program"
         }
       }
     }
