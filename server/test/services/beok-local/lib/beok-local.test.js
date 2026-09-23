@@ -137,7 +137,7 @@ describe('BeokLocalHandler', () => {
       [EVENTS.DEVICE.NEW_STATE, { device_feature_external_id: `beok-local:${MAC}:heating`, state: 1 }],
       [
         EVENTS.DEVICE.NEW_STATE,
-        { device_feature_external_id: `beok-local:${MAC}:mode`, state: THERMOSTAT_MODE.PROGRAM },
+        { device_feature_external_id: `beok-local:${MAC}:mode`, state: THERMOSTAT_MODE.MANUAL },
       ],
     ]);
   });
@@ -152,17 +152,19 @@ describe('BeokLocalHandler', () => {
   it('sets target and maps public thermostat modes while preserving loop grouping and sensor', async () => {
     const { handler, client } = setup();
     const device = makeDevice();
-    await handler.setValue(device, device.features[1], 22.5);
-    await handler.setValue(device, device.features[3], THERMOSTAT_MODE.MANUAL);
+    expect(await handler.setValue(device, device.features[1], '22.5')).to.equal(22.5);
+    expect(await handler.setValue(device, device.features[3], String(THERMOSTAT_MODE.MANUAL))).to.equal(
+      THERMOSTAT_MODE.MANUAL,
+    );
     await handler.setValue(device, device.features[3], THERMOSTAT_MODE.PROGRAM);
     client.getFullStatus.resolves({ ...status, loopMode: 0 });
     await handler.setValue(device, device.features[3], THERMOSTAT_MODE.MANUAL);
     assert.callCount(client.getFullStatus, 4);
     assert.calledWithExactly(client.setTemp, 22.5);
     expect(client.setMode.getCalls().map((call) => call.args)).to.deep.equal([
-      [1, 1, 1],
       [0, 1, 1],
-      [1, 0, 1],
+      [1, 1, 1],
+      [0, 0, 1],
     ]);
   });
 
@@ -178,9 +180,9 @@ describe('BeokLocalHandler', () => {
   it('decodes every protocol mode and day grouping in schedules', async () => {
     const { handler, client } = setup();
     const expected = [
-      { autoMode: 1, loopMode: 1, mode: THERMOSTAT_MODE.MANUAL, dayGrouping: '5+2' },
-      { autoMode: 0, loopMode: 2, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '6+1' },
-      { autoMode: 0, loopMode: 3, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '7+0' },
+      { autoMode: 0, loopMode: 1, mode: THERMOSTAT_MODE.MANUAL, dayGrouping: '5+2' },
+      { autoMode: 1, loopMode: 2, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '6+1' },
+      { autoMode: 1, loopMode: 3, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '7+0' },
     ];
     for (const mapping of expected) {
       client.getFullStatus.resolves({ ...status, autoMode: mapping.autoMode, loopMode: mapping.loopMode });
@@ -196,9 +198,9 @@ describe('BeokLocalHandler', () => {
 
   it('sets every grouping, preserves a fresh sensor, and returns device readback', async () => {
     const expected = [
-      { dayGrouping: '5+2', setter: 0, mode: THERMOSTAT_MODE.MANUAL, autoMode: 1 },
-      { dayGrouping: '6+1', setter: 1, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 0 },
-      { dayGrouping: '7+0', setter: 2, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 0 },
+      { dayGrouping: '5+2', setter: 0, mode: THERMOSTAT_MODE.MANUAL, autoMode: 0 },
+      { dayGrouping: '6+1', setter: 1, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 1 },
+      { dayGrouping: '7+0', setter: 2, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 1 },
     ];
     for (const mapping of expected) {
       const { handler, client } = setup();

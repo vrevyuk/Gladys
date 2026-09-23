@@ -76,7 +76,7 @@ function isRetryableError(error) {
  * @example modeFromAutoMode(0);
  */
 function modeFromAutoMode(autoMode) {
-  return autoMode === 0 ? THERMOSTAT_MODE.PROGRAM : THERMOSTAT_MODE.MANUAL;
+  return autoMode === 1 ? THERMOSTAT_MODE.PROGRAM : THERMOSTAT_MODE.MANUAL;
 }
 
 /**
@@ -86,7 +86,7 @@ function modeFromAutoMode(autoMode) {
  * @example autoModeFromMode(THERMOSTAT_MODE.PROGRAM);
  */
 function autoModeFromMode(mode) {
-  return mode === THERMOSTAT_MODE.PROGRAM ? 0 : 1;
+  return mode === THERMOSTAT_MODE.PROGRAM ? 1 : 0;
 }
 
 /**
@@ -362,10 +362,18 @@ BeokLocalHandler.prototype.poll = async function poll(device) {
 
 BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeature, value) {
   const suffix = deviceFeature.external_id.split(':').pop();
-  if (suffix === FEATURE_SUFFIXES.TARGET && (!Number.isFinite(value) || value * 2 !== Math.round(value * 2))) {
+  const numericValue = typeof value === 'number' ? value : Number(value);
+  if (
+    suffix === FEATURE_SUFFIXES.TARGET &&
+    (!Number.isFinite(numericValue) || numericValue * 2 !== Math.round(numericValue * 2))
+  ) {
     throw new BadParameters('Target temperature must use 0.5°C increments');
   }
-  if (suffix === FEATURE_SUFFIXES.MODE && value !== 0 && value !== 1) {
+  if (
+    suffix === FEATURE_SUFFIXES.MODE &&
+    numericValue !== THERMOSTAT_MODE.MANUAL &&
+    numericValue !== THERMOSTAT_MODE.PROGRAM
+  ) {
     throw new BadParameters('Thermostat mode must be manual (0) or program (1)');
   }
   if (suffix !== FEATURE_SUFFIXES.TARGET && suffix !== FEATURE_SUFFIXES.MODE) {
@@ -375,15 +383,19 @@ BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeat
   await this.execute(address, mac, async (client) => {
     const freshStatus = await client.getFullStatus();
     if (suffix === FEATURE_SUFFIXES.TARGET) {
-      if (value < freshStatus.svl || value > freshStatus.svh) {
+      if (numericValue < freshStatus.svl || numericValue > freshStatus.svh) {
         throw new BadParameters(`Target temperature must be between ${freshStatus.svl} and ${freshStatus.svh}°C`);
       }
-      await client.setTemp(value);
+      await client.setTemp(numericValue);
     } else {
-      await client.setMode(autoModeFromMode(value), Math.max(freshStatus.loopMode - 1, 0), freshStatus.sensor);
+      await client.setMode(
+        autoModeFromMode(numericValue),
+        Math.max(freshStatus.loopMode - 1, 0),
+        freshStatus.sensor,
+      );
     }
   });
-  return value;
+  return numericValue;
 };
 
 BeokLocalHandler.prototype.getSchedule = async function getSchedule(device) {
