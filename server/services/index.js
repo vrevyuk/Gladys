@@ -21,6 +21,7 @@ module.exports.zigbee2mqtt = require('./zigbee2mqtt');
 module.exports['google-actions'] = require('./google-actions');
 module.exports.homekit = require('./homekit');
 module.exports.broadlink = require('./broadlink');
+module.exports['beok-local'] = require('./beok-local');
 module.exports['lan-manager'] = require('./lan-manager');
 module.exports.matter = require('./matter');
 module.exports['nextcloud-talk'] = require('./nextcloud-talk');

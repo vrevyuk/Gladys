@@ -20,6 +20,20 @@ describe('broadlink.addPeripheral', () => {
     sinon.reset();
   });
 
+  it('should leave Hysen thermostats to the dedicated Beok local service', async () => {
+    const broadlinkDevice = {
+      deviceType: 0x4ead,
+      auth: fake.resolves(null),
+      socket: { close: fake() },
+    };
+
+    await broadlinkHandler.addPeripheral(broadlinkDevice);
+
+    assert.notCalled(broadlinkDevice.auth);
+    assert.calledOnce(broadlinkDevice.socket.close);
+    expect(broadlinkHandler.broadlinkDevices).to.deep.eq({});
+  });
+
   it('should not add device', async () => {
     broadlinkHandler.buildPeripheral = fake.returns(undefined);
 

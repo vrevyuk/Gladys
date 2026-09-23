@@ -10,6 +10,13 @@ const logger = require('../../../../utils/logger');
  * });
  */
 async function addPeripheral(broadlinkDevice) {
+  // Hysen thermostats are managed by beok-local, which owns their authenticated UDP socket.
+  if (broadlinkDevice.deviceType === 0x4ead) {
+    if (broadlinkDevice.socket && typeof broadlinkDevice.socket.close === 'function') {
+      broadlinkDevice.socket.close();
+    }
+    return;
+  }
   let connectable = true;
   try {
     await broadlinkDevice.auth();
