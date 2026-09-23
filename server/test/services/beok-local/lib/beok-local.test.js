@@ -159,7 +159,7 @@ describe('BeokLocalHandler', () => {
     await handler.setValue(device, device.features[3], THERMOSTAT_MODE.PROGRAM);
     client.getFullStatus.resolves({ ...status, loopMode: 0 });
     await handler.setValue(device, device.features[3], THERMOSTAT_MODE.MANUAL);
-    assert.callCount(client.getFullStatus, 4);
+    assert.callCount(client.getFullStatus, 8);
     assert.calledWithExactly(client.setTemp, 22.5);
     expect(client.setMode.getCalls().map((call) => call.args)).to.deep.equal([
       [0, 1, 1],
@@ -258,6 +258,235 @@ describe('BeokLocalHandler', () => {
     assert.calledOnce(replacement.auth);
     assert.calledOnce(replacement.getFullStatus);
     assert.calledOnce(client.socket.close);
+  });
+
+  it('times out an unanswered operation, recreates the session once, and recovers the queue', async () => {
+    const clock = sinon.useFakeTimers();
+    try {
+      const { handler, broadlink, client } = setup();
+      const replacement = {
+        ...client,
+        auth: sinon.stub().resolves(),
+        getFullStatus: sinon.stub().resolves(status),
+        socket: { close: sinon.stub() },
+      };
+      broadlink.genDevice.returns(replacement);
+      handler.clients.set(MAC, { address: '192.168.1.20', client });
+      client.getFullStatus.returns(new Promise(() => {}));
+
+      const pollPromise = handler.poll(makeDevice());
+      await clock.tickAsync(5000);
+      await pollPromise;
+
+      assert.calledOnce(client.socket.close);
+      assert.calledOnce(replacement.auth);
+      assert.calledOnce(replacement.getFullStatus);
+      expect(handler.queues.size).to.equal(0);
+
+      await handler.getSchedule(makeDevice());
+      assert.calledTwice(replacement.getFullStatus);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it('bounds unanswered authentication retries, closes both sockets, and releases the queue', async () => {
+    const clock = sinon.useFakeTimers();
+    try {
+      const { handler, broadlink } = setup();
+      const clients = [0, 1].map(() => ({
+        auth: sinon.stub().returns(new Promise(() => {})),
+        socket: { close: sinon.stub() },
+      }));
+      broadlink.genDevice.onCall(0).returns(clients[0]);
+      broadlink.genDevice.onCall(1).returns(clients[1]);
+
+      const pollPromise = handler.poll(makeDevice());
+      const rejection = expect(pollPromise).to.be.rejectedWith('timed out');
+      await clock.tickAsync(10000);
+      await rejection;
+
+      assert.calledTwice(broadlink.genDevice);
+      clients.forEach(({ auth, socket }) => {
+        assert.calledOnce(auth);
+        assert.calledOnce(socket.close);
+      });
+      expect(handler.queues.size).to.equal(0);
+
+      const healthyClient = {
+        ...clients[1],
+        auth: sinon.stub().resolves(),
+        getFullStatus: sinon.stub().resolves(status),
+      };
+      broadlink.genDevice.reset();
+      broadlink.genDevice.returns(healthyClient);
+      await handler.poll(makeDevice());
+      assert.calledOnce(healthyClient.getFullStatus);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it('invalidates the replacement client when the single operation retry also times out', async () => {
+    const clock = sinon.useFakeTimers();
+    try {
+      const { handler, broadlink, client } = setup();
+      const replacement = {
+        ...client,
+        auth: sinon.stub().resolves(),
+        getFullStatus: sinon.stub().returns(new Promise(() => {})),
+        socket: { close: sinon.stub() },
+      };
+      broadlink.genDevice.returns(replacement);
+      handler.clients.set(MAC, { address: '192.168.1.20', client });
+      client.getFullStatus.returns(new Promise(() => {}));
+
+      const pollPromise = handler.poll(makeDevice());
+      const rejection = expect(pollPromise).to.be.rejectedWith('timed out');
+      await clock.tickAsync(10000);
+      await rejection;
+
+      assert.calledOnce(client.getFullStatus);
+      assert.calledOnce(replacement.getFullStatus);
+      assert.calledOnce(client.socket.close);
+      assert.calledOnce(replacement.socket.close);
+      expect(handler.clients.has(MAC)).to.equal(false);
+      expect(handler.queues.size).to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it('retries idempotent writes after an ambiguous readback timeout and only emits reconciled state', async () => {
+    const clock = sinon.useFakeTimers();
+    try {
+      for (const write of [
+        { featureIndex: 1, value: 22.5, setter: 'setTemp' },
+        { featureIndex: 3, value: THERMOSTAT_MODE.PROGRAM, setter: 'setMode' },
+      ]) {
+        const { handler, broadlink, gladys, client } = setup();
+        const readback = { ...status, roomTemp: 20, thermostatTemp: 22.5, autoMode: 1 };
+        const replacement = {
+          ...client,
+          auth: sinon.stub().resolves(),
+          getFullStatus: sinon.stub(),
+          setTemp: sinon.stub().resolves(),
+          setMode: sinon.stub().resolves(),
+          socket: { close: sinon.stub() },
+        };
+        client.getFullStatus.onCall(0).resolves(status);
+        client.getFullStatus.onCall(1).returns(new Promise(() => {}));
+        replacement.getFullStatus.onCall(0).resolves(status);
+        replacement.getFullStatus.onCall(1).resolves(readback);
+        broadlink.genDevice.returns(replacement);
+        handler.clients.set(MAC, { address: '192.168.1.20', client });
+
+        const writePromise = handler.setValue(makeDevice(), makeDevice().features[write.featureIndex], write.value);
+        // The loop exercises both writable feature types with the same timeout boundary.
+        // eslint-disable-next-line no-await-in-loop
+        await clock.tickAsync(5000);
+        // eslint-disable-next-line no-await-in-loop
+        await writePromise;
+
+        assert.calledOnce(client[write.setter]);
+        assert.calledOnce(replacement[write.setter]);
+        assert.calledOnce(client.socket.close);
+        expect(gladys.event.emit.getCalls().map((call) => call.args[1].state)).to.deep.equal([
+          20,
+          22.5,
+          1,
+          THERMOSTAT_MODE.PROGRAM,
+        ]);
+      }
+
+      const { handler, broadlink, gladys, client } = setup();
+      const readback = { ...status, roomTemp: 20, thermostatTemp: 22.5, autoMode: 1 };
+      const replacement = {
+        ...client,
+        auth: sinon.stub().resolves(),
+        getFullStatus: sinon.stub(),
+        setSchedule: sinon.stub().resolves(),
+        setMode: sinon.stub().resolves(),
+        socket: { close: sinon.stub() },
+      };
+      client.getFullStatus.onCall(0).resolves(status);
+      client.getFullStatus.onCall(1).resolves(status);
+      client.getFullStatus.onCall(2).returns(new Promise(() => {}));
+      replacement.getFullStatus.onCall(0).resolves(status);
+      replacement.getFullStatus.onCall(1).resolves(status);
+      replacement.getFullStatus.onCall(2).resolves(readback);
+      broadlink.genDevice.returns(replacement);
+      handler.clients.set(MAC, { address: '192.168.1.20', client });
+
+      const schedulePromise = handler.setSchedule(makeDevice(), {
+        mode: THERMOSTAT_MODE.PROGRAM,
+        dayGrouping: '5+2',
+        weekday: status.weekDay,
+        weekend: status.weekEnd,
+      });
+      await clock.tickAsync(5000);
+      await schedulePromise;
+
+      assert.calledOnce(client.setSchedule);
+      assert.calledOnce(client.setMode);
+      assert.calledOnce(replacement.setSchedule);
+      assert.calledOnce(replacement.setMode);
+      assert.calledOnce(client.socket.close);
+      expect(gladys.event.emit.getCalls().map((call) => call.args[1].state)).to.deep.equal([
+        20,
+        22.5,
+        1,
+        THERMOSTAT_MODE.PROGRAM,
+      ]);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it('emits authoritative readback states after target, mode, and schedule writes', async () => {
+    const { handler, gladys, client } = setup();
+    const device = makeDevice();
+    const readback = { ...status, roomTemp: 20, thermostatTemp: 22.5, power: 1, active: 0, autoMode: 1 };
+
+    client.getFullStatus.onCall(0).resolves(status);
+    client.getFullStatus.onCall(1).resolves(readback);
+    await handler.setValue(device, device.features[1], 22.5);
+    expect(gladys.event.emit.getCalls().map((call) => call.args[1].state)).to.deep.equal([
+      20,
+      22.5,
+      0,
+      THERMOSTAT_MODE.PROGRAM,
+    ]);
+
+    gladys.event.emit.resetHistory();
+    client.getFullStatus.reset();
+    client.getFullStatus.onCall(0).resolves(status);
+    client.getFullStatus.onCall(1).resolves(readback);
+    await handler.setValue(device, device.features[3], THERMOSTAT_MODE.PROGRAM);
+    expect(gladys.event.emit.getCalls().map((call) => call.args[1].state)).to.deep.equal([
+      20,
+      22.5,
+      0,
+      THERMOSTAT_MODE.PROGRAM,
+    ]);
+
+    gladys.event.emit.resetHistory();
+    client.getFullStatus.reset();
+    client.getFullStatus.onCall(0).resolves(status);
+    client.getFullStatus.onCall(1).resolves(status);
+    client.getFullStatus.onCall(2).resolves(readback);
+    await handler.setSchedule(device, {
+      mode: THERMOSTAT_MODE.PROGRAM,
+      dayGrouping: '5+2',
+      weekday: status.weekDay,
+      weekend: status.weekEnd,
+    });
+    expect(gladys.event.emit.getCalls().map((call) => call.args[1].state)).to.deep.equal([
+      20,
+      22.5,
+      0,
+      THERMOSTAT_MODE.PROGRAM,
+    ]);
   });
 
   it('does not retry bad parameters or unknown operation errors', async () => {

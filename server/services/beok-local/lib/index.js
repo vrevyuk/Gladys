@@ -19,6 +19,37 @@ const FEATURE_SUFFIXES = {
   HEATING: 'heating',
   MODE: 'mode',
 };
+const PROTOCOL_TIMEOUT = 5000;
+
+/**
+ * @description Bound a Broadlink protocol request that may otherwise never settle.
+ * @param {Promise<*>} request - Protocol request.
+ * @param {string} operation - Operation name used in the timeout error.
+ * @returns {Promise<*>} Protocol result.
+ * @example await withTimeout(client.auth(), 'authentication');
+ */
+function withTimeout(request, operation) {
+  let timeout;
+  const timeoutPromise = new Promise((resolve, reject) => {
+    timeout = setTimeout(() => {
+      const error = new Error(`Beok ${operation} timed out`);
+      error.code = 'ETIMEDOUT';
+      reject(error);
+    }, PROTOCOL_TIMEOUT);
+  });
+  // The timer must be cleared regardless of which promise settles first.
+  // eslint-disable-next-line promise/prefer-await-to-then
+  return Promise.race([request, timeoutPromise]).then(
+    (result) => {
+      clearTimeout(timeout);
+      return result;
+    },
+    (error) => {
+      clearTimeout(timeout);
+      throw error;
+    },
+  );
+}
 
 /**
  * @description Normalize and validate a MAC address.
@@ -143,7 +174,7 @@ BeokLocalHandler.prototype.createClient = function createClient(address, mac) {
 BeokLocalHandler.prototype.authenticate = async function authenticate(address, mac, initialClient) {
   let client = initialClient || this.createClient(address, mac);
   try {
-    await client.auth();
+    await withTimeout(client.auth(), 'authentication');
   } catch (error) {
     closeClient(client);
     if (!isRetryableError(error)) {
@@ -151,7 +182,7 @@ BeokLocalHandler.prototype.authenticate = async function authenticate(address, m
     }
     client = this.createClient(address, mac);
     try {
-      await client.auth();
+      await withTimeout(client.auth(), 'authentication');
     } catch (retryError) {
       closeClient(client);
       throw retryError;
@@ -194,15 +225,24 @@ BeokLocalHandler.prototype.execute = function execute(address, mac, operation, i
   return this.runSerialized(mac, async () => {
     const entry = this.clients.get(mac);
     let client = entry ? entry.client : await this.authenticate(address, mac, initialClient);
+    const request = (protocolRequest, operationName = 'operation') => withTimeout(protocolRequest, operationName);
     try {
-      return await operation(client);
+      return await operation(client, request);
     } catch (error) {
       if (!isRetryableError(error)) {
         throw error;
       }
       this.invalidate(mac);
       client = await this.authenticate(address, mac);
-      return operation(client);
+      try {
+        // BEOK setters write absolute values, so retrying the complete operation is idempotent when a response is lost.
+        return await operation(client, request);
+      } catch (retryError) {
+        if (isRetryableError(retryError)) {
+          this.invalidate(mac);
+        }
+        throw retryError;
+      }
     }
   });
 };
@@ -302,7 +342,7 @@ BeokLocalHandler.prototype.discover = async function discover() {
       const status = await this.execute(
         address,
         mac,
-        (authenticatedClient) => authenticatedClient.getFullStatus(),
+        (authenticatedClient, request) => request(authenticatedClient.getFullStatus(), 'status request'),
         client,
       );
       devices.push(this.buildDevice(address, mac, status));
@@ -317,7 +357,9 @@ BeokLocalHandler.prototype.probe = async function probe(input = {}) {
     throw new BadParameters('A private IPv4 address is required');
   }
   const mac = normalizeMac(input.mac);
-  const status = await this.execute(address, mac, (client) => client.getFullStatus());
+  const status = await this.execute(address, mac, (client, request) =>
+    request(client.getFullStatus(), 'status request'),
+  );
   return this.buildDevice(address, mac, status);
 };
 
@@ -340,9 +382,7 @@ BeokLocalHandler.prototype.getDevice = function getDevice(mac) {
   return device;
 };
 
-BeokLocalHandler.prototype.poll = async function poll(device) {
-  const { address, mac } = this.getConnection(device);
-  const status = await this.execute(address, mac, (client) => client.getFullStatus());
+BeokLocalHandler.prototype.emitStatus = function emitStatus(device, status) {
   const values = {
     [FEATURE_SUFFIXES.CURRENT]: status.roomTemp,
     [FEATURE_SUFFIXES.TARGET]: status.thermostatTemp,
@@ -358,6 +398,14 @@ BeokLocalHandler.prototype.poll = async function poll(device) {
       });
     }
   });
+};
+
+BeokLocalHandler.prototype.poll = async function poll(device) {
+  const { address, mac } = this.getConnection(device);
+  const status = await this.execute(address, mac, (client, request) =>
+    request(client.getFullStatus(), 'status request'),
+  );
+  this.emitStatus(device, status);
 };
 
 BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeature, value) {
@@ -380,27 +428,30 @@ BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeat
     throw new BadParameters('Unsupported Beok local feature');
   }
   const { address, mac } = this.getConnection(device);
-  await this.execute(address, mac, async (client) => {
-    const freshStatus = await client.getFullStatus();
+  const status = await this.execute(address, mac, async (client, request) => {
+    const freshStatus = await request(client.getFullStatus(), 'status request');
     if (suffix === FEATURE_SUFFIXES.TARGET) {
       if (numericValue < freshStatus.svl || numericValue > freshStatus.svh) {
         throw new BadParameters(`Target temperature must be between ${freshStatus.svl} and ${freshStatus.svh}°C`);
       }
-      await client.setTemp(numericValue);
+      await request(client.setTemp(numericValue), 'target temperature write');
     } else {
-      await client.setMode(
-        autoModeFromMode(numericValue),
-        Math.max(freshStatus.loopMode - 1, 0),
-        freshStatus.sensor,
+      await request(
+        client.setMode(autoModeFromMode(numericValue), Math.max(freshStatus.loopMode - 1, 0), freshStatus.sensor),
+        'mode write',
       );
     }
+    return request(client.getFullStatus(), 'write readback');
   });
+  this.emitStatus(device, status);
   return numericValue;
 };
 
 BeokLocalHandler.prototype.getSchedule = async function getSchedule(device) {
   const { address, mac } = this.getConnection(device);
-  const status = await this.execute(address, mac, (client) => client.getFullStatus());
+  const status = await this.execute(address, mac, (client, request) =>
+    request(client.getFullStatus(), 'status request'),
+  );
   return scheduleFromStatus(status);
 };
 
@@ -448,19 +499,24 @@ BeokLocalHandler.prototype.setSchedule = async function setSchedule(device, sche
     throw new BadParameters('Day grouping must be 5+2, 6+1, or 7+0');
   }
   const { address, mac } = this.getConnection(device);
-  return this.execute(address, mac, async (client) => {
-    const status = await client.getFullStatus();
-    validatePeriods(schedule.weekday, 6, status.svl, status.svh, 'Weekday');
-    validatePeriods(schedule.weekend, 2, status.svl, status.svh, 'Weekend');
-    await client.setSchedule(schedule.weekday, schedule.weekend);
-    const freshStatus = await client.getFullStatus();
-    await client.setMode(
-      autoModeFromMode(schedule.mode),
-      LOOP_MODE_BY_DAY_GROUPING[schedule.dayGrouping],
-      freshStatus.sensor,
+  const status = await this.execute(address, mac, async (client, request) => {
+    const currentStatus = await request(client.getFullStatus(), 'status request');
+    validatePeriods(schedule.weekday, 6, currentStatus.svl, currentStatus.svh, 'Weekday');
+    validatePeriods(schedule.weekend, 2, currentStatus.svl, currentStatus.svh, 'Weekend');
+    await request(client.setSchedule(schedule.weekday, schedule.weekend), 'schedule write');
+    const freshStatus = await request(client.getFullStatus(), 'schedule readback');
+    await request(
+      client.setMode(
+        autoModeFromMode(schedule.mode),
+        LOOP_MODE_BY_DAY_GROUPING[schedule.dayGrouping],
+        freshStatus.sensor,
+      ),
+      'mode write',
     );
-    return scheduleFromStatus(await client.getFullStatus());
+    return request(client.getFullStatus(), 'write readback');
   });
+  this.emitStatus(device, status);
+  return scheduleFromStatus(status);
 };
 
 BeokLocalHandler.prototype.stop = function stop() {

@@ -44,7 +44,7 @@ export class HttpClient {
     this.session.connect();
   }
 
-  async executeQuery(method, url, query, body, retryCount = 0) {
+  async executeQuery(method, url, query, body, retryCount = 0, options = {}) {
     if (retryCount > MAX_RETRY) {
       this.session.reset();
       throw new Error('MAX_RETRY_EXCEEDED');
@@ -56,13 +56,14 @@ export class HttpClient {
         method,
         params: query,
         data: body,
+        timeout: options.timeout,
         headers: this.getAxiosHeaders()
       });
       return data;
     } catch (e) {
       if (e.response && e.response.status === 401 && e.response.data.message !== 'TABLET_IS_LOCKED') {
         await this.refreshAccessToken();
-        return this.executeQuery(method, url, query, body, retryCount + 1);
+        return this.executeQuery(method, url, query, body, retryCount + 1, options);
       }
       throw e;
     }
@@ -74,7 +75,7 @@ export class HttpClient {
     return `${url}?${queryKey}`;
   }
 
-  async get(url, query) {
+  async get(url, query, options = {}) {
     const cacheKey = this.getCacheKey(url, query);
 
     // Check if the request is already in progress
@@ -83,7 +84,7 @@ export class HttpClient {
     }
 
     // Execute the request and store the promise in the cache
-    const requestPromise = this.executeQuery('get', url, query);
+    const requestPromise = this.executeQuery('get', url, query, undefined, 0, options);
     this.pendingRequests.set(cacheKey, requestPromise);
 
     try {
@@ -135,6 +136,10 @@ export class HttpClient {
       }
       throw e;
     }
+  }
+
+  async put(url, body, options = {}) {
+    return this.executeQuery('put', url, {}, body, 0, options);
   }
 
   async patch(url, body) {

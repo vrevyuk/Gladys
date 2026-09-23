@@ -62,6 +62,9 @@ const validRows = rows => {
   });
 };
 
+const SCHEDULE_READ_OPTIONS = { timeout: 40000 };
+const SCHEDULE_WRITE_OPTIONS = { timeout: 70000 };
+
 const serializeRows = rows =>
   rows.map(row => {
     const [startHour, startMinute] = row.time.split(':').map(Number);
@@ -77,14 +80,36 @@ class SchedulePage extends Component {
     validationError: false
   };
 
-  async componentWillMount() {
-    try {
-      const response = await this.props.httpClient.get(`/api/v1/service/beok-local/device/${this.props.mac}/schedule`);
-      this.setState({ schedule: normalizeSchedule(response), loading: false });
-    } catch (e) {
-      this.setState({ loading: false, error: true });
-    }
+  componentDidMount() {
+    this.mounted = true;
+    this.loadSchedule();
   }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  loadSchedule = async () => {
+    this.setState({ loading: true, error: false, success: false });
+    try {
+      const response = await this.props.httpClient.get(
+        `/api/v1/service/beok-local/device/${this.props.mac}/schedule`,
+        undefined,
+        SCHEDULE_READ_OPTIONS
+      );
+      if (this.mounted) {
+        this.setState({ schedule: normalizeSchedule(response) });
+      }
+    } catch (e) {
+      if (this.mounted) {
+        this.setState({ error: true });
+      }
+    } finally {
+      if (this.mounted) {
+        this.setState({ loading: false });
+      }
+    }
+  };
 
   updateSchedule = (property, value) => {
     this.setState({ schedule: { ...this.state.schedule, [property]: value }, success: false });
@@ -104,19 +129,30 @@ class SchedulePage extends Component {
     }
     this.setState({ loading: true, error: false, success: false, validationError: false });
     try {
-      const response = await this.props.httpClient.put(`/api/v1/service/beok-local/device/${this.props.mac}/schedule`, {
-        mode: schedule.mode,
-        dayGrouping: schedule.dayGrouping,
-        weekday: serializeRows(schedule.weekday),
-        weekend: serializeRows(schedule.weekend)
-      });
-      this.setState({
-        schedule: normalizeSchedule({ ...schedule, ...(response || {}) }),
-        loading: false,
-        success: true
-      });
+      const response = await this.props.httpClient.put(
+        `/api/v1/service/beok-local/device/${this.props.mac}/schedule`,
+        {
+          mode: schedule.mode,
+          dayGrouping: schedule.dayGrouping,
+          weekday: serializeRows(schedule.weekday),
+          weekend: serializeRows(schedule.weekend)
+        },
+        SCHEDULE_WRITE_OPTIONS
+      );
+      if (this.mounted) {
+        this.setState({
+          schedule: normalizeSchedule({ ...schedule, ...(response || {}) }),
+          success: true
+        });
+      }
     } catch (e) {
-      this.setState({ loading: false, error: true });
+      if (this.mounted) {
+        this.setState({ error: true });
+      }
+    } finally {
+      if (this.mounted) {
+        this.setState({ loading: false });
+      }
     }
   };
 
@@ -169,8 +205,19 @@ class SchedulePage extends Component {
                 <Text id="integration.beok-local.schedule.manualWarning" />
               </div>
               {error && (
-                <div class="alert alert-danger">
+                <div class="alert alert-danger d-flex align-items-center justify-content-between">
                   <Text id="integration.beok-local.errors.schedule" />
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger ml-2"
+                    onClick={this.loadSchedule}
+                    disabled={loading}
+                  >
+                    <i class="fe fe-refresh-cw" />
+                    <span class="sr-only">
+                      <Text id="integration.beok-local.errors.schedule" />
+                    </span>
+                  </button>
                 </div>
               )}
               {validationError && (
