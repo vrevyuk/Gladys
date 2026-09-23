@@ -4718,7 +4718,8 @@
     },
     "thermostat": {
       "shortCategoryName": "Термостат",
-      "target-temperature": "Температура термостата"
+      "target-temperature": "Температура термостата",
+      "mode": "Thermostat Mode"
     },
     "airquality-sensor": {
       "shortCategoryName": "Якість повітря",

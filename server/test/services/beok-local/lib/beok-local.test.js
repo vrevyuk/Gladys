@@ -2,14 +2,24 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const { assert } = sinon;
 const BeokLocalHandler = require('../../../../services/beok-local/lib');
-const { EVENTS } = require('../../../../utils/constants');
+const { BadParameters } = require('../../../../utils/coreErrors');
+
+const {
+  DEVICE_FEATURE_CATEGORIES,
+  DEVICE_FEATURE_TYPES,
+  EVENTS,
+  THERMOSTAT_MODE,
+} = require('../../../../utils/constants');
+
+const { assert } = sinon;
+const { isRetryableError } = BeokLocalHandler;
 
 const MAC = 'aabbccddeeff';
 const status = {
   roomTemp: 19.5,
   thermostatTemp: 21,
+  power: 1,
   active: 1,
   autoMode: 0,
   loopMode: 2,
@@ -33,6 +43,7 @@ const status = {
 function makeDevice() {
   return {
     external_id: `beok-local:${MAC}`,
+    service_id: 'service-id',
     params: [
       { name: 'IP_ADDRESS', value: '192.168.1.20' },
       { name: 'MAC_ADDRESS', value: MAC },
@@ -75,6 +86,11 @@ describe('BeokLocalHandler', () => {
     const devices = await handler.discover();
     expect(devices).to.have.length(1);
     expect(devices[0].external_id).to.equal(`beok-local:${MAC}`);
+    expect(devices[0].features[3]).to.include({
+      category: DEVICE_FEATURE_CATEGORIES.THERMOSTAT,
+      type: DEVICE_FEATURE_TYPES.THERMOSTAT.MODE,
+    });
+    expect(THERMOSTAT_MODE).to.deep.equal({ MANUAL: 0, PROGRAM: 1 });
     expect(devices[0].params).to.deep.equal([
       { name: 'IP_ADDRESS', value: '192.168.1.20' },
       { name: 'MAC_ADDRESS', value: MAC },
@@ -111,7 +127,7 @@ describe('BeokLocalHandler', () => {
     }
   });
 
-  it('polls once and emits all thermostat states', async () => {
+  it('polls once and emits mapped thermostat states', async () => {
     const { handler, gladys, client } = setup();
     await handler.poll(makeDevice());
     assert.calledOnce(client.getFullStatus);
@@ -119,18 +135,35 @@ describe('BeokLocalHandler', () => {
       [EVENTS.DEVICE.NEW_STATE, { device_feature_external_id: `beok-local:${MAC}:current-temperature`, state: 19.5 }],
       [EVENTS.DEVICE.NEW_STATE, { device_feature_external_id: `beok-local:${MAC}:target-temperature`, state: 21 }],
       [EVENTS.DEVICE.NEW_STATE, { device_feature_external_id: `beok-local:${MAC}:heating`, state: 1 }],
-      [EVENTS.DEVICE.NEW_STATE, { device_feature_external_id: `beok-local:${MAC}:mode`, state: 0 }],
+      [
+        EVENTS.DEVICE.NEW_STATE,
+        { device_feature_external_id: `beok-local:${MAC}:mode`, state: THERMOSTAT_MODE.PROGRAM },
+      ],
     ]);
   });
 
-  it('sets target and mode after fresh status and preserves loop/sensor', async () => {
+  it('emits heating off when the active bit remains set while power is off', async () => {
+    const { handler, gladys, client } = setup();
+    client.getFullStatus.resolves({ ...status, power: 0, active: 1 });
+    await handler.poll(makeDevice());
+    expect(gladys.event.emit.getCall(2).args[1].state).to.equal(0);
+  });
+
+  it('sets target and maps public thermostat modes while preserving loop grouping and sensor', async () => {
     const { handler, client } = setup();
     const device = makeDevice();
     await handler.setValue(device, device.features[1], 22.5);
-    await handler.setValue(device, device.features[3], 1);
-    assert.calledTwice(client.getFullStatus);
+    await handler.setValue(device, device.features[3], THERMOSTAT_MODE.MANUAL);
+    await handler.setValue(device, device.features[3], THERMOSTAT_MODE.PROGRAM);
+    client.getFullStatus.resolves({ ...status, loopMode: 0 });
+    await handler.setValue(device, device.features[3], THERMOSTAT_MODE.MANUAL);
+    assert.callCount(client.getFullStatus, 4);
     assert.calledWithExactly(client.setTemp, 22.5);
-    assert.calledWithExactly(client.setMode, 1, 2, 1);
+    expect(client.setMode.getCalls().map((call) => call.args)).to.deep.equal([
+      [1, 1, 1],
+      [0, 1, 1],
+      [1, 0, 1],
+    ]);
   });
 
   it('rejects unknown features and invalid target/mode values', async () => {
@@ -142,21 +175,75 @@ describe('BeokLocalHandler', () => {
     await expect(handler.setValue(device, device.features[3], 2)).to.be.rejected;
   });
 
-  it('gets and validates grouped schedules against live limits', async () => {
+  it('decodes every protocol mode and day grouping in schedules', async () => {
     const { handler, client } = setup();
-    const device = makeDevice();
-    expect(await handler.getSchedule(device)).to.deep.equal({ weekday: status.weekDay, weekend: status.weekEnd });
-    await handler.setSchedule(device, { weekday: status.weekDay, weekend: status.weekEnd });
-    assert.calledWithExactly(client.setSchedule, status.weekDay, status.weekEnd);
+    const expected = [
+      { autoMode: 1, loopMode: 1, mode: THERMOSTAT_MODE.MANUAL, dayGrouping: '5+2' },
+      { autoMode: 0, loopMode: 2, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '6+1' },
+      { autoMode: 0, loopMode: 3, mode: THERMOSTAT_MODE.PROGRAM, dayGrouping: '7+0' },
+    ];
+    for (const mapping of expected) {
+      client.getFullStatus.resolves({ ...status, autoMode: mapping.autoMode, loopMode: mapping.loopMode });
+      // eslint-disable-next-line no-await-in-loop
+      expect(await handler.getSchedule(makeDevice())).to.deep.equal({
+        mode: mapping.mode,
+        dayGrouping: mapping.dayGrouping,
+        weekday: status.weekDay,
+        weekend: status.weekEnd,
+      });
+    }
+  });
 
-    await expect(handler.setSchedule(device, { weekday: status.weekDay.slice(1), weekend: status.weekEnd })).to.be
-      .rejected;
+  it('sets every grouping, preserves a fresh sensor, and returns device readback', async () => {
+    const expected = [
+      { dayGrouping: '5+2', setter: 0, mode: THERMOSTAT_MODE.MANUAL, autoMode: 1 },
+      { dayGrouping: '6+1', setter: 1, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 0 },
+      { dayGrouping: '7+0', setter: 2, mode: THERMOSTAT_MODE.PROGRAM, autoMode: 0 },
+    ];
+    for (const mapping of expected) {
+      const { handler, client } = setup();
+      const fresh = { ...status, sensor: 2 };
+      const readback = { ...status, autoMode: mapping.autoMode, loopMode: mapping.setter + 1, thermostatTemp: 22 };
+      client.getFullStatus.onCall(0).resolves(status);
+      client.getFullStatus.onCall(1).resolves(fresh);
+      client.getFullStatus.onCall(2).resolves(readback);
+      // eslint-disable-next-line no-await-in-loop
+      const result = await handler.setSchedule(makeDevice(), {
+        mode: mapping.mode,
+        dayGrouping: mapping.dayGrouping,
+        weekday: status.weekDay,
+        weekend: status.weekEnd,
+      });
+      expect(client.setSchedule.firstCall.callId).to.be.lessThan(client.getFullStatus.getCall(1).callId);
+      expect(client.getFullStatus.getCall(1).callId).to.be.lessThan(client.setMode.firstCall.callId);
+      expect(client.setMode.firstCall.callId).to.be.lessThan(client.getFullStatus.getCall(2).callId);
+      assert.calledWithExactly(client.setMode, mapping.autoMode, mapping.setter, 2);
+      expect(result).to.deep.equal({
+        mode: mapping.mode,
+        dayGrouping: mapping.dayGrouping,
+        weekday: readback.weekDay,
+        weekend: readback.weekEnd,
+      });
+    }
+  });
+
+  it('validates schedule mode, grouping, period count, order, and temperature', async () => {
+    const { handler } = setup();
+    const valid = {
+      mode: THERMOSTAT_MODE.MANUAL,
+      dayGrouping: '5+2',
+      weekday: status.weekDay,
+      weekend: status.weekEnd,
+    };
+    await expect(handler.setSchedule(makeDevice(), { ...valid, mode: 2 })).to.be.rejected;
+    await expect(handler.setSchedule(makeDevice(), { ...valid, dayGrouping: 'invalid' })).to.be.rejected;
+    await expect(handler.setSchedule(makeDevice(), { ...valid, weekday: status.weekDay.slice(1) })).to.be.rejected;
     const unordered = status.weekDay.map((period) => ({ ...period }));
     unordered[1].startHour = 5;
-    await expect(handler.setSchedule(device, { weekday: unordered, weekend: status.weekEnd })).to.be.rejected;
+    await expect(handler.setSchedule(makeDevice(), { ...valid, weekday: unordered })).to.be.rejected;
     const badStep = status.weekDay.map((period) => ({ ...period }));
     badStep[0].temp = 20.2;
-    await expect(handler.setSchedule(device, { weekday: badStep, weekend: status.weekEnd })).to.be.rejected;
+    await expect(handler.setSchedule(makeDevice(), { ...valid, weekday: badStep })).to.be.rejected;
   });
 
   it('serializes operations and retries once with a recreated authenticated client', async () => {
@@ -164,11 +251,33 @@ describe('BeokLocalHandler', () => {
     const replacement = { ...client, auth: sinon.stub().resolves(), getFullStatus: sinon.stub().resolves(status) };
     broadlink.genDevice.returns(replacement);
     handler.clients.set(MAC, { address: '192.168.1.20', client });
-    client.getFullStatus.onFirstCall().rejects(new Error('expired session'));
+    client.getFullStatus.onFirstCall().rejects(Object.assign(new Error('socket timeout'), { code: 'ETIMEDOUT' }));
     await handler.poll(makeDevice());
     assert.calledOnce(replacement.auth);
     assert.calledOnce(replacement.getFullStatus);
     assert.calledOnce(client.socket.close);
+  });
+
+  it('does not retry bad parameters or unknown operation errors', async () => {
+    const { handler, broadlink, client } = setup();
+    handler.clients.set(MAC, { address: '192.168.1.20', client });
+    client.getFullStatus.rejects(new Error('business rule failed'));
+    await expect(handler.poll(makeDevice())).to.be.rejectedWith('business rule failed');
+    assert.notCalled(client.auth);
+    assert.notCalled(broadlink.genDevice);
+
+    client.getFullStatus.rejects(new BadParameters('invalid value'));
+    await expect(handler.poll(makeDevice())).to.be.rejectedWith('invalid value');
+    assert.notCalled(client.auth);
+  });
+
+  it('only retries known network, session, auth, and response-corruption failures', () => {
+    expect(isRetryableError(Object.assign(new Error('failure'), { code: 'ECONNRESET' }))).to.equal(true);
+    expect(isRetryableError(new Error('authentication expired'))).to.equal(true);
+    expect(isRetryableError(new Error('checksum mismatch'))).to.equal(true);
+    expect(isRetryableError(new Error('business rule failed'))).to.equal(false);
+    expect(isRetryableError(new BadParameters('socket value is invalid'))).to.equal(false);
+    expect(isRetryableError(null)).to.equal(false);
   });
 
   it('covers lifecycle, authentication failures, and device lookup validation', async () => {
@@ -176,6 +285,11 @@ describe('BeokLocalHandler', () => {
     handler.stopped = true;
     await handler.init();
     expect(handler.stopped).to.equal(false);
+
+    const invalid = { auth: sinon.stub().rejects(new BadParameters('invalid auth')), socket: { close: sinon.stub() } };
+    await expect(handler.authenticate('172.16.0.2', MAC, invalid)).to.be.rejectedWith('invalid auth');
+    assert.calledOnce(invalid.auth);
+    assert.calledOnce(invalid.socket.close);
 
     const failed = { auth: sinon.stub().rejects(new Error('auth failed')), socket: { close: sinon.stub() } };
     broadlink.genDevice.returns(failed);
@@ -190,10 +304,12 @@ describe('BeokLocalHandler', () => {
 
     expect(() => handler.getConnection()).to.throw('not correctly configured');
     gladys.stateManager.get.returns(undefined);
-    expect(() => handler.getDevice(`beok-local:${MAC}`)).to.throw('not found');
+    expect(() => handler.getDevice(MAC)).to.throw('not found');
+    expect(() => handler.getDevice('bad')).to.throw('valid 6-byte MAC');
+    gladys.stateManager.get.returns({ ...makeDevice(), service_id: 'another-service' });
+    expect(() => handler.getDevice(MAC)).to.throw('not found');
     gladys.stateManager.get.returns(makeDevice());
-    expect(() => handler.getDevice(`other:${MAC}`)).to.throw('not found');
-    expect(handler.getDevice(`beok-local:${MAC}`)).to.deep.equal(makeDevice());
+    expect(handler.getDevice('AA:BB:CC:DD:EE:FF')).to.deep.equal(makeDevice());
   });
 
   it('cleans up clients and discovery resources on stop', async () => {

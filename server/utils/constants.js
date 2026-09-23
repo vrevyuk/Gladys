@@ -139,6 +139,11 @@ const SIREN_LMH_VOLUME = {
   HIGH: 2,
 };
 
+const THERMOSTAT_MODE = {
+  MANUAL: 0,
+  PROGRAM: 1,
+};
+
 const AC_MODE = {
   AUTO: 0,
   COOLING: 1,
@@ -954,6 +959,7 @@ const DEVICE_FEATURE_TYPES = {
   },
   THERMOSTAT: {
     TARGET_TEMPERATURE: 'target-temperature',
+    MODE: 'mode',
   },
   AIRQUALITY_SENSOR: {
     AQI: 'aqi',
@@ -1715,6 +1721,7 @@ module.exports.BUTTON_PUSH = BUTTON_PUSH;
 module.exports.COVER_STATE = COVER_STATE;
 module.exports.LOCK = LOCK;
 module.exports.SIREN_LMH_VOLUME = SIREN_LMH_VOLUME;
+module.exports.THERMOSTAT_MODE = THERMOSTAT_MODE;
 module.exports.AC_MODE = AC_MODE;
 module.exports.FAN_MODE = FAN_MODE;
 module.exports.FAN_AIRFLOW_DIRECTION = FAN_AIRFLOW_DIRECTION;

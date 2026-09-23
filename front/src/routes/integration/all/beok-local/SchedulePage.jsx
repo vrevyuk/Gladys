@@ -79,9 +79,7 @@ class SchedulePage extends Component {
 
   async componentWillMount() {
     try {
-      const response = await this.props.httpClient.get(
-        `/api/v1/service/beok-local/device/${encodeURIComponent(this.props.selector)}/schedule`
-      );
+      const response = await this.props.httpClient.get(`/api/v1/service/beok-local/device/${this.props.mac}/schedule`);
       this.setState({ schedule: normalizeSchedule(response), loading: false });
     } catch (e) {
       this.setState({ loading: false, error: true });
@@ -106,15 +104,12 @@ class SchedulePage extends Component {
     }
     this.setState({ loading: true, error: false, success: false, validationError: false });
     try {
-      const response = await this.props.httpClient.put(
-        `/api/v1/service/beok-local/device/${encodeURIComponent(this.props.selector)}/schedule`,
-        {
-          mode: schedule.mode,
-          dayGrouping: schedule.dayGrouping,
-          weekday: serializeRows(schedule.weekday),
-          weekend: serializeRows(schedule.weekend)
-        }
-      );
+      const response = await this.props.httpClient.put(`/api/v1/service/beok-local/device/${this.props.mac}/schedule`, {
+        mode: schedule.mode,
+        dayGrouping: schedule.dayGrouping,
+        weekday: serializeRows(schedule.weekday),
+        weekend: serializeRows(schedule.weekend)
+      });
       this.setState({
         schedule: normalizeSchedule({ ...schedule, ...(response || {}) }),
         loading: false,

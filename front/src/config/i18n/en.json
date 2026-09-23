@@ -4718,7 +4718,8 @@
     },
     "thermostat": {
       "shortCategoryName": "Thermostat",
-      "target-temperature": "Thermostat Temperature"
+      "target-temperature": "Thermostat Temperature",
+      "mode": "Thermostat Mode"
     },
     "airquality-sensor": {
       "shortCategoryName": "Air Quality",

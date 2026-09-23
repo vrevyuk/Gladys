@@ -1,6 +1,3 @@
-/* eslint-disable require-jsdoc, jsdoc/require-jsdoc, jsdoc/require-example */
-/* eslint-disable jsdoc/require-hyphen-before-param-description, jsdoc/require-description-complete-sentence */
-/* eslint-disable no-restricted-syntax, promise/prefer-await-to-then */
 const net = require('net');
 const {
   DEVICE_FEATURE_CATEGORIES,
@@ -8,11 +5,14 @@ const {
   DEVICE_FEATURE_UNITS,
   DEVICE_POLL_FREQUENCIES,
   EVENTS,
+  THERMOSTAT_MODE,
 } = require('../../../utils/constants');
 const { BadParameters, NotFoundError } = require('../../../utils/coreErrors');
 
 const HYSEN_DEVICE_TYPE = 0x4ead;
 const PARAMS = { ADDRESS: 'IP_ADDRESS', MAC: 'MAC_ADDRESS' };
+const DAY_GROUPING_BY_LOOP_MODE = { 1: '5+2', 2: '6+1', 3: '7+0' };
+const LOOP_MODE_BY_DAY_GROUPING = { '5+2': 0, '6+1': 1, '7+0': 2 };
 const FEATURE_SUFFIXES = {
   CURRENT: 'current-temperature',
   TARGET: 'target-temperature',
@@ -20,6 +20,12 @@ const FEATURE_SUFFIXES = {
   MODE: 'mode',
 };
 
+/**
+ * @description Normalize and validate a MAC address.
+ * @param {string} mac - MAC address.
+ * @returns {string} Normalized MAC address.
+ * @example normalizeMac('AA:BB:CC:DD:EE:FF');
+ */
 function normalizeMac(mac) {
   const normalized = typeof mac === 'string' ? mac.replace(/[:-]/g, '').toLowerCase() : '';
   if (!/^[0-9a-f]{12}$/.test(normalized)) {
@@ -28,6 +34,12 @@ function normalizeMac(mac) {
   return normalized;
 }
 
+/**
+ * @description Test whether an address is a private IPv4 address.
+ * @param {string} address - IP address.
+ * @returns {boolean} Whether the address is private.
+ * @example isPrivateIpv4('192.168.1.2');
+ */
 function isPrivateIpv4(address) {
   if (net.isIP(address) !== 4) {
     return false;
@@ -38,6 +50,66 @@ function isPrivateIpv4(address) {
   );
 }
 
+/**
+ * @description Test whether a failed protocol operation can safely be retried.
+ * @param {Error} error - Operation error.
+ * @returns {boolean} Whether the operation can be retried.
+ * @example isRetryableError(new Error('socket timeout'));
+ */
+function isRetryableError(error) {
+  if (!error || error instanceof BadParameters) {
+    return false;
+  }
+  const retryableCodes = new Set(['ETIMEDOUT', 'ECONNRESET', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ENETUNREACH']);
+  if (retryableCodes.has(error.code)) {
+    return true;
+  }
+  return /(?:timed? ?out|timeout|socket|auth(?:entication)?|session|checksum|corrupt|invalid response|malformed response)/i.test(
+    `${error.name || ''} ${error.message || ''}`,
+  );
+}
+
+/**
+ * @description Convert a protocol auto-mode value to a Gladys thermostat mode.
+ * @param {number} autoMode - Protocol auto-mode value.
+ * @returns {number} Gladys thermostat mode.
+ * @example modeFromAutoMode(0);
+ */
+function modeFromAutoMode(autoMode) {
+  return autoMode === 0 ? THERMOSTAT_MODE.PROGRAM : THERMOSTAT_MODE.MANUAL;
+}
+
+/**
+ * @description Convert a Gladys thermostat mode to a protocol auto-mode value.
+ * @param {number} mode - Gladys thermostat mode.
+ * @returns {number} Protocol auto-mode value.
+ * @example autoModeFromMode(THERMOSTAT_MODE.PROGRAM);
+ */
+function autoModeFromMode(mode) {
+  return mode === THERMOSTAT_MODE.PROGRAM ? 0 : 1;
+}
+
+/**
+ * @description Convert full thermostat status to the schedule API contract.
+ * @param {object} status - Full thermostat status.
+ * @returns {object} Complete schedule.
+ * @example scheduleFromStatus(status);
+ */
+function scheduleFromStatus(status) {
+  return {
+    mode: modeFromAutoMode(status.autoMode),
+    dayGrouping: DAY_GROUPING_BY_LOOP_MODE[status.loopMode],
+    weekday: status.weekDay,
+    weekend: status.weekEnd,
+  };
+}
+
+/**
+ * @description Close a Broadlink client socket when available.
+ * @param {object} client - Broadlink client.
+ * @returns {void}
+ * @example closeClient(client);
+ */
 function closeClient(client) {
   if (client && client.socket && typeof client.socket.close === 'function') {
     client.socket.close();
@@ -46,9 +118,10 @@ function closeClient(client) {
 
 /**
  * @description Manage Beok thermostats over the local Broadlink protocol.
- * @param {object} gladys Gladys instance.
- * @param {object} broadlink node-broadlink module.
- * @param {string} serviceId Service identifier.
+ * @param {object} gladys - Gladys instance.
+ * @param {object} broadlink - Node Broadlink module.
+ * @param {string} serviceId - Service identifier.
+ * @example new BeokLocalHandler(gladys, broadlink, serviceId);
  */
 function BeokLocalHandler(gladys, broadlink, serviceId) {
   this.gladys = gladys;
@@ -73,6 +146,9 @@ BeokLocalHandler.prototype.authenticate = async function authenticate(address, m
     await client.auth();
   } catch (error) {
     closeClient(client);
+    if (!isRetryableError(error)) {
+      throw error;
+    }
     client = this.createClient(address, mac);
     try {
       await client.auth();
@@ -99,6 +175,8 @@ BeokLocalHandler.prototype.invalidate = function invalidate(mac) {
 
 BeokLocalHandler.prototype.runSerialized = function runSerialized(mac, task) {
   const previous = this.queues.get(mac) || Promise.resolve();
+  // Promise chaining is required to append work without awaiting the result here.
+  // eslint-disable-next-line promise/prefer-await-to-then
   const current = previous.catch(() => null).then(task);
   this.queues.set(mac, current);
   const cleanup = () => {
@@ -106,6 +184,8 @@ BeokLocalHandler.prototype.runSerialized = function runSerialized(mac, task) {
       this.queues.delete(mac);
     }
   };
+  // Cleanup must observe either outcome without changing the returned promise.
+  // eslint-disable-next-line promise/prefer-await-to-then
   current.then(cleanup, cleanup);
   return current;
 };
@@ -117,6 +197,9 @@ BeokLocalHandler.prototype.execute = function execute(address, mac, operation, i
     try {
       return await operation(client);
     } catch (error) {
+      if (!isRetryableError(error)) {
+        throw error;
+      }
       this.invalidate(mac);
       client = await this.authenticate(address, mac);
       return operation(client);
@@ -186,10 +269,10 @@ BeokLocalHandler.prototype.buildDevice = function buildDevice(address, mac, stat
         },
       ),
       feature(
-        'Manual mode',
+        'Thermostat mode',
         FEATURE_SUFFIXES.MODE,
-        DEVICE_FEATURE_CATEGORIES.SWITCH,
-        DEVICE_FEATURE_TYPES.SWITCH.BINARY,
+        DEVICE_FEATURE_CATEGORIES.THERMOSTAT,
+        DEVICE_FEATURE_TYPES.THERMOSTAT.MODE,
         {
           min: 0,
           max: 1,
@@ -206,6 +289,8 @@ BeokLocalHandler.prototype.buildDevice = function buildDevice(address, mac, stat
 BeokLocalHandler.prototype.discover = async function discover() {
   const discovered = await this.broadlink.discover();
   const devices = [];
+  // Each discovered client must be authenticated before it can be returned.
+  // eslint-disable-next-line no-restricted-syntax
   for (const client of discovered) {
     if (client.deviceType !== HYSEN_DEVICE_TYPE) {
       closeClient(client);
@@ -246,9 +331,10 @@ BeokLocalHandler.prototype.getConnection = function getConnection(device) {
   return { address: addressParam.value, mac: normalizeMac(macParam.value) };
 };
 
-BeokLocalHandler.prototype.getDevice = function getDevice(externalId) {
+BeokLocalHandler.prototype.getDevice = function getDevice(mac) {
+  const externalId = `beok-local:${normalizeMac(mac)}`;
   const device = this.gladys.stateManager.get('deviceByExternalId', externalId);
-  if (!device || !externalId.startsWith('beok-local:')) {
+  if (!device || device.service_id !== this.serviceId) {
     throw new NotFoundError('Beok local device not found');
   }
   return device;
@@ -260,8 +346,8 @@ BeokLocalHandler.prototype.poll = async function poll(device) {
   const values = {
     [FEATURE_SUFFIXES.CURRENT]: status.roomTemp,
     [FEATURE_SUFFIXES.TARGET]: status.thermostatTemp,
-    [FEATURE_SUFFIXES.HEATING]: status.active,
-    [FEATURE_SUFFIXES.MODE]: status.autoMode,
+    [FEATURE_SUFFIXES.HEATING]: Number(Boolean(status.power && status.active)),
+    [FEATURE_SUFFIXES.MODE]: modeFromAutoMode(status.autoMode),
   };
   device.features.forEach((feature) => {
     const suffix = feature.external_id.split(':').pop();
@@ -280,7 +366,7 @@ BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeat
     throw new BadParameters('Target temperature must use 0.5°C increments');
   }
   if (suffix === FEATURE_SUFFIXES.MODE && value !== 0 && value !== 1) {
-    throw new BadParameters('Thermostat mode must be program (0) or manual (1)');
+    throw new BadParameters('Thermostat mode must be manual (0) or program (1)');
   }
   if (suffix !== FEATURE_SUFFIXES.TARGET && suffix !== FEATURE_SUFFIXES.MODE) {
     throw new BadParameters('Unsupported Beok local feature');
@@ -294,7 +380,7 @@ BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeat
       }
       await client.setTemp(value);
     } else {
-      await client.setMode(value, freshStatus.loopMode, freshStatus.sensor);
+      await client.setMode(autoModeFromMode(value), Math.max(freshStatus.loopMode - 1, 0), freshStatus.sensor);
     }
   });
   return value;
@@ -303,9 +389,19 @@ BeokLocalHandler.prototype.setValue = async function setValue(device, deviceFeat
 BeokLocalHandler.prototype.getSchedule = async function getSchedule(device) {
   const { address, mac } = this.getConnection(device);
   const status = await this.execute(address, mac, (client) => client.getFullStatus());
-  return { weekday: status.weekDay, weekend: status.weekEnd };
+  return scheduleFromStatus(status);
 };
 
+/**
+ * @description Validate one group of thermostat schedule periods.
+ * @param {Array<object>} periods - Schedule periods.
+ * @param {number} expectedLength - Required period count.
+ * @param {number} minimum - Minimum temperature.
+ * @param {number} maximum - Maximum temperature.
+ * @param {string} group - Group name used in errors.
+ * @returns {void}
+ * @example validatePeriods(periods, 6, 5, 35, 'Weekday');
+ */
 function validatePeriods(periods, expectedLength, minimum, maximum, group) {
   if (!Array.isArray(periods) || periods.length !== expectedLength) {
     throw new BadParameters(`${group} schedule must contain exactly ${expectedLength} periods`);
@@ -333,13 +429,25 @@ function validatePeriods(periods, expectedLength, minimum, maximum, group) {
 }
 
 BeokLocalHandler.prototype.setSchedule = async function setSchedule(device, schedule = {}) {
+  if (schedule.mode !== THERMOSTAT_MODE.MANUAL && schedule.mode !== THERMOSTAT_MODE.PROGRAM) {
+    throw new BadParameters('Thermostat mode must be manual (0) or program (1)');
+  }
+  if (!Object.prototype.hasOwnProperty.call(LOOP_MODE_BY_DAY_GROUPING, schedule.dayGrouping)) {
+    throw new BadParameters('Day grouping must be 5+2, 6+1, or 7+0');
+  }
   const { address, mac } = this.getConnection(device);
   return this.execute(address, mac, async (client) => {
     const status = await client.getFullStatus();
     validatePeriods(schedule.weekday, 6, status.svl, status.svh, 'Weekday');
     validatePeriods(schedule.weekend, 2, status.svl, status.svh, 'Weekend');
     await client.setSchedule(schedule.weekday, schedule.weekend);
-    return { weekday: schedule.weekday, weekend: schedule.weekend };
+    const freshStatus = await client.getFullStatus();
+    await client.setMode(
+      autoModeFromMode(schedule.mode),
+      LOOP_MODE_BY_DAY_GROUPING[schedule.dayGrouping],
+      freshStatus.sensor,
+    );
+    return scheduleFromStatus(await client.getFullStatus());
   });
 };
 
@@ -353,3 +461,4 @@ BeokLocalHandler.prototype.stop = function stop() {
 module.exports = BeokLocalHandler;
 module.exports.isPrivateIpv4 = isPrivateIpv4;
 module.exports.normalizeMac = normalizeMac;
+module.exports.isRetryableError = isRetryableError;

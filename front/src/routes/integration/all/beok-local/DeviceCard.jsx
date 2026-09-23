@@ -3,6 +3,8 @@ import { Text } from 'preact-i18n';
 import { Link } from 'preact-router/match';
 import cx from 'classnames';
 
+const normalizeMac = mac => (typeof mac === 'string' ? mac.replace(/[:-]/g, '').toLowerCase() : '');
+
 const getParam = (device, name) => {
   const param = (device.params || []).find(item => item.name === name);
   return param && param.value;
@@ -54,8 +56,9 @@ class DeviceCard extends Component {
   };
 
   render(props, { device, loading, error, success }) {
-    const ip = getParam(device, 'address') || getParam(device, 'ip');
-    const mac = getParam(device, 'mac');
+    const ip = getParam(device, 'IP_ADDRESS');
+    const mac = getParam(device, 'MAC_ADDRESS');
+    const normalizedMac = normalizeMac(mac);
     const persisted = Boolean(device.selector && device.created_at);
 
     return (
@@ -120,10 +123,10 @@ class DeviceCard extends Component {
                 <button class="btn btn-primary mb-2" disabled={loading || !device.name} onClick={this.save}>
                   <Text id="global.save" />
                 </button>
-                {persisted && (
+                {persisted && normalizedMac && (
                   <Link
                     class="btn btn-outline-primary mb-2"
-                    href={`/dashboard/integration/device/beok-local/schedule/${device.selector}`}
+                    href={`/dashboard/integration/device/beok-local/schedule/${normalizedMac}`}
                   >
                     <Text id="integration.beok-local.schedule.button" />
                   </Link>
