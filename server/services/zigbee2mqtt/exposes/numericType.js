@@ -52,6 +52,13 @@ module.exports = {
         },
       },
     },
+    carbon_monoxide: {
+      feature: {
+        category: DEVICE_FEATURE_CATEGORIES.CO_SENSOR,
+        type: DEVICE_FEATURE_TYPES.SENSOR.DECIMAL,
+        unit: DEVICE_FEATURE_UNITS.PPM,
+      },
+    },
     co2: {
       feature: {
         category: DEVICE_FEATURE_CATEGORIES.CO2_SENSOR,
